@@ -21,7 +21,7 @@ function Header() {
                     <div><FaShoppingCart className='icon'/></div>
                     </div>  
                 <div className='inputSearch'>
-                    <input type="text" placeholder='O quê você procura? Giovani' />
+                    <input type="text" placeholder='O quê você procura?' />
                     <FaSearch className='searchIcon' />
                 </div>
                 <div className='userActions'>
