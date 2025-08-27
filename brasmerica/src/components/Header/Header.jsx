@@ -17,7 +17,7 @@ function Header() {
             <header>
                 <div className='imgHeader'>
                     <div><FaBars className='icon' /></div>
-                    <img src="/public/images/logo-sem-fundo-border.png" alt="Logo Brasmerica" />
+                    <img src="./public/images/logo-sem-fundo-border.png" alt="Logo Brasmerica" />
                     <div><FaShoppingCart className='icon'/></div>
                     </div>  
                 <div className='inputSearch'>
