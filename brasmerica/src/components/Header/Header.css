@@ -53,11 +53,11 @@ header img {
     font-size: 1.0rem;
 }
 
-input:focus {
+.inputSearch input:focus {
     outline: none;
 }
 
-input::placeholder {
+.inputSearch input::placeholder {
     color: #b22234;
     font-size: 1.0rem;
     text-align: center;

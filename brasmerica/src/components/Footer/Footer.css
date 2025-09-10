@@ -1,0 +1,189 @@
+footer {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    flex-direction: column;
+}
+
+.first {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    color: #f5f5f5;
+    font-size: 14px;
+    background-color: #b22234;
+    height: 15vh;
+}
+
+.first img {
+    height: 12vh;
+}
+
+.firstInput {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    gap: 45px;
+}
+
+.firstInput div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: #f5f5f5;
+    width: 30vw;
+    border-radius: 35px;
+}
+
+.firstInput h7 {
+    font-size: 1.2rem;
+}
+
+.firstInput input {
+    height: 90%;
+    width: 85%;
+    border: none;
+    color: black;
+    border-radius: 35px;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+.firstInput input:focus {
+    outline: none;
+}
+
+.firstInput input::placeholder {
+    color: #000000;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.firstInput button {
+    height: 80%;
+    width: auto;
+    border: none;
+    border-radius: 80%;
+    background-color: #b22234;
+    color: #f5f5f5;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.second {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    color: black;
+}
+
+.imgFooter {
+    width: 90vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #f5f5f5;
+}
+
+.imgFooter img {
+    height: 20vh;
+    cursor: pointer;
+}
+
+.textFooter {
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+}
+
+.textDvis {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-width: 200px;
+  margin-bottom: 5px;
+}
+
+.textDvis h4 {
+  font-size: 1.7rem;
+  color: #333;
+}
+
+.textDvis p,
+.textDvis a {
+  font-size: 1rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.textDvis a:hover {
+  color: #0073e6;
+}
+
+.icon-footer{
+    color: #b22234;
+    font-size: 2.5rem;
+}
+
+.redes {
+  width: 80vw;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.redes .texto {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.redes .icones {
+  margin-left: 0.5rem;
+}
+
+.redes .icon {
+  font-size: 1.6rem;
+  margin: 0 0.4rem;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.redes .icon:hover {
+  color: #e1306c; /* cor padrão Instagram (pode variar para cada ícone) */
+  transform: scale(1.2);
+}
+
+.redes .endereco {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
