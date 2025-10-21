@@ -10,7 +10,7 @@ body {
   justify-content: flex-start;
   color: #f5f5f5;
   overflow-x: hidden;
-  width: 100vw;
+  max-width: 100vw;
 }
 
 a {
@@ -33,10 +33,129 @@ main {
   flex-direction: column;
   background-color: #f5f5f5;
   color: black;
+  padding: 0.5rem 0;
 }
 
-footer {
+.carousel{
   width: 100vw;
-  height: 10vh;
-  background-color: black;
+  height: 60vh;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel img{
+  width: 85vw;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
+.productCards {
+  width: 85vw;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.brand-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px 15px 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  scale: 1;
+  transition: box-shadow 0.3s ease;
+}
+
+.brand-section:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo do H1 (o nome da marca) */
+.brand-title {
+  font-size: 48px;
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.brand-title{
+  color:  #57010b;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo da parte "BRAS" (verde) */
+.brand-part-green {
+  color: #3b9c58;
+}
+
+/* Estilo da parte "MÉRICA" (gradiente) */
+.brand-part-gradient {
+  background: linear-gradient(to right, #0057a0, #b22234);
+
+  /* Aplica o fundo ao texto */
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  /* Deixa o texto transparente para o fundo aparecer */
+  color: transparent;
+}
+
+/* Estilo do H2 (o slogan) */
+.slogan-subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  color: #333;
+  text-transform: none;
+  text-align: center;
+  /* Controla o espaçamento (zeramos a margem padrão do h2) */
+  margin: 0;
+  margin-top: 8px;
+  /* Espaço entre o título e o slogan */
+
+  line-height: 1.3;
+}
+
+
+@media (max-width: 1150px) {
+
+  .productCards {
+    width: 95vw;
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
+  .carousel{
+  width: 100vw;
+  height: 50vh;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel img{
+  width: 85vw;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 }

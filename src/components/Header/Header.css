@@ -16,13 +16,13 @@ header img {
 .blackHeader {
     background-color: #2b2b2b;
     width: 100vw;
-    height: 3vh;
+    height: 2vh;
 }
 
 .redHeader {
     background-color: #831926;
     width: 100vw;
-    height: 5vh;
+    height: 4vh;
 }
 
 .imgHeader {
@@ -33,7 +33,7 @@ header img {
 
 .inputSearch {
     width: 42vw;
-    height: 8vh;
+    height: 7vh;
     border-radius: 30px;
     border: none;
     background-color: #f5f5f5;
@@ -142,13 +142,13 @@ header img {
 .blackHeader {
     background-color: #2b2b2b;
     width: 100vw;
-    height: 3vh;
+    height: 2vh;
 }
 
 .redHeader {
     background-color: #831926;
     width: 100vw;
-    height: 5vh;
+    height: 4vh;
 }
 
 .imgHeader {
@@ -160,7 +160,7 @@ header img {
 
 .inputSearch {
     width: 85vw;
-    height: 8vh;
+    height: 6vh;
     border-radius: 30px;
     border: none;
     background-color: #f5f5f5;
