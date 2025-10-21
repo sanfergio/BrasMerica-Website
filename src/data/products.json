@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "title": "Capacete Integral Pro Tork R8",
+    "image": "/images/capacete.png",
+    "price": 199.00,
+    "oldPrice": 389.00,
+    "discountPix": "10% de desconto no PIX",
+    "freeShipping": true,
+    "addToCartUrl": "#",
+    "buyNowUrl": "#"
+  }
+]
