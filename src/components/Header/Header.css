@@ -13,6 +13,52 @@ header img {
     width: auto;
 }
 
+/* --- ADICIONE ESTAS CLASSES NO TOPO DO SEU Header.css --- */
+
+.header-wrapper {
+    /* ESTADO PADRÃO (Topo da página): 
+    Apenas fica aqui, em sua posição normal.
+    'position: relative' é bom para o z-index funcionar.
+  */
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    /* O 'background' é importante, senão o conteúdo da página 
+     passará por trás dele quando ele estiver fixo. 
+     Se os seus .blackHeader e .redHeader já preenchem 
+     o fundo, talvez você não precise disto. */
+    background-color: white;
+}
+
+.header-wrapper.fixed-header {
+    /* ESTADO FIXO (Após rolar):
+    Fica preso no topo da tela.
+  */
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.5s ease-in-out;
+}
+
+/* Define a animação de "surgimento" (ease-in-out)
+*/
+@keyframes slideDown {
+    from {
+        /* Começa 100% acima da tela */
+        transform: translateY(-100%);
+    }
+
+    to {
+        /* Termina na posição normal (top: 0) */
+        transform: translateY(0);
+    }
+}
+
+
+/* --- SEU CSS EXISTENTE CONTINUA ABAIXO --- */
+/* ... */
+
 .blackHeader {
     background-color: #2b2b2b;
     width: 100vw;
@@ -116,105 +162,105 @@ input::placeholder {
     cursor: pointer;
 }
 
-.icon{
+.icon {
     display: none;
 }
 
 @media (max-width: 1150px) {
 
-header {
-    background-color: #b22234;
-    width: 100vw;
-    height: auto;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 7px 0;
-}
+    header {
+        background-color: #b22234;
+        width: 100vw;
+        height: auto;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 7px 0;
+    }
 
-header img {
-    height: 15vh;
-    width: auto;
-}
+    header img {
+        height: 15vh;
+        width: auto;
+    }
 
-.blackHeader {
-    background-color: #2b2b2b;
-    width: 100vw;
-    height: 2vh;
-}
+    .blackHeader {
+        background-color: #2b2b2b;
+        width: 100vw;
+        height: 2vh;
+    }
 
-.redHeader {
-    background-color: #831926;
-    width: 100vw;
-    height: 4vh;
-}
+    .redHeader {
+        background-color: #831926;
+        width: 100vw;
+        height: 4vh;
+    }
 
-.imgHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100vw;
-}
+    .imgHeader {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100vw;
+    }
 
-.inputSearch {
-    width: 85vw;
-    height: 6vh;
-    border-radius: 30px;
-    border: none;
-    background-color: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 5px;
-}
+    .inputSearch {
+        width: 85vw;
+        height: 6vh;
+        border-radius: 30px;
+        border: none;
+        background-color: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 5px;
+    }
 
-.inputSearch input {
-    width: 85%;
-    height: 80%;
-    border: none;
-    border-radius: 30px;
-    background-color: #f5f5f5;
-    color:#2b2b2b;
-    text-align: center;
-    font-size: 1.0rem;  
-}
+    .inputSearch input {
+        width: 85%;
+        height: 80%;
+        border: none;
+        border-radius: 30px;
+        background-color: #f5f5f5;
+        color: #2b2b2b;
+        text-align: center;
+        font-size: 1.0rem;
+    }
 
-input:focus {
-    outline: none;
-}
+    input:focus {
+        outline: none;
+    }
 
-input::placeholder {
-    color: #b22234;
-    font-size: 1.0rem;
-    text-align: center;
-}
+    input::placeholder {
+        color: #b22234;
+        font-size: 1.0rem;
+        text-align: center;
+    }
 
-.searchIcon {
-    color: #b22234;
-    font-size: 1.2rem;
-}
+    .searchIcon {
+        color: #b22234;
+        font-size: 1.2rem;
+    }
 
-.userActions {
-    display: none;
-}
+    .userActions {
+        display: none;
+    }
 
-.locationIcon {
-    display: none;
-}
+    .locationIcon {
+        display: none;
+    }
 
-.userIcon {
-    display: none;
-}
+    .userIcon {
+        display: none;
+    }
 
-.cartIcon {
-    display: none;
-}
+    .cartIcon {
+        display: none;
+    }
 
-.icon{
-    font-size: 1.5rem;
-    display: block;
-}
+    .icon {
+        font-size: 1.5rem;
+        display: block;
+    }
 
 }
