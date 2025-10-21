@@ -22,7 +22,7 @@ function Header() {
     const handleScroll = () => {
       // Define o ponto em que o header deve ficar fixo (ex: 200px)
       // Você pode mudar esse valor
-      const threshold = 200; 
+      const threshold = 200;
 
       if (window.scrollY > threshold) {
         setIsFixed(true);
@@ -35,7 +35,7 @@ function Header() {
     setHeight(); // Define a altura inicial
     window.addEventListener('scroll', handleScroll);
     // Atualiza a altura caso o usuário redimensione a janela (ex: vire o celular)
-    window.addEventListener('resize', setHeight); 
+    window.addEventListener('resize', setHeight);
 
     // --- 4. Limpeza (remove os listeners ao desmontar) ---
     return () => {
@@ -52,6 +52,9 @@ function Header() {
 
   return (
     <>
+      {/* Todo o seu JSX original vai aqui dentro */}
+      <div className='blackHeader'></div>
+      <div className='redHeader'></div>
       {/* 1. O PLACEHOLDER 
         Este div só terá altura QUANDO o header estiver fixo (isFixed === true).
         Isso impede que o conteúdo da página "pule" para cima.
@@ -62,13 +65,11 @@ function Header() {
         Usamos 'ref' para medi-lo.
         Aplicamos a classe 'fixed-header' condicionalmente.
       */}
-      <div 
-        ref={headerRef} 
+      <div
+        ref={headerRef}
         className={`header-wrapper ${isFixed ? 'fixed-header' : ''}`}
       >
-        {/* Todo o seu JSX original vai aqui dentro */}
-        <div className='blackHeader'></div>
-        <div className='redHeader'></div>
+
         <header>
           <div className='imgHeader'>
             <div><FaBars className='icon' /></div>
