@@ -10,13 +10,12 @@ function App() {
     <>
       <Header />
       <main>
+        <h2 style={{ color: '#b22234', fontSize: '32px'}}>NOSSAS NOVIDADES</h2>
         <div style={{
-          width: '90%',
+          width: '80%',
           display: 'flex',
           justifyContent: 'center',
-          margin: '0 auto',
-          alignItems: 'center',
-          padding: '2rem 0'
+          alignItems: 'center'
         }}><ProductCard /></div>
       </main>
       <footer></footer>

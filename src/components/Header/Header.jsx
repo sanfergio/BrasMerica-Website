@@ -4,11 +4,11 @@ import { FaMapMarkerAlt, FaUser, FaShoppingCart, FaSearch, FaHamburger, FaBars }
 
 function Header() {
 
-    function toggleMenu() {}
+    function toggleMenu() { }
 
     function toggleCart() {
         alert('Clicou no carrinho')
-    }    
+    }
 
     return (
         <>
@@ -17,9 +17,9 @@ function Header() {
             <header>
                 <div className='imgHeader'>
                     <div><FaBars className='icon' /></div>
-                    <img src="https://github.com/sanfergio/BrasMerica-Website/blob/main/brasmerica/public/images/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" />
-                    <div><FaShoppingCart className='icon'/></div>
-                    </div>  
+                    <img src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" />
+                    <div><FaShoppingCart className='icon' /></div>
+                </div>
                 <div className='inputSearch'>
                     <input type="text" placeholder='O quê você procura?' />
                     <FaSearch className='searchIcon' />
@@ -36,7 +36,7 @@ function Header() {
                     </div>
 
                     <div className="cartIcon">
-                        <FaShoppingCart/>
+                        <FaShoppingCart />
                     </div>
 
                 </div>
