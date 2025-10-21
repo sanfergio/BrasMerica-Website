@@ -7,6 +7,7 @@ import WhatsAppButton from './components/WhatsappButton.jsx';
 import { FaMotorcycle, FaCampground } from "react-icons/fa";
 import { FaBridge } from 'react-icons/fa6';
 import NavBar from './components/Navbar/NavBar.jsx';
+import HomeButton from './components/HomeButton.jsx';
 
 function App() {
 
@@ -14,11 +15,12 @@ function App() {
     <>
       <Header />
       <WhatsAppButton />
+      <HomeButton />
       <NavBar />
       <main>
 
         <div className="carousel">
-          <img src="https://media.canva.com/v2/image-resize/format:PNG/height:302/quality:100/uri:ifs%3A%2F%2FM%2F81cef53e-a9d7-4b2b-b965-7018ffd1d39d/watermark:F/width:800?csig=AAAAAAAAAAAAAAAAAAAAAAyyncRgKvSo4mLt1aKg8tULX2GwJ-sqI1Iphyacxph6&exp=1761082843&osig=AAAAAAAAAAAAAAAAAAAAABVtAHuDzX63nfyHQDBh6FJw4CjMmkF6jizjX2J4qdkp&signer=media-rpc&x-canva-quality=screen" alt="" />
+          <img src="https://paulinhomotos.fbitsstatic.net/img/b/18336843-73db-4c33-bf8a-6b1843874fb0.jpg" alt="" />
         </div>
         <div className="brand-section">
           {/* H1 - Apenas o nome da marca */}
@@ -42,9 +44,22 @@ function App() {
         </div>
         <h3 style={{ color: '#b22234', fontSize: '30px' }}>NOSSAS NOVIDADES</h3>
         <div className='productCards'><ProductCard /></div>
-
+        <h3 style={{ color: '#b22234', fontSize: '30px', textAlign: 'center' }}>SUA MARCA <br/> DE CONFIANÇA</h3>
+        <div className="trust-section">
+          <div className="trust-item">
+            <img src="https://powersports.honda.com/motorcycle/standard/-/media/products/family/scl500/hero-banner/desktop/2025/2025-scl500-hero-banner-1920x930.jpg" alt="Qualidade" />
+          </div>
+          <div className="trust-item">
+            <img src="https://mir-s3-cdn-cf.behance.net/projects/404/421919187810179.Y3JvcCwxMDgwLDg0NCwwLDI1MQ.jpg" alt="Qualidade" />
+          </div>
+          <div className="trust-item">
+            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQobQl6LdbndEjaAc31LtZejeNl9oBkv4vH0uGgXkTCRo9SGxP8" alt="Qualidade" />
+          </div>
+        </div>
+        <h3 style={{ color: '#b22234', fontSize: '30px' }}>MAIS VENDIDOS</h3>
+        <div className='productCards'><ProductCard /></div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   )
 }
