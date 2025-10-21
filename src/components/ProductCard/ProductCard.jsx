@@ -115,12 +115,13 @@ export default function ProductCard() {
             </div>
           )}
 
+          <a href={product.buyNowUrl}>
           <img
             src={product.image}
             alt={product.title}
             className="product-image"
           />
-
+          </a>
           <div className="product-info">
             <h3 className="product-title">{product.title}</h3>
             <p className="product-price">
@@ -132,9 +133,9 @@ export default function ProductCard() {
           </div>
 
           <div className="product-actions">
-            <a href={product.addToCartUrl} className="btn btn-cart">
+            <button href={product.addToCartUrl} className="btn btn-cart">
               ADICIONAR AO CARRINHO!
-            </a>
+            </button>
             <a href={product.buyNowUrl} className="btn btn-buy">
               COMPRAR AGORA!
             </a>
