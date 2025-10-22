@@ -164,7 +164,7 @@ div[style*="flex-wrap"] {
         padding: 0.8rem; /* Ajustado */
         text-align: center;
         background-color: #fff;
-        width: 40.5vw; /* 2 por linha */
+        width: 42%; /* 2 por linha */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -173,12 +173,6 @@ div[style*="flex-wrap"] {
         height: auto; /* Altura automática */
     }
 
-    /* Mantém todos com a mesma altura em telas grandes (regra não se aplica aqui, mas mantida para contexto) */
-    @media (min-width: 769px) {
-        .product-card {
-            height: 420px;
-        }
-    }
 
     /* Hover */
     .product-card:hover {

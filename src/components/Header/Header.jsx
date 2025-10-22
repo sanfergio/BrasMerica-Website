@@ -73,7 +73,7 @@ function Header() {
         <header>
           <div className='imgHeader'>
             <div><FaBars className='icon' /></div>
-            <img src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" />
+            <a href="./index.html"><img src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" /></a>
             <div><FaShoppingCart className='icon' /></div>
           </div>
           <div className='inputSearch'>
@@ -83,11 +83,11 @@ function Header() {
           <div className='userActions'>
             <div className="locationIcon">
               <FaMapMarkerAlt />
-              <p>CONHEÇA <br /> <a>NOSSA LOJA</a></p>
+              <p>CONHEÇA <br /> <a href='#'>NOSSA LOJA</a></p>
             </div>
             <div className="userIcon">
               <FaUser />
-              <p>OLÁ VISITANTE,<br /> <a>ENTRE</a> OU <a>CADASTRE-SE</a></p>
+              <p>OLÁ VISITANTE,<br /> <a href='#'>ENTRE</a> OU <a href='#'>CADASTRE-SE</a></p>
             </div>
             <div className="cartIcon">
               <FaShoppingCart />
