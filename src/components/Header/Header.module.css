@@ -1,250 +1,180 @@
-/* 1. MUDANÇA: O seletor de tag 'header' virou uma classe '.header' */
 .header {
-    background-color: #b22234;
-    width: 100%;
-    height: 15vh;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  background-color: #b22234;
+  width: 100%;
+  height: 15vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-/* O seletor de tag 'img' dentro de '.header' funciona normalmente */
 .header img {
-    height: 15vh;
-    width: auto;
+  height: 15vh;
+  width: auto;
 }
 
-/* 2. MUDANÇA: Classe renomeada para 'headerWrapper' (camelCase) */
+/* --- WRAPPER --- */
 .headerWrapper {
-    position: relative;
-    z-index: 1000;
-    width: 100%;
-    /* O 'background' é importante para o header fixo não ficar transparente
-      Se os seus .blackHeader e .redHeader já fazem isso, pode ser redundante.
-    */
-    background-color: white; 
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  background-color: white;
 }
 
-/* 3. MUDANÇA: Classe renomeada para 'fixedHeader' e combinada com 'headerWrapper' */
-.headerWrapper.fixedHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideDown 0.5s ease-in-out;
+.fixedHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.5s ease-in-out;
 }
 
 @keyframes slideDown {
-    from {
-        transform: translateY(-100%);
-    }
-    to {
-        transform: translateY(0);
-    }
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
-/* --- SEU CSS EXISTENTE (agora 100% modularizado) --- */
 .blackHeader {
-    background-color: #2b2b2b;
-    width: 100%;
-    height: 2vh;
+  background-color: #2b2b2b;
+  width: 100%;
+  height: 2vh;
 }
 
 .redHeader {
-    background-color: #831926;
-    width: 100%;
-    height: 4vh;
+  background-color: #831926;
+  width: 100%;
+  height: 4vh;
 }
 
 .imgHeader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inputSearch {
-    width: 42vw;
-    height: 7vh;
+  width: 42vw;
+  height: 7vh;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.inputSearch input {
+  width: 90%;
+  height: 80%;
+  border: none;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  color: #2b2b2b;
+  text-align: center;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: #b22234;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.searchIcon {
+  color: #b22234;
+  font-size: 1.2rem;
+}
+
+.userActions {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  color: #f5f5f5;
+  font-size: 30px;
+}
+
+.locationIcon,
+.userIcon {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+
+.locationIcon p,
+.userIcon p {
+  font-size: 12px;
+}
+
+.cartIcon {
+  cursor: pointer;
+}
+
+.icon {
+  display: none;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 1150px) {
+  .header {
+    background-color: #b22234;
+    width: 100%;
+    height: auto;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 7px 0;
+  }
+
+  .imgHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+  }
+
+  .inputSearch {
+    width: 85vw;
+    height: 6vh;
     border-radius: 30px;
-    border: none;
     background-color: #f5f5f5;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-}
+    margin-bottom: 5px;
+  }
 
-/* Seletores de tag (input) dentro de uma classe (.inputSearch) 
-  são perfeitamente válidos e não vazarão.
-*/
-.inputSearch input {
-    width: 90%;
+  .inputSearch input {
+    width: 85%;
     height: 80%;
     border: none;
     border-radius: 30px;
     background-color: #f5f5f5;
     color: #2b2b2b;
     text-align: center;
-    font-size: 1.0rem;
-}
+    font-size: 1rem;
+  }
 
-/* Seletores de pseudo-classe em tags globais.
-  Isso NÃO é modularizado, vai se aplicar a TODOS os inputs.
-  Se quisesse aplicar só a este input, usaria: .inputSearch input:focus
-*/
-input:focus {
-    outline: none;
-}
-input::placeholder {
-    color: #b22234;
-    font-size: 1.0rem;
-    text-align: center;
-}
-
-.searchIcon {
-    color: #b22234;
-    font-size: 1.2rem;
-}
-
-.userActions {
-    height: 10vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 35px;
-    color: #f5f5f5;
-    font-size: 30px;
-}
-
-.userActions span {
-    cursor: pointer;
-}
-
-.locationIcon {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    align-items: center;
-}
-
-.locationIcon span {
-    cursor: pointer;
-}
-
-.locationIcon p {
-    font-size: 12px
-}
-
-.location {
-    cursor: pointer;
-}
-
-.userIcon {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    align-items: center;
-}
-
-.userIcon p {
-    font-size: 12px;
-}
-
-.cartIcon {
-    cursor: pointer;
-}
-
-.icon {
+  .userActions,
+  .locationIcon,
+  .userIcon,
+  .cartIcon {
     display: none;
-}
+  }
 
-
-/* --- MEDIA QUERIES --- */
-@media (max-width: 1150px) {
-
-    /* 4. MUDANÇA: 'header' virou '.header' aqui também */
-    .header {
-        background-color: #b22234;
-        width: 100%;
-        height: auto;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        padding: 7px 0;
-    }
-
-    .header img {
-        height: 15vh;
-        width: auto;
-    }
-
-    .blackHeader {
-        background-color: #2b2b2b;
-        width: 100%;
-        height: 2vh;
-    }
-
-    .redHeader {
-        background-color: #831926;
-        width: 100%;
-        height: 4vh;
-    }
-
-    .imgHeader {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        width: 100vw;
-    }
-
-    .inputSearch {
-        width: 85vw;
-        height: 6vh;
-        border-radius: 30px;
-        border: none;
-        background-color: #f5f5f5;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        margin-bottom: 5px;
-    }
-
-    .inputSearch input {
-        width: 85%;
-        height: 80%;
-        border: none;
-        border-radius: 30px;
-        background-color: #f5f5f5;
-        color: #2b2b2b;
-        text-align: center;
-        font-size: 1.0rem;
-    }
-
-    .searchIcon {
-        color: #b22234;
-        font-size: 1.2rem;
-    }
-
-    .userActions {
-        display: none;
-    }
-
-    .locationIcon {
-        display: none;
-    }
-
-    .userIcon {
-        display: none;
-    }
-
-    .cartIcon {
-        display: none;
-    }
-
-    .icon {
-        font-size: 1.5rem;
-        display: block;
-    }
+  .icon {
+    font-size: 1.5rem;
+    display: block;
+  }
 }

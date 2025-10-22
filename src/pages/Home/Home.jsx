@@ -1,13 +1,8 @@
-import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import '../../App.css';
 import ProductCard from "../../components/ProductCard/ProductCard.jsx";
-import React, { useEffect, useState } from 'react';
-import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import { FaMotorcycle, FaCampground } from "react-icons/fa";
-import { FaBridge } from 'react-icons/fa6';
 import NavBar from '../../components/Navbar/NavBar.jsx';
-import HomeButton from '../../components/HomeButton.jsx';
 import Categories from '../../components/Categorias/Categorias.jsx';
 import Carousel from '../../components/Carousel/Carousel.jsx';
 import './Home.css';

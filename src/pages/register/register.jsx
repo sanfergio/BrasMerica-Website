@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./register.css";
+import "./Register.css";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -84,158 +85,161 @@ export default function Register() {
   }
 
   return (
-    <div className="reg-container">
-      <div className="reg-card">
-        <h2 className="reg-title">Crie sua conta</h2>
+    <>
+      <main className="reg-container">
+        <div className="reg-card">
+          <h2 className="reg-title">Crie sua conta</h2>
 
-        <form className="reg-form" onSubmit={handleSubmit} noValidate>
-          {[{ name: "name", placeholder: "Nome" },
+          <form className="reg-form" onSubmit={handleSubmit} noValidate>
+            {[{ name: "name", placeholder: "Nome" },
             { name: "email", placeholder: "Email" }].map((field) => (
-            <label
-              key={field.name}
-              className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
-            >
-              <input
-                className="input-box"
-                name={field.name}
-                placeholder={field.placeholder}
-                value={form[field.name]}
-                onChange={handleChange}
-              />
-              {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
-            </label>
-          ))}
+              <label
+                key={field.name}
+                className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
+              >
+                <input
+                  className="input-box"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={form[field.name]}
+                  onChange={handleChange}
+                />
+                {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
+              </label>
+            ))}
 
-          <div className="row two">
-            {[{ name: "cpf", placeholder: "CPF" },
+            <div className="row two">
+              {[{ name: "cpf", placeholder: "CPF" },
               { name: "birth", placeholder: "dd/mm/aaaa" }].map((field) => (
-              <label
-                key={field.name}
-                className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
-              >
-                <input
-                  className="input-box"
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={form[field.name]}
-                  onChange={handleChange}
-                />
-                {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
-              </label>
-            ))}
-          </div>
-
-          <div className="row two">
-            {[{ name: "address", placeholder: "Endereço" },
-              { name: "neighborhood", placeholder: "Bairro" }].map((field) => (
-              <label
-                key={field.name}
-                className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
-              >
-                <input
-                  className="input-box"
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={form[field.name]}
-                  onChange={handleChange}
-                />
-                {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
-              </label>
-            ))}
-          </div>
-
-          <label className={`input-group ${errors.city ? "input-group-error" : ""}`}>
-            <input
-              className="input-box"
-              name="city"
-              placeholder="Cidade"
-              value={form.city}
-              onChange={handleChange}
-            />
-            {errors.city && <span className="field-error">{errors.city}</span>}
-          </label>
-
-          <div className="row two">
-            {[{ name: "cep", placeholder: "CEP" },
-              { name: "number", placeholder: "Número" }].map((field) => (
-              <label
-                key={field.name}
-                className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
-              >
-                <input
-                  className="input-box"
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={form[field.name]}
-                  onChange={handleChange}
-                />
-                {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
-              </label>
-            ))}
-          </div>
-
-          <label className={`input-group ${errors.complement ? "input-group-error" : ""}`}>
-            <input
-              className="input-box"
-              name="complement"
-              placeholder="Complemento"
-              value={form.complement}
-              onChange={handleChange}
-            />
-            {errors.complement && <span className="field-error">{errors.complement}</span>}
-          </label>
-
-          <div className="row two">
-            {[{ name: "password", placeholder: "Senha", type: "password" },
-              { name: "confirmPassword", placeholder: "Confirme a senha", type: "password" }].map(
-              (field) => (
                 <label
                   key={field.name}
                   className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
                 >
                   <input
                     className="input-box"
-                    type={field.type}
                     name={field.name}
                     placeholder={field.placeholder}
                     value={form[field.name]}
                     onChange={handleChange}
                   />
-                  {errors[field.name] && (
-                    <span className="field-error">{errors[field.name]}</span>
-                  )}
+                  {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
                 </label>
-              )
-            )}
-          </div>
+              ))}
+            </div>
 
-          <div className="terms-row">
-            <label className="terms-label">
+            <div className="row two">
+              {[{ name: "address", placeholder: "Endereço" },
+              { name: "neighborhood", placeholder: "Bairro" }].map((field) => (
+                <label
+                  key={field.name}
+                  className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
+                >
+                  <input
+                    className="input-box"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={form[field.name]}
+                    onChange={handleChange}
+                  />
+                  {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
+                </label>
+              ))}
+            </div>
+
+            <label className={`input-group ${errors.city ? "input-group-error" : ""}`}>
               <input
-                type="checkbox"
-                name="terms"
-                checked={form.terms}
+                className="input-box"
+                name="city"
+                placeholder="Cidade"
+                value={form.city}
                 onChange={handleChange}
               />
-              <span> Concordo com os Termos de Uso e Serviço do site</span>
+              {errors.city && <span className="field-error">{errors.city}</span>}
             </label>
-            {errors.terms && <div className="field-error">{errors.terms}</div>}
-          </div>
 
-          <a className="small-link" href="#">
-            Já tenho uma conta
-          </a>
+            <div className="row two">
+              {[{ name: "cep", placeholder: "CEP" },
+              { name: "number", placeholder: "Número" }].map((field) => (
+                <label
+                  key={field.name}
+                  className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
+                >
+                  <input
+                    className="input-box"
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={form[field.name]}
+                    onChange={handleChange}
+                  />
+                  {errors[field.name] && <span className="field-error">{errors[field.name]}</span>}
+                </label>
+              ))}
+            </div>
 
-          <button className="submit-btn" type="submit">
-            Cadastrar
-          </button>
+            <label className={`input-group ${errors.complement ? "input-group-error" : ""}`}>
+              <input
+                className="input-box"
+                name="complement"
+                placeholder="Complemento"
+                value={form.complement}
+                onChange={handleChange}
+              />
+              {errors.complement && <span className="field-error">{errors.complement}</span>}
+            </label>
 
-          {Object.keys(errors).length > 0 && (
-            <div className="form-error">Por favor, corrija os campos destacados.</div>
-          )}
-          {success && <div className="form-success">{success}</div>}
-        </form>
-      </div>
-    </div>
+            <div className="row two">
+              {[{ name: "password", placeholder: "Senha", type: "password" },
+              { name: "confirmPassword", placeholder: "Confirme a senha", type: "password" }].map(
+                (field) => (
+                  <label
+                    key={field.name}
+                    className={`input-group ${errors[field.name] ? "input-group-error" : ""}`}
+                  >
+                    <input
+                      className="input-box"
+                      type={field.type}
+                      name={field.name}
+                      placeholder={field.placeholder}
+                      value={form[field.name]}
+                      onChange={handleChange}
+                    />
+                    {errors[field.name] && (
+                      <span className="field-error">{errors[field.name]}</span>
+                    )}
+                  </label>
+                )
+              )}
+            </div>
+
+            <div className="terms-row">
+              <label className="terms-label">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  checked={form.terms}
+                  onChange={handleChange}
+                />
+                <span> Concordo com os Termos de Uso e Serviço do site</span>
+              </label>
+              {errors.terms && <div className="field-error">{errors.terms}</div>}
+            </div>
+
+            <a className="small-link" href="/login">
+              Já tenho uma conta
+            </a>
+
+            <button className="submit-btn" type="submit">
+              Cadastrar
+            </button>
+
+            {Object.keys(errors).length > 0 && (
+              <div className="form-error">Por favor, corrija os campos destacados.</div>
+            )}
+            {success && <div className="form-success">{success}</div>}
+          </form>
+        </div>
+      </main>
+      <ShortFooter />
+    </>
   );
 }

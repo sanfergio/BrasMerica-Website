@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./Login.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function Login() {
@@ -155,7 +155,7 @@ export default function Login() {
             {errors.password && <p className="error-message">{errors.password}</p>}
 
             <div className="actions-row">
-              <a className="link" href="#">
+              <a className="link" href="/register">
                 Não tenho uma conta
               </a>
               <button className="signup-button" type="submit">
