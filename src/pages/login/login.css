@@ -1,0 +1,164 @@
+:root {
+  --bg: #f7faf9;
+  --card-bg: #ffffff;
+  --accent: #b91c1c;
+  --muted: #f3f4f6;
+  --input-text: #374151;
+  --google-blue: #0b5db8;
+}
+
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card-bg);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+}
+
+.login-title {
+  text-align: center;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 24px;
+  margin: -5px 0px 15px 0px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: var(--muted);
+  border-radius: 999px;
+  padding: 8px 14px;
+  transition: all 0.3s ease;
+}
+
+.input-group-error {
+  border: 2px solid #dc2626 !important;
+  background: #fee2e2 !important;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.3);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  margin-right: 12px;
+  flex: 0 0 36px;
+}
+
+.input-box {
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: var(--input-text);
+  flex: 1 1 auto;
+  padding: 10px 6px;
+}
+
+.input-box::placeholder {
+  text-align: start;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 0.4s ease;
+}
+
+.link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+.signup-button {
+  background: var(--accent);
+  color: white;
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.signup-button:hover {
+  transform: scale(1.05);
+}
+
+.google-button {
+  margin-top: 12px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--google-blue);
+  color: white;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.4s ease;
+}
+
+.google-button:hover {
+  transform: scale(1.02);
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 13px;
+  margin: 4px 0 0 10px;
+  font-weight: 500;
+}
+
+.success-message {
+  color: #16a34a;
+  font-weight: 600;
+  margin-top: 14px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .login-title {
+    font-size: 20px;
+  }
+}
