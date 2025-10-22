@@ -7,7 +7,7 @@ export default function ShortFooter() {
     <footer className="footer">
       <div className="newsletter">
         <img
-          src="/assets/logo_footer.webp"
+          src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true"
           alt="Logo do rodapé"
           className="newsletter-logo"
         />
@@ -17,16 +17,6 @@ export default function ShortFooter() {
             <MapPin size={16} /> São João Evangelista MG, Rua José Guimarães
             número 509 - Centro, 39705000
           </p>
-        </div>
-
-        <div>
-          <h3>Contato</h3>
-          <div className="contact">
-            <Phone size={16} />
-            <Mail size={16} />
-            <Instagram size={16} />
-            <Facebook size={16} />
-          </div>
         </div>
       </div>
     </footer>
