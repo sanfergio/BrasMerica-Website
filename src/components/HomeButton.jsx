@@ -41,7 +41,7 @@ const HomeButton = () => {
   const buttonStyle = {
     position: 'fixed',
     bottom: '50px',
-    right: '20px',
+    right: '8px',
     zIndex: 1000,
     background: '#b22234', // Fundo vermelho
     border: 'none',

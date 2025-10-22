@@ -75,7 +75,7 @@ main {
   padding: 5px 5px 10px;
   background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.1);
   scale: 1;
   width: auto;
   transition: box-shadow 0.3s ease;
@@ -112,12 +112,8 @@ main {
 /* Estilo da parte "MÉRICA" (gradiente) */
 .brand-part-gradient {
   background: linear-gradient(to right, #0057a0, #b22234);
-
-  /* Aplica o fundo ao texto */
   -webkit-background-clip: text;
   background-clip: text;
-
-  /* Deixa o texto transparente para o fundo aparecer */
   color: transparent;
 }
 

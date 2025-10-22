@@ -8,6 +8,7 @@ import { FaMotorcycle, FaCampground } from "react-icons/fa";
 import { FaBridge } from 'react-icons/fa6';
 import NavBar from './components/Navbar/NavBar.jsx';
 import HomeButton from './components/HomeButton.jsx';
+import Categories from './components/Categorias/Categorias.jsx';
 
 function App() {
 
@@ -42,9 +43,9 @@ function App() {
             O maior estoque atacadista, agora na sua garagem.
           </h2>
         </div>
-        <h3 style={{ color: '#b22234', fontSize: '30px' }}>NOSSAS NOVIDADES</h3>
+        <h3 style={{ color: '#b22234', fontSize: '25px' }}>NOSSAS NOVIDADES</h3>
         <div className='productCards'><ProductCard /></div>
-        <h3 style={{ color: '#b22234', fontSize: '30px', textAlign: 'center' }}>SUA MARCA <br/> DE CONFIANÇA</h3>
+        <h3 style={{ color: '#b22234', fontSize: '25px', textAlign: 'center' }}>SUA MARCA <br /> DE CONFIANÇA</h3>
         <div className="trust-section">
           <div className="trust-item">
             <img src="https://powersports.honda.com/motorcycle/standard/-/media/products/family/scl500/hero-banner/desktop/2025/2025-scl500-hero-banner-1920x930.jpg" alt="Qualidade" />
@@ -56,7 +57,11 @@ function App() {
             <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQobQl6LdbndEjaAc31LtZejeNl9oBkv4vH0uGgXkTCRo9SGxP8" alt="Qualidade" />
           </div>
         </div>
-        <h3 style={{ color: '#b22234', fontSize: '30px' }}>MAIS VENDIDOS</h3>
+        <h3 style={{ color: '#b22234', fontSize: '25px', textAlign: 'center' }}>CATEGORIAS DISPONÍVEIS</h3>
+        <div className="categories-section">
+          <Categories />
+        </div>
+        <h3 style={{ color: '#b22234', fontSize: '25px' }}>MAIS VENDIDOS</h3>
         <div className='productCards'><ProductCard /></div>
       </main>
       <Footer />

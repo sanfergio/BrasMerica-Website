@@ -41,6 +41,15 @@ nav a {
     height: 10px;
 }
 
+.categories-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
 @media (max-width: 1150px) {
 
     .card-navbar {
@@ -82,9 +91,10 @@ nav a {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: center;
         color: black;
         width: 100%;
+        gap: 10px;
         height: auto;
         padding: 40px 0;
 
