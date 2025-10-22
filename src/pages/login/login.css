@@ -8,17 +8,18 @@
 }
 
 .login-container {
-  height: 100vh;
+  height: auto;
   width: 100vw;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 24px;
+  justify-content: flex-start;
+  padding: 15px;
+  min-height: 75vh;
   background: var(--bg);
 }
 
 .login-card {
-  width: 100%;
+  width: 40%;
   max-width: 720px;
   background: var(--card-bg);
   border-radius: 28px;
@@ -152,10 +153,23 @@
   text-align: center;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1150px) {
+
+  .login-container {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 50px;
+    background: var(--bg);
+    min-height: 50vh;
+  }
+
   .login-card {
     padding: 20px;
     border-radius: 20px;
+    width: 80vw;
   }
 
   .login-title {

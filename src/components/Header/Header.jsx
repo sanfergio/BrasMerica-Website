@@ -1,29 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Header.css';
+// 1. MUDANÇA: Importamos o CSS como um objeto 'styles'
+import styles from './Header.module.css';
 import { FaMapMarkerAlt, FaUser, FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 
-function Header() {
-  // Estado para controlar se o header está fixo ou não
+function Header({ children }) {
+  // Estados para o header fixo (lógica original mantida)
   const [isFixed, setIsFixed] = useState(false);
-  // Estado para guardar a altura do header (para o placeholder)
   const [placeholderHeight, setPlaceholderHeight] = useState(0);
-  // Referência para o wrapper do header, para podermos medi-lo
   const headerRef = useRef(null);
 
+  // useEffect para controlar o scroll (lógica original mantida)
   useEffect(() => {
-    // --- 1. Função para medir e definir a altura do header ---
     const setHeight = () => {
       if (headerRef.current) {
         setPlaceholderHeight(headerRef.current.offsetHeight);
       }
     };
 
-    // --- 2. Função para controlar o estado 'fixed' no scroll ---
     const handleScroll = () => {
-      // Define o ponto em que o header deve ficar fixo (ex: 200px)
-      // Você pode mudar esse valor
       const threshold = 200;
-
       if (window.scrollY > threshold) {
         setIsFixed(true);
       } else {
@@ -31,18 +26,15 @@ function Header() {
       }
     };
 
-    // --- 3. Adiciona os "ouvintes" (listeners) ---
-    setHeight(); // Define a altura inicial
+    setHeight();
     window.addEventListener('scroll', handleScroll);
-    // Atualiza a altura caso o usuário redimensione a janela (ex: vire o celular)
     window.addEventListener('resize', setHeight);
 
-    // --- 4. Limpeza (remove os listeners ao desmontar) ---
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', setHeight);
     };
-  }, []); // O array vazio [] garante que isso rode só uma vez
+  }, []);
 
   function toggleMenu() { }
 
@@ -52,44 +44,44 @@ function Header() {
 
   return (
     <>
-      {/* Todo o seu JSX original vai aqui dentro */}
-      <div className='blackHeader'></div>
-      <div className='redHeader'></div>
-      {/* 1. O PLACEHOLDER 
-        Este div só terá altura QUANDO o header estiver fixo (isFixed === true).
-        Isso impede que o conteúdo da página "pule" para cima.
-      */}
+      {/* 2. MUDANÇA: Aplicando classes do objeto 'styles' */}
+      <div className={styles.blackHeader}></div>
+      <div className={styles.redHeader}></div>
+
+      {/* Placeholder (lógica original mantida) */}
       <div style={{ height: isFixed ? placeholderHeight : 0 }} />
 
-      {/* 2. O WRAPPER DO HEADER
-        Usamos 'ref' para medi-lo.
-        Aplicamos a classe 'fixed-header' condicionalmente.
+      {/* 3. MUDANÇA: Classes dinâmicas usando template string e o objeto 'styles'.
+           Repare que 'header-wrapper' virou 'styles.headerWrapper' e
+           'fixed-header' virou 'styles.fixedHeader'.
       */}
       <div
         ref={headerRef}
-        className={`header-wrapper ${isFixed ? 'fixed-header' : ''}`}
+        className={`${styles.headerWrapper} ${isFixed ? styles.fixedHeader : ''}`}
       >
+        {/* 4. MUDANÇA: <header> agora usa a classe '.header' */}
+        <header className={styles.header}>
+          <div className={styles.imgHeader}>
+            <div><FaBars className={styles.icon} /></div>
+            <a href="./"><img src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" /></a>
+            <div><FaShoppingCart className={styles.icon} /></div>
+          </div>
 
-        <header>
-          <div className='imgHeader'>
-            <div><FaBars className='icon' /></div>
-            <a href="./index.html"><img src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true" alt="Logo Brasmerica" /></a>
-            <div><FaShoppingCart className='icon' /></div>
-          </div>
-          <div className='inputSearch'>
+          <div className={styles.inputSearch}>
             <input type="text" placeholder='O quê você procura?' />
-            <FaSearch className='searchIcon' />
+            <FaSearch className={styles.searchIcon} />
           </div>
-          <div className='userActions'>
-            <div className="locationIcon">
+
+          <div className={styles.userActions}>
+            <div className={styles.locationIcon}>
               <FaMapMarkerAlt />
               <p>CONHEÇA <br /> <a href='#'>NOSSA LOJA</a></p>
             </div>
-            <div className="userIcon">
+            <div className={styles.userIcon}>
               <FaUser />
-              <p>OLÁ VISITANTE,<br /> <a href='#'>ENTRE</a> OU <a href='#'>CADASTRE-SE</a></p>
+              <p>OLÁ VISITANTE,<br /> <a href='/login'>ENTRE</a> OU <a href='#'>CADASTRE-SE</a></p>
             </div>
-            <div className="cartIcon">
+            <div className={styles.cartIcon}>
               <FaShoppingCart />
             </div>
           </div>

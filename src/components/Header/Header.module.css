@@ -1,4 +1,5 @@
-header {
+/* 1. MUDANÇA: O seletor de tag 'header' virou uma classe '.header' */
+.header {
     background-color: #b22234;
     width: 100%;
     height: 15vh;
@@ -8,32 +9,25 @@ header {
     justify-content: space-evenly;
 }
 
-header img {
+/* O seletor de tag 'img' dentro de '.header' funciona normalmente */
+.header img {
     height: 15vh;
     width: auto;
 }
 
-/* --- ADICIONE ESTAS CLASSES NO TOPO DO SEU Header.css --- */
-
-.header-wrapper {
-    /* ESTADO PADRÃO (Topo da página): 
-    Apenas fica aqui, em sua posição normal.
-    'position: relative' é bom para o z-index funcionar.
-  */
+/* 2. MUDANÇA: Classe renomeada para 'headerWrapper' (camelCase) */
+.headerWrapper {
     position: relative;
     z-index: 1000;
     width: 100%;
-    /* O 'background' é importante, senão o conteúdo da página 
-     passará por trás dele quando ele estiver fixo. 
-     Se os seus .blackHeader e .redHeader já preenchem 
-     o fundo, talvez você não precise disto. */
-    background-color: white;
+    /* O 'background' é importante para o header fixo não ficar transparente
+      Se os seus .blackHeader e .redHeader já fazem isso, pode ser redundante.
+    */
+    background-color: white; 
 }
 
-.header-wrapper.fixed-header {
-    /* ESTADO FIXO (Após rolar):
-    Fica preso no topo da tela.
-  */
+/* 3. MUDANÇA: Classe renomeada para 'fixedHeader' e combinada com 'headerWrapper' */
+.headerWrapper.fixedHeader {
     position: fixed;
     top: 0;
     left: 0;
@@ -41,24 +35,16 @@ header img {
     animation: slideDown 0.5s ease-in-out;
 }
 
-/* Define a animação de "surgimento" (ease-in-out)
-*/
 @keyframes slideDown {
     from {
-        /* Começa 100% acima da tela */
         transform: translateY(-100%);
     }
-
     to {
-        /* Termina na posição normal (top: 0) */
         transform: translateY(0);
     }
 }
 
-
-/* --- SEU CSS EXISTENTE CONTINUA ABAIXO --- */
-/* ... */
-
+/* --- SEU CSS EXISTENTE (agora 100% modularizado) --- */
 .blackHeader {
     background-color: #2b2b2b;
     width: 100%;
@@ -88,6 +74,9 @@ header img {
     justify-content: flex-start;
 }
 
+/* Seletores de tag (input) dentro de uma classe (.inputSearch) 
+  são perfeitamente válidos e não vazarão.
+*/
 .inputSearch input {
     width: 90%;
     height: 80%;
@@ -99,10 +88,13 @@ header img {
     font-size: 1.0rem;
 }
 
+/* Seletores de pseudo-classe em tags globais.
+  Isso NÃO é modularizado, vai se aplicar a TODOS os inputs.
+  Se quisesse aplicar só a este input, usaria: .inputSearch input:focus
+*/
 input:focus {
     outline: none;
 }
-
 input::placeholder {
     color: #b22234;
     font-size: 1.0rem;
@@ -166,9 +158,12 @@ input::placeholder {
     display: none;
 }
 
+
+/* --- MEDIA QUERIES --- */
 @media (max-width: 1150px) {
 
-    header {
+    /* 4. MUDANÇA: 'header' virou '.header' aqui também */
+    .header {
         background-color: #b22234;
         width: 100%;
         height: auto;
@@ -180,7 +175,7 @@ input::placeholder {
         padding: 7px 0;
     }
 
-    header img {
+    .header img {
         height: 15vh;
         width: auto;
     }
@@ -227,16 +222,6 @@ input::placeholder {
         font-size: 1.0rem;
     }
 
-    input:focus {
-        outline: none;
-    }
-
-    input::placeholder {
-        color: #b22234;
-        font-size: 1.0rem;
-        text-align: center;
-    }
-
     .searchIcon {
         color: #b22234;
         font-size: 1.2rem;
@@ -262,5 +247,4 @@ input::placeholder {
         font-size: 1.5rem;
         display: block;
     }
-
 }
