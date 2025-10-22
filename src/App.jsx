@@ -9,6 +9,7 @@ import { FaBridge } from 'react-icons/fa6';
 import NavBar from './components/Navbar/NavBar.jsx';
 import HomeButton from './components/HomeButton.jsx';
 import Categories from './components/Categorias/Categorias.jsx';
+import Carousel from './components/Carousel/Carousel.jsx';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
       <main>
 
         <div className="carousel">
-          <img src="https://paulinhomotos.fbitsstatic.net/img/b/18336843-73db-4c33-bf8a-6b1843874fb0.jpg" alt="" />
+          <Carousel />
         </div>
         <div className="brand-section">
           {/* H1 - Apenas o nome da marca */}
@@ -63,6 +64,10 @@ function App() {
         </div>
         <h3 style={{ color: '#b22234', fontSize: '25px' }}>MAIS VENDIDOS</h3>
         <div className='productCards'><ProductCard /></div>
+        <div className="bannerSection">
+          <img src="https://paulinhomotos.fbitsstatic.net/img/b/a1c5be88-d5f1-41b2-bc3d-9a3f715ba844.jpg" />
+          <img src="https://paulinhomotos.fbitsstatic.net/img/b/e45e2155-1f7a-4069-91b2-409ad5eeeb8f.jpg" />
+        </div>
       </main>
       <Footer />
     </>
