@@ -1,0 +1,57 @@
+.termos-container {
+    width: 100vw;
+    background-color: #ffffff;
+    padding: 4rem 1rem;
+}
+
+.termos-conteudo {
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.termos-titulo {
+    font-size: 2.25rem;
+    font-weight: bold;
+    margin: 2rem 0px;
+    text-align: center;
+    color: #b22234;
+}
+
+.termos-lista {
+    list-style: none;
+    counter-reset: termos;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.termo-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.termo-numero {
+    font-size: 2rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    color: #b22234;
+}
+
+.termo-textos {
+    flex: 1;
+    padding-top: 0.5rem;
+}
+
+.termo-subtitulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0px;
+    color: #b22234;
+}
+
+.termo-descricao {
+    line-height: 1.5rem;
+    color: #333;
+    margin: 0px 0px 10px 0px;
+    font-size: 1rem;
+}
