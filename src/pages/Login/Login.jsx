@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import styles from "./Login.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function Login() {
@@ -61,16 +61,18 @@ export default function Login() {
 
   return (
     <>
-      <main className="login-container">
-        <div className="login-card">
-          <h2 className="login-title">Entre com sua conta</h2>
+      <main className={styles.loginContainer}>
+        <div className={styles.loginCard}>
+          <h2 className={styles.loginTitle}>Entre com sua conta</h2>
 
-          <form className="login-form" onSubmit={handleSubmit} noValidate>
+          <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
             {/* Nome */}
             <label
-              className={`input-group ${errors.name ? "input-group-error" : ""}`}
+              className={`${styles.inputGroup} ${
+                errors.name ? styles.inputGroupError : ""
+              }`}
             >
-              <span className="icon" aria-hidden>
+              <span className={styles.icon} aria-hidden>
                 <svg
                   width="16"
                   height="16"
@@ -84,7 +86,7 @@ export default function Login() {
                 </svg>
               </span>
               <input
-                className="input-box"
+                className={styles.inputBox}
                 type="text"
                 placeholder="Nome"
                 name="name"
@@ -93,13 +95,17 @@ export default function Login() {
                 autoComplete="name"
               />
             </label>
-            {errors.name && <p className="error-message">{errors.name}</p>}
+            {errors.name && (
+              <p className={styles.errorMessage}>{errors.name}</p>
+            )}
 
             {/* Email */}
             <label
-              className={`input-group ${errors.email ? "input-group-error" : ""}`}
+              className={`${styles.inputGroup} ${
+                errors.email ? styles.inputGroupError : ""
+              }`}
             >
-              <span className="icon" aria-hidden>
+              <span className={styles.icon} aria-hidden>
                 <svg
                   width="16"
                   height="16"
@@ -113,7 +119,7 @@ export default function Login() {
                 </svg>
               </span>
               <input
-                className="input-box"
+                className={styles.inputBox}
                 type="email"
                 placeholder="Email"
                 name="email"
@@ -122,14 +128,17 @@ export default function Login() {
                 autoComplete="email"
               />
             </label>
-            {errors.email && <p className="error-message">{errors.email}</p>}
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email}</p>
+            )}
 
             {/* Senha */}
             <label
-              className={`input-group ${errors.password ? "input-group-error" : ""
-                }`}
+              className={`${styles.inputGroup} ${
+                errors.password ? styles.inputGroupError : ""
+              }`}
             >
-              <span className="icon" aria-hidden>
+              <span className={styles.icon} aria-hidden>
                 <svg
                   width="14"
                   height="14"
@@ -143,7 +152,7 @@ export default function Login() {
                 </svg>
               </span>
               <input
-                className="input-box"
+                className={styles.inputBox}
                 type="password"
                 placeholder="Senha"
                 name="password"
@@ -152,19 +161,21 @@ export default function Login() {
                 autoComplete="current-password"
               />
             </label>
-            {errors.password && <p className="error-message">{errors.password}</p>}
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password}</p>
+            )}
 
-            <div className="actions-row">
-              <a className="link" href="/register">
+            <div className={styles.actionsRow}>
+              <a className={styles.link} href="/register">
                 Não tenho uma conta
               </a>
-              <button className="signup-button" type="submit">
+              <button className={styles.signupButton} type="submit">
                 SIGN UP
               </button>
             </div>
 
-            <button type="button" className="google-button">
-              <span className="google-icon" aria-hidden>
+            <button type="button" className={styles.googleButton}>
+              <span className={styles.googleIcon} aria-hidden>
                 <svg
                   viewBox="0 0 533.5 544.3"
                   width="18"
@@ -192,10 +203,11 @@ export default function Login() {
               <span>Fazer Login com Google</span>
             </button>
 
-            {success && <p className="success-message">{success}</p>}
+            {success && (
+              <p className={styles.successMessage}>{success}</p>
+            )}
           </form>
         </div>
-
       </main>
       <ShortFooter />
     </>

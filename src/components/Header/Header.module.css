@@ -1,3 +1,19 @@
+.header img {
+  height: 15vh;
+  width: auto;
+}
+
+/* WRAPPER AGORA USANDO STICKY */
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove fixedHeader e animação de slideDown */
 .header {
   background-color: #b22234;
   width: 100%;
@@ -8,18 +24,8 @@
   justify-content: space-evenly;
 }
 
-.header img {
-  height: 15vh;
-  width: auto;
-}
+/* resto do CSS permanece igual */
 
-/* --- WRAPPER --- */
-.headerWrapper {
-  position: relative;
-  z-index: 1000;
-  width: 100%;
-  background-color: white;
-}
 
 .fixedHeader {
   position: fixed;
@@ -30,12 +36,8 @@
 }
 
 @keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
 }
 
 .blackHeader {

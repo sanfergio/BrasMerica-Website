@@ -1,36 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import styles from './Header.module.css'; // Importa como módulo CSS
-
+import React from 'react';
+import styles from './Header.module.css';
 import { FaMapMarkerAlt, FaUser, FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
 
 function Header() {
-  const [isFixed, setIsFixed] = useState(false);
-  const [placeholderHeight, setPlaceholderHeight] = useState(0);
-  const headerRef = useRef(null);
-
-  useEffect(() => {
-    const setHeight = () => {
-      if (headerRef.current) {
-        setPlaceholderHeight(headerRef.current.offsetHeight);
-      }
-    };
-
-    const handleScroll = () => {
-      const threshold = 200;
-      if (window.scrollY > threshold) setIsFixed(true);
-      else setIsFixed(false);
-    };
-
-    setHeight();
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', setHeight);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', setHeight);
-    };
-  }, []);
-
   function toggleCart() {
     alert('Clicou no carrinho');
   }
@@ -40,13 +12,7 @@ function Header() {
       <div className={styles.blackHeader}></div>
       <div className={styles.redHeader}></div>
 
-      {/* Placeholder que evita o "salto" do conteúdo */}
-      <div style={{ height: isFixed ? placeholderHeight : 0 }} />
-
-      <div
-        ref={headerRef}
-        className={`${styles.headerWrapper} ${isFixed ? styles.fixedHeader : ''}`}
-      >
+      <div className={styles.headerWrapper}>
         <header className={styles.header}>
           <div className={styles.imgHeader}>
             <div><FaBars className={styles.icon} /></div>

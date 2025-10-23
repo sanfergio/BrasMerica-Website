@@ -109,8 +109,10 @@ export default function ProductCard() {
     >
       {mockProducts.map((product) => (
         <div className="product-card" key={product.id}>
+          <br />
           {product.freeShipping && (
             <div className="free-shipping">
+              
               <span><FaShippingFast /> FRETE GRÁTIS</span>
             </div>
           )}
@@ -139,8 +141,10 @@ export default function ProductCard() {
             <a href={product.buyNowUrl} className="btn btn-buy">
               COMPRAR AGORA!
             </a>
+            <br />  
           </div>
         </div>
+        
       ))}
     </div>
   );
