@@ -8,6 +8,8 @@ import Register from './pages/Register/Register';
 import NossaLoja from './pages/NossaLoja/NossaLoja.jsx';
 import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import NavBar from './components/Navbar/NavBar.jsx';
+import TermosUso from './pages/TermosUso/TermosUso.jsx';
+import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/nossa-loja" element={<NossaLoja />} />
         <Route path="/categorias" element={<ProductsFilter />} />
+        <Route path="/termo-de-uso" element={<TermosUso />} />
+        <Route path="/quem-somos" element={<QuemSomos />} />    
       </Routes>
     </div>
   )
