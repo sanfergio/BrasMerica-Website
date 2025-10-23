@@ -1,27 +1,29 @@
 import Header from './components/Header/Header'
 import './App.css'
 import WhatsAppButton from './components/WhatsappButton.jsx';
-import HomeButton from './components/HomeButton.jsx';
 import { Routes, Route } from 'react-router-dom'; // 1. Importar
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import NossaLoja from './pages/NossaLoja/NossaLoja.jsx';
+import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
+import NavBar from './components/Navbar/NavBar.jsx';
 
 
 function App() {
   return (
-    <>
+    <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection:'column'}}>      
       {/* 3. Itens que aparecem em TODAS as páginas */}
       <Header />
       <WhatsAppButton />
-      <HomeButton />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-      </Routes>           
-    </>
+        <Route path="/nossa-loja" element={<NossaLoja />} />
+        <Route path="/categorias" element={<ProductsFilter />} />
+      </Routes>
+    </div>
   )
 }
 

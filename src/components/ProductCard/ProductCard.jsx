@@ -2,6 +2,7 @@ import React from "react";
 import "./ProductCard.css";
 import { FaShippingFast } from "react-icons/fa";
 import { SiPix } from "react-icons/si";
+import { FaCartShopping } from "react-icons/fa6";
 
 // 🧩 Mock JSON diretamente no arquivo
 const mockProducts = [
@@ -136,10 +137,10 @@ export default function ProductCard() {
 
           <div className="product-actions">
             <button href={product.addToCartUrl} className="btn btn-cart">
-              ADICIONAR AO CARRINHO!
+              ADICIONAR <FaCartShopping />
             </button>
             <a href={product.buyNowUrl} className="btn btn-buy">
-              COMPRAR AGORA!
+              VER PRODUTO!
             </a>
             <br />  
           </div>
