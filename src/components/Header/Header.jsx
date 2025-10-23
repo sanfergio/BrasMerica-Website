@@ -1,11 +1,15 @@
-import React from 'react';
 import styles from './Header.module.css';
 import { FaMapMarkerAlt, FaUser, FaShoppingCart, FaSearch, FaBars } from 'react-icons/fa';
+import { useState } from "react";
+import "./Header.module.css";
+import MenuMobile from "../MenuMobile/MenuMobile";
 
 function Header() {
   function toggleCart() {
     alert('Clicou no carrinho');
   }
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <>
@@ -15,7 +19,9 @@ function Header() {
       <div className={styles.headerWrapper}>
         <header className={styles.header}>
           <div className={styles.imgHeader}>
-            <div><FaBars className={styles.icon} /></div>
+            <div onClick={() => setIsMenuOpen(true)}>
+              <FaBars className={styles.icon} />
+            </div>
 
             <a href="./">
               <img
@@ -57,6 +63,7 @@ function Header() {
           </div>
         </header>
       </div>
+      <MenuMobile isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );
 }
