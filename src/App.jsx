@@ -10,6 +10,7 @@ import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import NavBar from './components/Navbar/NavBar.jsx';
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
+import PoliticaPrivacidade from './pages/PoliticaPrivacidade/PoliticaPrivacidade.jsx';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
         <Route path="/nossa-loja" element={<NossaLoja />} />
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/termo-de-uso" element={<TermosUso />} />
-        <Route path="/quem-somos" element={<QuemSomos />} />    
+        <Route path="/quem-somos" element={<QuemSomos />} />
+        <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />   
       </Routes>
     </div>
   )
