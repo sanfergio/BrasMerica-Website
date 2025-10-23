@@ -7,7 +7,7 @@
   --google-blue: #0b5db8;
 }
 
-.login-container {
+.loginContainer {
   height: auto;
   width: 100vw;
   display: flex;
@@ -18,7 +18,7 @@
   background: var(--bg);
 }
 
-.login-card {
+.loginCard {
   width: 40%;
   max-width: 720px;
   background: var(--card-bg);
@@ -27,7 +27,7 @@
   box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
 }
 
-.login-title {
+.loginTitle {
   text-align: center;
   color: var(--accent);
   font-weight: 800;
@@ -35,13 +35,13 @@
   margin: -5px 0px 15px 0px;
 }
 
-.login-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.input-group {
+.inputGroup {
   display: flex;
   align-items: center;
   background: var(--muted);
@@ -50,7 +50,7 @@
   transition: all 0.3s ease;
 }
 
-.input-group-error {
+.inputGroupError {
   border: 2px solid #dc2626 !important;
   background: #fee2e2 !important;
   box-shadow: 0 0 6px rgba(220, 38, 38, 0.3);
@@ -69,7 +69,7 @@
   flex: 0 0 36px;
 }
 
-.input-box {
+.inputBox {
   border: 0;
   background: transparent;
   outline: none;
@@ -79,11 +79,11 @@
   padding: 10px 6px;
 }
 
-.input-box::placeholder {
+.inputBox::placeholder {
   text-align: start;
 }
 
-.actions-row {
+.actionsRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -103,7 +103,7 @@
   transform: scale(1.05);
 }
 
-.signup-button {
+.signupButton {
   background: var(--accent);
   color: white;
   border: 0;
@@ -114,11 +114,11 @@
   transition: transform 0.4s ease;
 }
 
-.signup-button:hover {
+.signupButton:hover {
   transform: scale(1.05);
 }
 
-.google-button {
+.googleButton {
   margin-top: 12px;
   width: 100%;
   display: inline-flex;
@@ -135,18 +135,18 @@
   transition: transform 0.4s ease;
 }
 
-.google-button:hover {
+.googleButton:hover {
   transform: scale(1.02);
 }
 
-.error-message {
+.errorMessage {
   color: #dc2626;
   font-size: 13px;
   margin: 4px 0 0 10px;
   font-weight: 500;
 }
 
-.success-message {
+.successMessage {
   color: #16a34a;
   font-weight: 600;
   margin-top: 14px;
@@ -154,8 +154,7 @@
 }
 
 @media (max-width: 1150px) {
-
-  .login-container {
+  .loginContainer {
     height: auto;
     width: 100vw;
     display: flex;
@@ -166,13 +165,13 @@
     min-height: 50vh;
   }
 
-  .login-card {
+  .loginCard {
     padding: 20px;
     border-radius: 20px;
     width: 80vw;
   }
 
-  .login-title {
+  .loginTitle {
     font-size: 20px;
-  }
+  } 
 }

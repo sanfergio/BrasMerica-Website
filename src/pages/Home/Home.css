@@ -16,11 +16,14 @@
 
 
 .productCards {
-  width: 80vw;
-  display: flex;
-  justify-content: center;
-  align-items: center
+    width: auto;
+    max-width: 88vw;
+    display: flex;
+    flex-wrap: wrap; /* Permite múltiplas linhas */
+    justify-content: center; /* Centraliza as linhas */
+    gap: 1rem; /* Espaçamento entre os cards */
 }
+
 
 .brand-section {
   display: flex;
@@ -232,7 +235,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    
+
     gap: 20px;
     width: 100%;
     height: auto;

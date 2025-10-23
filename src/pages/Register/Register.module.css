@@ -1,0 +1,172 @@
+:root {
+  --bg: #fbfbfc;
+  --card: #fff;
+  --accent: #9b1622;
+  --muted: #f1f1f1;
+  --input-text: #222;
+  --primary-blue: #0b5db8;
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  height: 100%;
+}
+
+.regContainer {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+}
+
+.regCard {
+  width: 100%;
+  max-width: 780px;
+  background: var(--card);
+  border-radius: 26px;
+  padding: 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+.regTitle {
+  text-align: center;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 26px;
+  margin: -15px 0px 10px 0px;
+}
+
+.regForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  background: var(--muted);
+  border-radius: 999px;
+  padding: 8px 14px;
+  transition: all 0.18s ease;
+}
+
+.inputGroupError {
+  border: 2px solid var(--danger) !important;
+  background: #fff5f5 !important;
+  box-shadow: 0 0 6px rgba(220, 38, 38, 0.12);
+}
+
+.inputBox {
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  color: var(--input-text);
+  width: 100%;
+  padding: 8px 6px;
+}
+
+.inputBox::placeholder {
+  text-align: start;
+}
+
+.row.two {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.row.two > .inputGroup {
+  flex: 1;
+}
+
+.termsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.termsLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.smallLink {
+  display: block;
+  margin-top: 6px;
+  color: var(--accent);
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 0.4s ease;
+}
+
+.smallLink:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+.submitBtn {
+  margin-top: 8px;
+  background: var(--primary-blue);
+  color: #fff;
+  border: 0;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(11, 93, 184, 0.18);
+  transition: transform 0.4s ease;
+}
+
+.submitBtn:hover {
+  transform: scale(1.05);
+}
+
+.fieldError {
+  color: var(--danger);
+  font-size: 13px;
+  margin-left: 6px;
+}
+
+.formError {
+  margin-top: 8px;
+  color: var(--danger);
+  font-weight: 600;
+  text-align: center;
+}
+
+.formSuccess {
+  margin-top: 8px;
+  color: var(--success);
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .row.two {
+    flex-direction: column;
+  }
+  .regCard {
+    padding: 22px;
+    border-radius: 18px;
+  }
+  .regTitle {
+    font-size: 22px;
+  }
+}

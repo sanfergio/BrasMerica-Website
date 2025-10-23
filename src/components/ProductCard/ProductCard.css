@@ -15,10 +15,10 @@ div[style*="flex-wrap"] {
     padding: 1rem;
     text-align: center;
     background-color: #fff;
-    width: 280px;
+    width: 19vw;
     display: flex; /*  Permite controle interno */
     flex-direction: column; /* Conteúdo em coluna */
-    justify-content: space-between; /* Distribui imagem, info e botões */
+    justify-content: center; /* Distribui imagem, info e botões */
     transition: transform 0.2s ease;
     box-sizing: border-box;
 }
@@ -26,7 +26,7 @@ div[style*="flex-wrap"] {
 /* Mantém todos com a mesma altura em telas grandes */
 @media (min-width: 769px) {
     .product-card {
-        height: 420px; /*  Altere conforme necessário */
+        height: 430px; /*  Altere conforme necessário */
     }
 }
 
