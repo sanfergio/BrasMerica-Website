@@ -1,5 +1,6 @@
 import React from "react";
 import "./TermosUso.css";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function TermosUso() {
     const terms = [
@@ -31,21 +32,24 @@ export default function TermosUso() {
     ];
 
     return (
-        <main className="termos-container">
-            <div className="termos-conteudo">
-                <h1 className="termos-titulo">Termos de Uso</h1>
-                <ol className="termos-lista">
-                    {terms.map((term, index) => (
-                        <li key={index} className="termo-item">
-                            <span className="termo-numero">{index + 1}.</span>
-                            <div className="termo-textos">
-                                <h2 className="termo-subtitulo">{term.title}</h2>
-                                <p className="termo-descricao">{term.content}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ol>
-            </div>
-        </main>
+        <>
+            <main className="termos-container">
+                <div className="termos-conteudo">
+                    <h1 className="termos-titulo">Termos de Uso</h1>
+                    <ol className="termos-lista">
+                        {terms.map((term, index) => (
+                            <li key={index} className="termo-item">
+                                <span className="termo-numero">{index + 1}.</span>
+                                <div className="termo-textos">
+                                    <h2 className="termo-subtitulo">{term.title}</h2>
+                                    <p className="termo-descricao">{term.content}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+            </main>
+            <ShortFooter />
+        </>
     );
 }

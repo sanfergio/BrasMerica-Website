@@ -1,9 +1,11 @@
 import React from "react";
 import { Target, Eye, Heart } from "lucide-react";
 import "./QuemSomos.css";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function QuemSomos() {
   return (
+    <>
     <div className="sobre">
       <div className="sobre-container">
         <div className="sobre-grid">
@@ -22,7 +24,7 @@ export default function QuemSomos() {
           </div>
           <div className="sobre-imagem">
             <img
-              src="https://img.freepik.com/fotos-gratis/motociclista-fazendo-uma-acrobacia-em-sua-moto-motociclista-fazendo-uma-acrobacia-dificil-e-perigosa_654080-1058.jpg?t=st=1761242878~exp=1761246478~hmac=d1dcb2995e9e80d53eedf9e598bbcddd28179f6f6f91211b2df89cb42c70ec33&w=1480"
+              src="https://img.freepik.com/fotos-gratis/motociclista-fazendo-uma-acrobacia-em-sua-moto-motociclista-fazendo-uma-acrobacia-dificil-e-perigosa_654080-1058.jpg"
               alt="Homem andando de moto ao ar livre"
               className="sobre-foto"
             />
@@ -68,5 +70,7 @@ export default function QuemSomos() {
         </div>
       </div>
     </div>
+    <ShortFooter />
+    </>
   );
 }
