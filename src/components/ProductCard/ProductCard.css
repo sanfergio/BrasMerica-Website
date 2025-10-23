@@ -164,7 +164,7 @@ div[style*="flex-wrap"] {
         padding: 0.8rem; /* Ajustado */
         text-align: center;
         background-color: #fff;
-        width: 42%; /* 2 por linha */
+        width: 45%; /* 2 por linha */
         display: flex;
         flex-direction: column;
         justify-content: space-between;

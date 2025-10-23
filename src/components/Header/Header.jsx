@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <>
-      <div className={styles.blackHeader}></div>
+      <div id='top' className={styles.blackHeader}></div>
       <div className={styles.redHeader}></div>
 
       <div className={styles.headerWrapper}>
@@ -39,7 +39,7 @@ function Header() {
               <FaMapMarkerAlt />
               <p>
                 CONHEÇA <br />
-                <a href="#">NOSSA LOJA</a>
+                <a href="/nossa-loja">NOSSA LOJA</a>
               </p>
             </div>
 

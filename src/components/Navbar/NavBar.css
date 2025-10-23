@@ -1,5 +1,5 @@
 nav {
-    background-color: #ffff;
+    background-color: #ffffff;
     height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -8,8 +8,7 @@ nav {
     color: black;
     width: 100%;
     height: auto;
-    padding: 15px 0;
-
+    padding: 15px 0;    
 }
 
 nav a {
@@ -23,13 +22,13 @@ nav a {
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    width: 80px;
+    width: 60px;
     cursor: pointer;
 }
 
 .card-navbar img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,7 +36,7 @@ nav a {
 }
 
 .card-navbar span {
-    font-size: 14px;
+    font-size: 12px;
     height: 10px;
 }
 
@@ -91,12 +90,11 @@ nav a {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
+        gap: 0px;
         color: black;
         width: 100%;
-        gap: 10px;
         height: auto;
-        padding: 40px 0;
 
     }
 

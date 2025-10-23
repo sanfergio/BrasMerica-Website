@@ -6,11 +6,13 @@ import NavBar from '../../components/Navbar/NavBar.jsx';
 import Categories from '../../components/Categorias/Categorias.jsx';
 import Carousel from '../../components/Carousel/Carousel.jsx';
 import './Home.css';
+import HomeButton from '../../components/HomeButton.jsx';
 
 function Home() {
 
     return (
         <>
+            <HomeButton />
             <NavBar />
             <main>
                 <div className="carousel">

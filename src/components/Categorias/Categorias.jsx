@@ -6,22 +6,22 @@ const categoryData = [
     {
         name: "Acessórios",
         imageUrl: "https://mir-s3-cdn-cf.behance.net/projects/404/a42804232205399.Y3JvcCw0NjcyLDM2NTQsMCwxNDIy.jpg",
-        url: "#"
+        url: '/categorias?categoria=acessorios'
     },
     {
         name: "Pneus",
         imageUrl: "https://media-cdn.tripadvisor.com/media/photo-s/19/4a/60/3e/drift.jpg",
-        url: "#"
+        url: '/categorias?categoria=pneus'
     },
     {
         name: "Peças",
         imageUrl: "https://cdn.motor1.com/images/mgl/QevnB7/s1/1x1/the-royal-enfield-classic-650-is-the-most-retro-inspired-of-the-650-cruisers..webp",
-        url: "#"
+        url: '/categorias?categoria=pecas'
     },
     {
         name: "Óleos",
         imageUrl: "https://tediousrepairs.com/wp-content/uploads/2023/07/Oil-Change.png",
-        url: "#"
+        url: '/categorias?categoria=oleos'
     }
 
 ];

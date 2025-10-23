@@ -5,13 +5,12 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 // ==========================
 const carouselCss = `
     .carousel-container {
-        margin-top: 10px;
-        width: 100vw;
+        width: 100vw;   
         display: flex;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        height: 60vh;
+        height: 45vh;
         background-color: #f4f4f5;
         position: relative;
     }

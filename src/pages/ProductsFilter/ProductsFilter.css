@@ -109,9 +109,20 @@
 }
 
 /* ----------- MOBILE ----------- */
-@media (max-width: 900px) {
+@media (max-width: 1150px) {
 
-  .mobile{
+  .produtos-container {
+    background-color: #f5f5f5;
+    font-family: "Poppins", sans-serif;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+
+  }
+
+  .mobile {
     flex-direction: row;
   }
 
@@ -152,12 +163,7 @@
     background-color: #fff;
     font-size: 14px;
     color: #000 !important;
-    width: 40%;
+    width: 100%;
+    margin-bottom: 5px;
   }
-}
-
-@media (max-width: 500px) {
-  .produtos-container {
-    padding: 20px;
-  }
-}
+} 

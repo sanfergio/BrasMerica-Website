@@ -1,10 +1,19 @@
+main {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column
+}
+
 .carousel {
   width: 100vw;
   height: auto;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 15px;
+  justify-content: flex-start;
+  padding: 5px;
 }
 
 .carousel img {
@@ -16,12 +25,15 @@
 
 
 .productCards {
-    width: auto;
-    max-width: 88vw;
-    display: flex;
-    flex-wrap: wrap; /* Permite múltiplas linhas */
-    justify-content: center; /* Centraliza as linhas */
-    gap: 1rem; /* Espaçamento entre os cards */
+  width: auto;
+  max-width: 88vw;
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite múltiplas linhas */
+  justify-content: center;
+  /* Centraliza as linhas */
+  gap: 1rem;
+  /* Espaçamento entre os cards */
 }
 
 
@@ -31,7 +43,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  margin-top: 50px;
+  margin-top: 20px;
   padding: 5px 5px 10px;
   background-color: #f5f5f5;
   border-radius: 8px;
@@ -175,8 +187,6 @@
   .carousel {
     width: 100vw;
     height: 50vh;
-    margin-bottom: 30px;
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -235,7 +245,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
     gap: 20px;
     width: 100%;
     height: auto;
