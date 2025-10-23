@@ -1,0 +1,163 @@
+.produtos-container {
+  padding: 30px 60px;
+  background-color: #f5f5f5;
+  font-family: "Poppins", sans-serif;
+}
+
+.breadcrumb {
+  color: #b22234;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.filtro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo-pagina {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111;
+}
+
+.ordenacao {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.ordenacao label {
+  font-size: 1.17em;
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.ordenacao select {
+  color: #000 !important;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.produtos-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.filtros {
+  width: 220px;
+  border-right: 2px solid #e5e5e5;
+  padding-right: 25px;
+}
+
+.filtro-grupo {
+  margin-bottom: 25px;
+}
+
+.filtro-grupo h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #b22234;
+  margin-bottom: 10px;
+}
+
+.filtro-grupo label {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.filtro-grupo input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+.filtro-grupo input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 14px;
+  color: #a50000;
+}
+
+.produtos-principal {
+  flex: 1;
+}
+
+.filtros-mobile {
+  display: none;
+}
+
+/* ----------- MOBILE ----------- */
+@media (max-width: 900px) {
+
+  .mobile{
+    flex-direction: row;
+  }
+
+  .filtros {
+    display: none;
+  }
+
+  .ordenacao.desktop {
+    display: none;
+  }
+
+  .filtro {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .filtros-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    color: #000 !important;
+  }
+
+  .filtros-mobile label {
+    font-weight: bold;
+    color: #b22234;
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  .filtros-mobile select {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+    color: #000 !important;
+    width: 40%;
+  }
+}
+
+@media (max-width: 500px) {
+  .produtos-container {
+    padding: 20px;
+  }
+}
