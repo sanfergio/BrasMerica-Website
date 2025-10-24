@@ -8,7 +8,7 @@
   opacity: 0;
   visibility: hidden;
   transition: 0.3s;
-  z-index: 999;
+  z-index: 1000;
 }
 
 .menu-overlay.show {

@@ -14,7 +14,7 @@ const WhatsAppButton = () => {
     position: 'fixed',
     bottom: '50px',
     left: '2%', // Posição que você definiu
-    zIndex: 1000,
+    zIndex:99,
     
     // Estilos para fazer o botão ter 56x56 e ser circular
     width: '56px',

@@ -3,6 +3,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import "./ProductsFilter.css";
 import Footer from "../../components/Footer/Footer.jsx";
 import NavBar from "../../components/Navbar/NavBar.jsx";
+import HomeButton from "../../components/HomeButton.jsx";
 
 export default function ProductsFilter() {
 
@@ -24,6 +25,7 @@ export default function ProductsFilter() {
   return (
     <>
       <NavBar />
+      <HomeButton />
       <div className="produtos-container">
         <div className="breadcrumb">
           <span>Início → Categorias → {categorie}</span>
