@@ -7,6 +7,7 @@ import Categories from '../../components/Categorias/Categorias.jsx';
 import Carousel from '../../components/Carousel/Carousel.jsx';
 import './Home.css';
 import HomeButton from '../../components/HomeButton.jsx';
+import { useEffect } from 'react';
 
 function Home() {
 

@@ -21,13 +21,13 @@ function MenuMobile({ isOpen, onClose }) {
         <div className="menu-login">
           <FaUser className="login-icon" />
           <p>
-            <a href="#">Entrar</a> / <a href="#">Cadastrar-se</a>
+            <a href="/login">Entrar</a> / <a href="/register">Cadastrar-se</a>
           </p>
         </div>
 
         <ul className="menu-list">
           <li>
-            <a href="#">Início</a>
+            <a href="./">Início</a>
           </li>
 
           <li className="menu-item-categorias">
@@ -39,26 +39,26 @@ function MenuMobile({ isOpen, onClose }) {
             {showCategorias && (
               <ul className="submenu">
                 <li>
-                  <a href="#">Acessórios</a>
+                  <a href="/categorias?categoria=acessorios">Acessórios</a>
                 </li>
                 <li>
-                  <a href="#">Pneus</a>
+                  <a href="/categorias?categoria=pneus">Pneus</a>
                 </li>
                 <li>
-                  <a href="#">Peças</a>
+                  <a href="/categorias?categoria=pecas">Peças</a>
                 </li>
                 <li>
-                  <a href="#">Óleos</a>
+                  <a href="/categorias?categoria=oleos">Óleos</a>
                 </li>
               </ul>
             )}
           </li>
 
           <li>
-            <a href="#">Contato</a>
+            <a target="_blank" href="https://api.whatsapp.com/send/?phone=553334122593&text=Ol%C3%A1%21+Vim+pelo+website+e+desejo+tirar+d%C3%BAvidas.&type=phone_number&app_absent=0">Contato</a>
           </li>
           <li>
-            <a href="#">Sobre a Loja</a>
+            <a href="/quem-somos">Sobre a Loja</a>
           </li>
         </ul>
       </div>
