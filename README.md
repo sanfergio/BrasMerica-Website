@@ -55,7 +55,7 @@ This workflow ensures continuous improvement and transparent communication betwe
 |------|------|
 | **Project Leader / Full-Stack Developer** | **Giovani Marlon** |
 | **Full-Stack Developer** | Gabriel Vieira |
-| **Full-Stack Developer / UI Designer** | Sarah Figueiredo |
+| **Full-Stack Developer** | Sarah Figueiredo |
 
 > All developers contribute to both **frontend and backend** development, following a shared ownership approach.
 
