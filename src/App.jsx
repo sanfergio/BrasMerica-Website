@@ -13,6 +13,7 @@ import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx'; // <-- 1. IMPORTE AQUI
 import DashboardProducts from './Admin/DataBase/Products/DashboardProducts.jsx';
 
+
 function App() {
   return (
     <div style={{display: 'flex', alignItems: 'center', justifyContent:'center', flexDirection:'column'}}>      
