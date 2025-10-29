@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Login.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from '../../components/Header/Header.jsx';
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -61,6 +63,8 @@ export default function Login() {
 
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <main className={styles.loginContainer}>
         <div className={styles.loginCard}>
           <h2 className={styles.loginTitle}>Entre com sua conta</h2>
@@ -68,9 +72,8 @@ export default function Login() {
           <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
             {/* Nome */}
             <label
-              className={`${styles.inputGroup} ${
-                errors.name ? styles.inputGroupError : ""
-              }`}
+              className={`${styles.inputGroup} ${errors.name ? styles.inputGroupError : ""
+                }`}
             >
               <span className={styles.icon} aria-hidden>
                 <svg
@@ -101,9 +104,8 @@ export default function Login() {
 
             {/* Email */}
             <label
-              className={`${styles.inputGroup} ${
-                errors.email ? styles.inputGroupError : ""
-              }`}
+              className={`${styles.inputGroup} ${errors.email ? styles.inputGroupError : ""
+                }`}
             >
               <span className={styles.icon} aria-hidden>
                 <svg
@@ -134,9 +136,8 @@ export default function Login() {
 
             {/* Senha */}
             <label
-              className={`${styles.inputGroup} ${
-                errors.password ? styles.inputGroupError : ""
-              }`}
+              className={`${styles.inputGroup} ${errors.password ? styles.inputGroupError : ""
+                }`}
             >
               <span className={styles.icon} aria-hidden>
                 <svg

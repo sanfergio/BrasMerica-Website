@@ -92,7 +92,7 @@ const carouselCss = `
         height: 0.5rem;
         width: 0.5rem;
         border-radius: 9999px;
-        background-color: #ffffff;
+        background-color: #f5f5f5;
         transition: all 200ms;
         border: none;
         cursor: pointer;

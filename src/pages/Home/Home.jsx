@@ -8,11 +8,15 @@ import Carousel from '../../components/Carousel/Carousel.jsx';
 import './Home.css';
 import HomeButton from '../../components/HomeButton.jsx';
 import { useEffect } from 'react';
+import Header from '../../components/Header/Header.jsx';
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 function Home() {
 
     return (
         <>
+            <Header />
+            <WhatsAppButton />
             <HomeButton />
             <NavBar />
             <main>

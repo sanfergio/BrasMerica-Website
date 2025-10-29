@@ -1,6 +1,8 @@
 import React from "react";
 import "./NossaLoja.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from '../../components/Header/Header.jsx';
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 export default function NossaLoja() {
   return (
@@ -12,6 +14,8 @@ export default function NossaLoja() {
 
 function StoreLocation() {
   return (<>
+    <Header />
+    <WhatsAppButton />
     <div className="store-container">
       <div className="store-section">
         <h1 className="store-title">Nossa Loja</h1>

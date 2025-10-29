@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from '../../components/Header/Header.jsx';
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -86,6 +88,8 @@ export default function Register() {
 
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <main className={styles.regContainer}>
         <div className={styles.regCard}>
           <h2 className={styles.regTitle}>Crie sua conta</h2>
