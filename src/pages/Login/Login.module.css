@@ -46,6 +46,7 @@
   align-items: center;
   background: var(--muted);
   border-radius: 999px;
+  background-color: whitesmoke;
   padding: 8px 14px;
   transition: all 0.3s ease;
 }
