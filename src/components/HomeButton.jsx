@@ -8,7 +8,7 @@ const HomeButton = () => {
     position: 'fixed',
     bottom: '50px',
     right: '20px',
-    zIndex: 1000,
+    zIndex: 999,
     background: '#b22234',
     border: 'none',
     borderRadius: '50%',
