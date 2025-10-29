@@ -10,7 +10,6 @@ import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 // import NavBar from './components/Navbar/NavBar.jsx'; // Você importou mas não usou :)
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
-import NotFound from './pages/NotFound.jsx'; // <-- 1. IMPORTE AQUI
 
 function App() {
   return (
@@ -24,10 +23,6 @@ function App() {
         <Route path="/nossa-loja" element={<NossaLoja />} />
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/termo-de-uso" element={<TermosUso />} />
-        <Route path="/quem-somos" element={<QuemSomos />} />   
-
-        {/* 2. ADICIONE A ROTA "NOT FOUND" POR ÚLTIMO */}
-        <Route path="*" element={<NotFound />} /> 
       </Routes>
     </div>
   )
