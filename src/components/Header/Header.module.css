@@ -3,6 +3,11 @@
   width: auto;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
 /* WRAPPER AGORA USANDO STICKY */
 .headerWrapper {
   position: sticky;
@@ -201,6 +206,10 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+
+.header p{
+  color: white;
 }
 
 /* resto do CSS permanece igual */

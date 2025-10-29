@@ -4,6 +4,8 @@ import "./ProductsFilter.css";
 import Footer from "../../components/Footer/Footer.jsx";
 import NavBar from "../../components/Navbar/NavBar.jsx";
 import HomeButton from "../../components/HomeButton.jsx";
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
+import Header from '../../components/Header/Header.jsx';
 
 export default function ProductsFilter() {
 
@@ -24,6 +26,8 @@ export default function ProductsFilter() {
 
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <NavBar />
       <HomeButton />
       <div className="produtos-container">

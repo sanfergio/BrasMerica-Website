@@ -1,6 +1,8 @@
 import React from "react";
 import "./TermosUso.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from '../../components/Header/Header.jsx';
+import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 export default function TermosUso() {
     const terms = [
@@ -33,6 +35,8 @@ export default function TermosUso() {
 
     return (
         <>
+            <Header />
+            <WhatsAppButton />
             <main className="termos-container">
                 <div className="termos-conteudo">
                     <h1 className="termos-titulo">Termos de Uso</h1>
