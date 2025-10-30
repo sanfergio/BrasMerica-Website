@@ -9,6 +9,28 @@
   --success: #16a34a;
 }
 
+.googleButton {
+  margin-top: 12px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--google-blue);
+  color: white;
+  border: 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.4s ease;
+}
+
+.googleButton:hover {
+  transform: scale(1.02);
+}
+
+
 * {
   box-sizing: border-box;
 }
@@ -24,17 +46,18 @@ body, html, #root {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: var(--bg);
+  background-color: white;
 }
 
 .regCard {
   width: 100%;
   max-width: 780px;
-  background: var(--card);
+  background-color: white;
   border-radius: 26px;
   padding: 32px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
+
 
 .regTitle {
   text-align: center;
@@ -53,7 +76,7 @@ body, html, #root {
 .inputGroup {
   display: flex;
   align-items: center;
-  background: var(--muted);
+  background: whitesmoke;
   border-radius: 999px;
   padding: 8px 14px;
   transition: all 0.18s ease;
@@ -168,5 +191,8 @@ body, html, #root {
   }
   .regTitle {
     font-size: 22px;
+  }
+  .inputGroup{
+    width: 100%;
   }
 }

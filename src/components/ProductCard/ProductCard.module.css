@@ -1,0 +1,282 @@
+/* Container dos produtos */
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.5rem;
+  align-items: stretch;
+}
+
+/* Card de produto */
+.productCard {
+  border: 2px solid #cfcfcf;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fff;
+  width: 19vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Mantém todos com a mesma altura em telas grandes */
+@media (min-width: 769px) {
+  .productCard {
+    height: 430px;
+  }
+}
+
+/* Hover */
+.productCard:hover {
+  transform: scale(1.02);
+}
+
+/* Frete grátis */
+.freeShipping {
+  background-color: #b22234;
+  color: white;
+  padding: 0.5rem;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Imagem */
+.productImage {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 1rem;
+}
+
+/* Texto e preço */
+.productInfo {
+  flex-grow: 1;
+}
+
+.productTitle {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0.5rem 0;
+}
+
+.productPrice {
+  color: #d50000;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.productOldPrice {
+  font-size: 0.9rem;
+  color: #777;
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+
+.discountPix {
+  font-size: 0.75rem;
+  color: #333;
+  display: block;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ações */
+.productActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Botões */
+.btn {
+  padding: 0.6rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnCart {
+  background-color: #456f93;
+}
+
+.btnBuy {
+  background-color: #0057a0;
+}
+
+/* Hover mais clean e profissional */
+.btnCart:hover {
+  background-color: #3a5c7e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btnBuy:hover {
+  background-color: #004880;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 🔁 --- RESPONSIVIDADE --- 🔁 */
+
+/* 💻 Telas médias (ex: tablets em pé) - 2 cards por linha */
+@media (max-width: 1150px) {
+  .responsiveFont {
+    font-size: 95%;
+  }
+
+  .productsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    align-items: stretch;
+  }
+
+  .productCard {
+    border: 2px solid #cfcfcf;
+    border-radius: 8px;
+    padding: 0.8rem;
+    text-align: center;
+    background-color: #fff;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    transition: transform 0.2s ease;
+    box-sizing: border-box;
+    height: auto;
+  }
+
+  .productCard:hover {
+    transform: scale(1.02);
+  }
+
+  .freeShipping {
+    background-color: #b22234;
+    color: white;
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .productImage {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 auto 1rem;
+  }
+
+  .productInfo {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .productTitle {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0.5rem 0;
+  }
+
+  .productPrice {
+    color: #d50000;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .productOldPrice {
+    font-size: 0.9rem;
+    color: #777;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+    width: 100%;
+  }
+
+  .discountPix {
+    font-size: 0.75rem;
+    color: #333;
+    display: block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .productActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    padding: 0.6rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+  }
+
+  .btnCart {
+    background-color: #456f93;
+  }
+
+  .btnBuy {
+    background-color: #0057a0;
+  }
+
+  .btnCart:hover {
+    background-color: #3a5c7e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .btnBuy:hover {
+    background-color: #004880;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+}

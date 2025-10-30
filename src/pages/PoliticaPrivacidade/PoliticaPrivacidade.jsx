@@ -1,10 +1,16 @@
 import { Shield } from "lucide-react"
 import "./PoliticaPrivacidade.css"
+
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from "../../components/Header/Header"
+import WhatsAppButton from "../../components/WhatsappButton"
 
 export default function PoliticaPrivacidade() {
     return (
         <>
+            <Header />
+            <WhatsAppButton />
+
             <div className="politica-container">
                 <div className="politica-wrapper">
                     <div className="politica-card">
@@ -35,5 +41,6 @@ export default function PoliticaPrivacidade() {
             </div>
             <ShortFooter />
         </>
+
     )
 }

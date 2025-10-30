@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Register.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Header from "../../components/Header/Header";
+import WhatsAppButton from "../../components/WhatsappButton";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -86,6 +88,8 @@ export default function Register() {
 
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <main className={styles.regContainer}>
         <div className={styles.regCard}>
           <h2 className={styles.regTitle}>Crie sua conta</h2>
@@ -231,12 +235,42 @@ export default function Register() {
             <button className={styles.submitBtn} type="submit">
               Cadastrar
             </button>
-
-            {Object.keys(errors).length > 0 && (
-              <div className={styles.formError}>Por favor, corrija os campos destacados.</div>
-            )}
-            {success && <div className={styles.formSuccess}>{success}</div>}
           </form>
+
+          <button type="button" className={styles.googleButton}>
+            <span className={styles.googleIcon} aria-hidden>
+              <svg
+                viewBox="0 0 533.5 544.3"
+                width="18"
+                height="18"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272v95.4h147.1c-6.3 34.3-25.1 63.4-53.6 83v68h86.6c50.6-46.6 81.4-115.4 81.4-196z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M272 544.3c72.6 0 133.6-24 178.2-65.3l-86.6-68c-24 16.2-54.8 25.7-91.6 25.7-70.4 0-130-47.5-151.3-111.4H30.9v69.9C75.3 485.9 167.4 544.3 272 544.3z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M120.7 325.3c-8.8-26.6-8.8-55.4 0-82l-89.8-69.9C7.2 214.7 0 242.6 0 272s7.2 57.3 30.9 98.6l89.8-69.9z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M272 108.1c39.5 0 75 13.6 103 40.4l77.4-77.4C405.6 24.1 344.6 0 272 0 167.4 0 75.3 58.4 30.9 145.7l89.8 69.9C142 155.6 201.6 108.1 272 108.1z"
+                />
+              </svg>
+            </span>
+            <span>Criar conta com Google</span>
+          </button>
+
+          {Object.keys(errors).length > 0 && (
+            <div className={styles.formError}>Por favor, corrija os campos destacados.</div>
+          )}
+          {success && <div className={styles.formSuccess}>{success}</div>}
+
         </div>
       </main>
       <ShortFooter />

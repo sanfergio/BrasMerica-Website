@@ -1,12 +1,16 @@
 .termos-container {
     width: 100vw;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     padding: 4rem 1rem;
 }
 
 .termos-conteudo {
     max-width: 64rem;
     margin: 0 auto;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem 3rem;
 }
 
 .termos-titulo {
