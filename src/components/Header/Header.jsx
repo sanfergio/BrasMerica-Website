@@ -7,10 +7,6 @@ import CartSideBar from "../CartSideBar/CartSideBar";
 
 function Header() {
 
-  function toggleCart() {
-    alert('Clicou no carrinho');
-  }
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false); //adicionar
 
@@ -33,7 +29,7 @@ function Header() {
               />
             </a>
 
-            <div onClick={toggleCart}>
+            <div onClick={() => setIsCartOpen(true)}>
               <FaShoppingCart className={styles.icon} />
             </div>
           </div>
