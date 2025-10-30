@@ -18,6 +18,7 @@ import NossaLoja from './pages/NossaLoja/NossaLoja.jsx';
 import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx';
+import ProductPage from  './pages/ProductPage/ProductPage.jsx'
 
 // --- PÁGINAS INSTITUCIONAIS (Políticas, Termos, etc.) ---
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
@@ -49,6 +50,7 @@ function App() {
         <Route path="/nossa-loja" element={<NossaLoja />} />
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
+        <Route path="/produtos" element={<ProductPage />} />
 
         {/* Rotas de Políticas e Termos */}
         <Route path="/termo-de-uso" element={<TermosUso />} />
