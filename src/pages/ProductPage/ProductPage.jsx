@@ -191,6 +191,7 @@ export default function ProductPage() {
       }
     };
 
+
     fetchProduct();
   }, []); // O array de dependência vazio [] garante que isso rode APENAS UMA VEZ no carregamento.
 

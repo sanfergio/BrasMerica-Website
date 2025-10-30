@@ -12,17 +12,14 @@ export default function ProductsFilter() {
   var urlParams = new URLSearchParams(window.location.search);
   var categorie = urlParams.get('categoria');
 
-  if (categorie === null) {
-    categorie = "Nenhuma categoria selecionada";
-  } else if (categorie === "pneus") {
-    categorie = "Pneus";
-  } else if (categorie === "oleos") {
-    categorie = "Óleos";
-  } else if (categorie === "acessorios") {
-    categorie = "Acessórios";
-  } else if (categorie === "pecas") {
-    categorie = "Peças";
-  }
+  const categoryMap = {
+    pneus: "Pneus",
+    oleos: "Óleos",
+    acessorios: "Acessórios",
+    pecas: "Peças"
+  };
+
+  categorie = categoryMap[categorie] || "None";
 
   return (
     <>
@@ -30,7 +27,7 @@ export default function ProductsFilter() {
       <WhatsAppButton />
       <NavBar />
       <HomeButton />
-      <div className="produtos-container">
+      <div style={{ width: '100vw' }} className="produtos-container">
         <div className="breadcrumb">
           <span>Início → Categorias → {categorie}</span>
         </div>
@@ -107,7 +104,7 @@ export default function ProductsFilter() {
           </aside>
 
           <div className="produtos-principal">
-            <ProductCard />
+            <ProductCard category={categorie} />
           </div>
         </div>
       </div>

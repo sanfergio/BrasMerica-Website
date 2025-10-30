@@ -7,11 +7,12 @@ import Categories from '../../components/Categorias/Categorias.jsx';
 import Carousel from '../../components/Carousel/Carousel.jsx';
 import './Home.css';
 import HomeButton from '../../components/HomeButton.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header.jsx';
 import WhatsAppButton from '../../components/WhatsappButton.jsx';
 
 function Home() {
+
 
     return (
         <>
@@ -44,7 +45,9 @@ function Home() {
                     </h2>
                 </div>
                 <h3 style={{ color: '#b22234', fontSize: '25px' }}>NOSSAS NOVIDADES</h3>
-                <div className='productCards'><ProductCard /></div>
+                <div className='productCards'>
+                    <ProductCard orderBy="id" limit={8} orderDirection="desc" />
+                </div>
                 <h3 style={{ color: '#b22234', fontSize: '25px', textAlign: 'center' }}>SUA MARCA DE CONFIANÇA</h3>
                 <div className="trust-section">
                     <div className="trust-item">
@@ -62,7 +65,7 @@ function Home() {
                     <Categories />
                 </div>
                 <h3 style={{ color: '#b22234', fontSize: '25px' }}>MAIS VENDIDOS</h3>
-                <div className='productCards'><ProductCard /></div>
+                <div className='productCards'><ProductCard limit={8} orderBy="unitssold" orderDirection="desc" /></div>
                 <div className="bannerSection">
                     <img src="https://paulinhomotos.fbitsstatic.net/img/b/a1c5be88-d5f1-41b2-bc3d-9a3f715ba844.jpg" />
                     <img src="https://paulinhomotos.fbitsstatic.net/img/b/e45e2155-1f7a-4069-91b2-409ad5eeeb8f.jpg" />
