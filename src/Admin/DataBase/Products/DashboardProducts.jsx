@@ -162,7 +162,7 @@ export default function DashboardProducts() {
         </div>
         <div className={styles.topActions}>
           <button className={styles.btn} onClick={() => { setQuery(''); setCategoryFilter(''); setShowOnlyAvailable(false); }}>Resetar filtros</button>
-          <a href="/produtos/novo" className={styles.btnAdd} title="Adicionar produto">
+          <a href="/admin/dataBase/products/add" className={styles.btnAdd} title="Adicionar produto">
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
               <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" />
             </svg>
@@ -234,8 +234,8 @@ export default function DashboardProducts() {
                   </td>
                   <td>
                     <div className={styles.actions}>
-                      <a href={'edit?productID='+prod.id} rel="noreferrer" className={styles.linkish}>Editar</a>
-                      <button onClick={()=>handleDelete(prod.id)} className={`${styles.linkish} ${styles.danger}`}>Excluir</button>
+                      <a href={'/admin/dataBase/products/edit?productID='+prod.id} rel="noreferrer" className={styles.linkish}>Editar</a>
+                      {/* <button onClick={()=>handleDelete(prod.id)} className={`${styles.linkish} ${styles.danger}`}>Excluir</button> */}
                       <a href={prod.url} target="_blank" rel="noreferrer" className={styles.linkish}>Ver</a>
                     </div>
                   </td>
