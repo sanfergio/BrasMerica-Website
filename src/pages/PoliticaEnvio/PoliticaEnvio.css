@@ -1,0 +1,55 @@
+.shipping-container {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f5f5f5;
+  padding: 3rem 1rem;
+}
+
+.shipping-wrapper {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.shipping-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .shipping-card {
+    padding: 3rem;
+  }
+}
+
+.shipping-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.shipping-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #b22234;
+}
+
+.shipping-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #b22234;
+}
+
+.shipping-text {
+  color: #333;
+  line-height: 1.75;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shipping-text p {
+  margin: 0;
+}

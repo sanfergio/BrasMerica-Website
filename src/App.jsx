@@ -26,8 +26,11 @@ function App() {
         <Route path="/termo-de-uso" element={<TermosUso />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
         <Route path="/politica" element={<PoliticaPrivacidade />} />
+          
+          {/* ADMIN PAGE */}
         <Route path="/admin/dataBase/products" element={<DashboardProducts />} />
-        {/* 2. ADICIONE A ROTA "NOT FOUND" POR ÚLTIMO */}
+          
+        {/* NOT FOUND PAGE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
