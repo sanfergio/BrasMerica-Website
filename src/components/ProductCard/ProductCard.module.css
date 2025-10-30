@@ -163,7 +163,7 @@
     width: 45%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content:center;
     transition: transform 0.2s ease;
     box-sizing: border-box;
     height: auto;
@@ -194,6 +194,10 @@
 
   .productInfo {
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .productTitle {
@@ -212,6 +216,11 @@
     color: #d50000;
     font-weight: bold;
     font-size: 1.3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   .productOldPrice {
@@ -219,6 +228,7 @@
     color: #777;
     text-decoration: line-through;
     margin-left: 0.5rem;
+    width: 100%;
   }
 
   .discountPix {
