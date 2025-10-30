@@ -13,10 +13,15 @@ import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx'; // <-- 1. IMPORTE AQUI
 import DashboardProducts from './Admin/DataBase/Products/DashboardProducts.jsx';
 import PoliticaPrivacidade from './pages/PoliticaPrivacidade/PoliticaPrivacidade.jsx';
+import Loading from './components/Loading.jsx';
+import PoliticaEnvio from "./pages/PoliticaEnvio/PoliticaEnvio.jsx"
+import PoliticaDevolucao from './pages/PoliticaDevolucao/PoliticaDevolucao.jsx'
+import FormasPagamento from './pages/FormasPagamento/FormasPagamento.jsx'
 
 function App() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+      <Loading />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -25,11 +30,14 @@ function App() {
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/termo-de-uso" element={<TermosUso />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
-        <Route path="/politica" element={<PoliticaPrivacidade />} />
-          
-          {/* ADMIN PAGE */}
+        <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
+        <Route path="/politica-envio" element={<PoliticaEnvio />} />
+        <Route path="/politica-devolucao" element={<PoliticaDevolucao />} />
+        <Route path="/formas-pagamento" element={<FormasPagamento />} />
+
+        {/* ADMIN PAGE */}
         <Route path="/admin/dataBase/products" element={<DashboardProducts />} />
-          
+
         {/* NOT FOUND PAGE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
