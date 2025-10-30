@@ -1,10 +1,15 @@
 import React from "react";
 import { CreditCard } from "lucide-react";
 import "./FormasPagamento.css";
+import Header from "../../components/Header/Header";
+import WhatsAppButton from "../../components/WhatsappButton";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
 
 export default function FormasPagamento() {
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <div className="pagamento-container">
         <div className="pagamento-wrapper">
           <div className="pagamento-card">
@@ -47,6 +52,7 @@ export default function FormasPagamento() {
           </div>
         </div>
       </div>
+      <ShortFooter />
     </>
   );
 }

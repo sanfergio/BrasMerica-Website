@@ -1,10 +1,16 @@
 import React from "react";
 import { RotateCcw } from "lucide-react";
 import "./PoliticaDevolucao.css";
+import Header from "../../components/Header/Header";
+import WhatsAppButton from "../../components/WhatsappButton";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
+
 
 export default function PoliticaDevolucao() {
   return (
     <>
+      <Header />
+      <WhatsAppButton />
       <div className="return-container">
         <div className="return-wrapper">
           <div className="return-card">
@@ -47,6 +53,7 @@ export default function PoliticaDevolucao() {
           </div>
         </div>
       </div>
+      <ShortFooter />
     </>
   );
 }

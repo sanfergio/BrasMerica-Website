@@ -83,7 +83,7 @@ function ProductCard() {
           </a>
 
           <div className={styles.productInfo}>
-            <h3 className={styles.productTitle}>{product.title}</h3>
+            <h3 title={product.title} className={styles.productTitle}>{product.title}</h3>
             <p className={styles.productPrice}>
               R${product.price.toFixed(2).replace(".", ",")}
               {product.oldPrice && (
