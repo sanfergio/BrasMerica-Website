@@ -3,13 +3,16 @@ import { FaMapMarkerAlt, FaUser, FaShoppingCart, FaSearch, FaBars } from 'react-
 import { useState } from "react";
 import "./Header.module.css";
 import MenuMobile from "../MenuMobile/MenuMobile";
+import CartSideBar from "../CartSideBar/CartSideBar";
 
 function Header() {
+
   function toggleCart() {
     alert('Clicou no carrinho');
   }
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false); //adicionar
 
   return (
     <>
@@ -58,12 +61,13 @@ function Header() {
             </div>
 
             <div className={styles.cartIcon}>
-              <FaShoppingCart onClick={toggleCart} />
+              <FaShoppingCart onClick={() => setIsCartOpen(true)} />
             </div>
           </div>
         </header>
       </div>
       <MenuMobile isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <CartSideBar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
   );
 }
