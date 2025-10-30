@@ -1,48 +1,75 @@
-import Header from './components/Header/Header'
-import './App.css'
-import WhatsAppButton from './components/WhatsappButton.jsx';
-import { Routes, Route } from 'react-router-dom'; // 1. Importar
+// --- DEPENDÊNCIAS EXTERNAS ---
+// Imports de bibliotecas de terceiros (como o React Router)
+import { Routes, Route } from 'react-router-dom';
+
+// --- ESTILIZAÇÃO GLOBAL ---
+import './App.css';
+
+// --- COMPONENTES GLOBAIS ---
+// Componentes reutilizáveis que aparecem em várias partes do site
+import Loading from './components/Loading.jsx';
+
+// --- PÁGINAS PÚBLICAS (Pages) ---
+// Componentes que representam uma "página" inteira
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import NossaLoja from './pages/NossaLoja/NossaLoja.jsx';
 import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
-// import NavBar from './components/Navbar/NavBar.jsx'; // Você importou mas não usou :)
-import TermosUso from './pages/TermosUso/TermosUso.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
-import NotFound from './pages/NotFound.jsx'; // <-- 1. IMPORTE AQUI
-import DashboardProducts from './Admin/DataBase/Products/DashboardProducts.jsx';
-import PoliticaPrivacidade from './pages/PoliticaPrivacidade/PoliticaPrivacidade.jsx';
-import Loading from './components/Loading.jsx';
-import PoliticaEnvio from "./pages/PoliticaEnvio/PoliticaEnvio.jsx"
-import PoliticaDevolucao from './pages/PoliticaDevolucao/PoliticaDevolucao.jsx'
-import FormasPagamento from './pages/FormasPagamento/FormasPagamento.jsx'
+import NotFound from './pages/NotFound.jsx';
 
+// --- PÁGINAS INSTITUCIONAIS (Políticas, Termos, etc.) ---
+import TermosUso from './pages/TermosUso/TermosUso.jsx';
+import PoliticaPrivacidade from './pages/PoliticaPrivacidade/PoliticaPrivacidade.jsx';
+import PoliticaEnvio from "./pages/PoliticaEnvio/PoliticaEnvio.jsx";
+import PoliticaDevolucao from './pages/PoliticaDevolucao/PoliticaDevolucao.jsx';
+import FormasPagamento from './pages/FormasPagamento/FormasPagamento.jsx';
+
+// --- PÁGINAS DE ADMIN (Dashboard) ---
+import DashboardProducts from './Admin/DataBase/Products/DashboardProducts.jsx';
+import EditProduct from './Admin/DataBase/Products/EditProducts.jsx';
+import AddProduct from './Admin/DataBase/Products/AddProduct.jsx';
+
+
+// --- DEFINIÇÃO DO COMPONENTE PRINCIPAL (App) ---
 function App() {
   return (
+
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+
       <Loading />
+
+      {/* --- CONFIGURAÇÃO DAS ROTAS --- */}
       <Routes>
+        {/* Rotas Públicas Principais */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/nossa-loja" element={<NossaLoja />} />
         <Route path="/categorias" element={<ProductsFilter />} />
-        <Route path="/termo-de-uso" element={<TermosUso />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
+
+        {/* Rotas de Políticas e Termos */}
+        <Route path="/termo-de-uso" element={<TermosUso />} />
         <Route path="/politica-privacidade" element={<PoliticaPrivacidade />} />
         <Route path="/politica-envio" element={<PoliticaEnvio />} />
         <Route path="/politica-devolucao" element={<PoliticaDevolucao />} />
         <Route path="/formas-pagamento" element={<FormasPagamento />} />
 
-        {/* ADMIN PAGE */}
+        {/* Rotas do Painel de Admin */}
         <Route path="/admin/dataBase/products" element={<DashboardProducts />} />
+        <Route path="/admin/dataBase/products/edit" element={<EditProduct />} />
+        <Route path="/admin/dataBase/products/add" element={<AddProduct />} />
 
-        {/* NOT FOUND PAGE */}
+        {/* Rota "Não Encontrado" (Catch-all) */}
+        {/* Deve ser sempre a última rota da lista */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </div>
   )
 }
 
-export default App
+// --- EXPORTAÇÃO DO COMPONENTE ---
+export default App;
