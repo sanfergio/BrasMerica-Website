@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { mockProducts } from "../../mocks/products";
-import "./CartSidebar.css";
+import "./CartSideBar.css"
 
 export default function CartSidebar({ isOpen, onClose }) {
   const [cartItems, setCartItems] = useState(mockProducts);
