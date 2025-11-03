@@ -1,12 +1,11 @@
 // CartSideBar.jsx
 import React, { useState, useEffect } from "react";
 import { mockProducts } from "../../mocks/products";
-import "./CartSideBar.css"
+import "./CartSideBar.css";
 
 const STORAGE_KEY = "cart_v1";
 
 export default function CartSidebar({ isOpen, onClose }) {
-  // Carrega do localStorage, se existir, senão usa mockProducts
   const [cartItems, setCartItems] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -21,8 +20,12 @@ export default function CartSidebar({ isOpen, onClose }) {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+      // opcional: emitir evento para outros listeners na mesma aba (não é obrigatório)
+      try {
+        window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cartItems }));
+      } catch (e) {}
     } catch (e) {
-      console.error("Erro ao salvar cart no localStorage:", e);
+      console.error("Falha ao salvar cart", e);
     }
   }, [cartItems]);
 
@@ -38,8 +41,27 @@ export default function CartSidebar({ isOpen, onClose }) {
         }
       }
     }
+
+    function onCartUpdated(e) {
+      // se o event carrega detail, usa-o; caso contrário, lê do localStorage
+      if (e && e.detail) {
+        setCartItems(e.detail);
+      } else {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          setCartItems(raw ? JSON.parse(raw) : []);
+        } catch (err) {
+          console.error("Erro ao ler cart no evento cartUpdated:", err);
+        }
+      }
+    }
+
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener("cartUpdated", onCartUpdated);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("cartUpdated", onCartUpdated);
+    };
   }, []);
 
   const increaseQuantity = (id) => {
