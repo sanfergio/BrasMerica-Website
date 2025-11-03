@@ -168,7 +168,7 @@ export default function ProductPage() {
 
       try {
         const { data, error } = await supabase
-          .from('produtos')
+          .from('DBproducts')
           .select('*')
           .eq('id', productID)
           .single();

@@ -65,7 +65,7 @@ export default function DashboardProducts() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from('produtos')
+          .from('DBproducts')
           .select('*')
           .order('name', { ascending: true });
 

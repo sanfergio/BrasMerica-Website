@@ -52,7 +52,7 @@ export default function EditProduct() {
             setLoading(true);
             try {
                 const { data, error } = await supabase
-                    .from('produtos')
+                    .from('DBproducts')
                     .select('*')
                     .eq('id', id)
                     .single(); // Espera um único resultado
@@ -135,7 +135,7 @@ export default function EditProduct() {
 
         try {
             const { error } = await supabase
-                .from('produtos')
+                .from('DBproducts')
                 .update(updates)
                 .eq('id', productId);
 

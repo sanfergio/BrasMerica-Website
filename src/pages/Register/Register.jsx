@@ -131,6 +131,26 @@ export default function Register() {
               ))}
             </div>
 
+
+            <div className={`${styles.row} ${styles.two}`}>
+              {[{ name: "cep", placeholder: "CEP" },
+              { name: "number", placeholder: "Número" }].map((field) => (
+                <label
+                  key={field.name}
+                  className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
+                >
+                  <input
+                    className={styles.inputBox}
+                    name={field.name}
+                    placeholder={field.placeholder}
+                    value={form[field.name]}
+                    onChange={handleChange}
+                  />
+                  {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
+                </label>
+              ))}
+            </div>
+
             <div className={`${styles.row} ${styles.two}`}>
               {[{ name: "address", placeholder: "Endereço" },
               { name: "neighborhood", placeholder: "Bairro" }].map((field) => (
@@ -161,24 +181,7 @@ export default function Register() {
               {errors.city && <span className={styles.fieldError}>{errors.city}</span>}
             </label>
 
-            <div className={`${styles.row} ${styles.two}`}>
-              {[{ name: "cep", placeholder: "CEP" },
-              { name: "number", placeholder: "Número" }].map((field) => (
-                <label
-                  key={field.name}
-                  className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-                >
-                  <input
-                    className={styles.inputBox}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={form[field.name]}
-                    onChange={handleChange}
-                  />
-                  {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
-                </label>
-              ))}
-            </div>
+
 
             <label className={`${styles.inputGroup} ${errors.complement ? styles.inputGroupError : ""}`}>
               <input
