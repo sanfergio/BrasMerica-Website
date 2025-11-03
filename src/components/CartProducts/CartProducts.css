@@ -1,0 +1,273 @@
+.cart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 1100px;
+  flex-wrap: wrap;
+}
+
+.cart-products {
+  flex: 1;
+  min-width: 600px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 25px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.cart-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  margin-left: 20px;
+  gap: 15px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.cart-item-info p {
+  color: #000;
+  font-weight: 500;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.8px solid #b22234;
+  border-radius: 30px;
+  width: 90px;
+  height: 35px;
+  overflow: hidden;
+  font-weight: bold;
+  color: #b22234;
+  background-color: #fff;
+}
+
+.quantity-control button {
+  background: none;
+  border: none;
+  color: #b22234;
+  font-size: 14px;
+  width: 26px;
+  height: 32px;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-control button:hover {
+  font-size: 16px;
+}
+
+.quantity-control input {
+  border: none;
+  background: transparent;
+  text-align: center;
+  width: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #b22234;
+  outline: none;
+}
+
+.remove-button {
+  background-color: #831926;
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.remove-button:hover {
+  background-color: #b22234;
+}
+
+.cart-summary {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 25px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.cart-summary h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #831926;
+  margin-bottom: 20px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+.summary-item span:last-child {
+  color: #831926;
+}
+
+.summary-item span {
+  color: #831926;
+}
+
+.total {
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+  font-weight: bold;
+}
+
+.checkout-button {
+  width: 100%;
+  background-color: #831926;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #b22234;
+}
+
+.continue-button {
+  display: block;
+  margin: 12px auto 0;
+  background: none;
+  border: none;
+  color: #7b001d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.continue-button:hover {
+  text-decoration: underline;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal h3 {
+  margin-bottom: 10px;
+  color: #831926;
+}
+
+.modal p {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.confirm-button {
+  background-color: #831926;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.confirm-button:hover {
+  background-color: #b22234;
+}
+
+.cancel-button {
+  background-color: #ddd;
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #bbb;
+}
+
+
+
+@media (max-width: 900px) {
+  .cart-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cart-products {
+    min-width: 100%;
+  }
+
+  .cart-summary {
+    width: 100%;
+  }
+}
