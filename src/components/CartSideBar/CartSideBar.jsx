@@ -1,6 +1,5 @@
 // CartSideBar.jsx
 import React, { useState, useEffect } from "react";
-import { mockProducts } from "../../mocks/products";
 import "./CartSideBar.css";
 
 const STORAGE_KEY = "cart_v1";
@@ -9,10 +8,10 @@ export default function CartSidebar({ isOpen, onClose }) {
   const [cartItems, setCartItems] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : mockProducts;
+      return raw ? JSON.parse(raw) : [];
     } catch (e) {
       console.error("Erro ao ler cart do localStorage:", e);
-      return mockProducts;
+      return [];
     }
   });
 
@@ -20,10 +19,9 @@ export default function CartSidebar({ isOpen, onClose }) {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
-      // opcional: emitir evento para outros listeners na mesma aba (não é obrigatório)
       try {
         window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cartItems }));
-      } catch (e) {}
+      } catch (e) { }
     } catch (e) {
       console.error("Falha ao salvar cart", e);
     }
@@ -43,7 +41,6 @@ export default function CartSidebar({ isOpen, onClose }) {
     }
 
     function onCartUpdated(e) {
-      // se o event carrega detail, usa-o; caso contrário, lê do localStorage
       if (e && e.detail) {
         setCartItems(e.detail);
       } else {
@@ -151,10 +148,20 @@ export default function CartSidebar({ isOpen, onClose }) {
 
         <div className="cart-footer">
           <strong>Total: R$ {total.toFixed(2)}</strong>
-          <a href="/carrinho">
-          <button className="checkout-btn">Finalizar Compra</button>
-          </a>
+          <button
+            className="checkout-btn"
+            onClick={() => {
+              if (cartItems.length > 0) {
+                window.location.href = "/carrinho";
+              } else {
+                alert("Seu carrinho está vazio. Adicione produtos antes de prosseguir.");
+              }
+            }}
+          >
+            Finalizar Compra
+          </button>
         </div>
+
       </div>
     </>
   );

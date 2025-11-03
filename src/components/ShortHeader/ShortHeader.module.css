@@ -1,0 +1,372 @@
+.header img {
+  height: 15vh;
+  width: auto;
+}
+
+/* WRAPPER AGORA USANDO STICKY */
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background-color: white;
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+  }
+
+  .menu-overlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menu-mobile {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 250px;
+    height: 100%;
+    background-color: #831926;
+    color: white;
+    transition: 0.3s;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .menu-mobile.open {
+    left: 0;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-header h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .close-icon {
+    font-size: 1.3rem;
+    cursor: pointer;
+  }
+
+  .menu-login {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: white;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+  }
+
+  .menu-login .login-icon {
+    font-size: 1.1rem;
+    color: white;
+  }
+
+  .menu-login p {
+    margin: 0;
+  }
+
+  .menu-login a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+  }
+
+  .menu-login a:hover {
+    color: #f5f5f5;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+  }
+
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+
+  .menu-list li {
+    margin: 15px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-list li::before,
+  .menu-item-categorias button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #b22234;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.25s ease;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .menu-list li:hover::before,
+  .menu-item-categorias button:hover::before {
+    transform: scaleY(1);
+  }
+
+  .menu-list a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    display: block;
+    padding: 5px 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-item-categorias {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .menu-item-categorias button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 10px;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .menu-item-categorias button:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .submenu {
+    margin-top: 8px;
+    padding-left: 15px;
+    border-left: 2px solid #b22234;
+  }
+
+  .submenu li {
+    margin: 8px 0;
+  }
+
+  .submenu a {
+    color: #f5f5f5;
+    font-size: 0.9rem;
+    font-weight: normal;
+    display: block;
+    padding: 3px 10px;
+    transition: all 0.2s ease;
+  }
+
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove fixedHeader e animação de slideDown */
+.header {
+  background-color: #b22234;
+  width: 100%;
+  height: 15vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* resto do CSS permanece igual */
+
+
+.fixedHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.5s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.blackHeader {
+  background-color: #2b2b2b;
+  width: 100%;
+  height: 2vh;
+}
+
+.redHeader {
+  background-color: #831926;
+  width: 100%;
+  height: 4vh;
+}
+
+.imgHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputSearch {
+  width: 42vw;
+  height: 7vh;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.inputSearch input {
+  width: 90%;
+  height: 80%;
+  border: none;
+  border-radius: 30px;
+  background-color: #f5f5f5;
+  color: #2b2b2b;
+  text-align: center;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: #b22234;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.searchIcon {
+  color: #b22234;
+  font-size: 1.2rem;
+}
+
+.userActions {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+  color: #f5f5f5;
+  font-size: 30px;
+}
+
+.locationIcon,
+.userIcon {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+}
+
+.locationIcon p,
+.userIcon p {
+  font-size: 12px;
+}
+
+.cartIcon {
+  cursor: pointer;
+}
+
+.icon {
+  display: none !important;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 1150px) {
+  .header {
+    background-color: #b22234;
+    width: 100%;
+    height: auto;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 7px 0;
+  }
+
+  .imgHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+  }
+
+  .inputSearch {
+    width: 85vw;
+    height: 6vh;
+    border-radius: 30px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+  }
+
+  .inputSearch input {
+    width: 85%;
+    height: 80%;
+    border: none;
+    border-radius: 30px;
+    background-color: #f5f5f5;
+    color: #2b2b2b;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .userActions,
+  .locationIcon,
+  .userIcon,
+  .cartIcon {
+    display: none;
+  }
+
+  .icon {
+    font-size: 1.8rem;
+    display: block !important;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+  }
+
+  .icon:hover {
+    color: #000000;
+  }
+}
