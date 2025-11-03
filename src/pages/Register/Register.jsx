@@ -1,19 +1,33 @@
 import React, { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import bcrypt from "bcryptjs";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Register.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
+import { useNavigate } from "react-router-dom";
+
+// Initialize Supabase client
+const supabase = createClient(
+  "https://vutcznlbeyvnzaoehdje.supabase.co",
+  "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
+);
 
 export default function Register() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
     cpf: "",
-    birth: "",
+    phone_number: "",
+    birth: null, // Date object
+    cep: "",
     address: "",
     neighborhood: "",
     city: "",
-    cep: "",
+    state: "",
     number: "",
     complement: "",
     password: "",
@@ -22,69 +36,279 @@ export default function Register() {
   });
 
   const [errors, setErrors] = useState({});
+  const [validFields, setValidFields] = useState({});
   const [success, setSuccess] = useState("");
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
+  // === Handle form change ===
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-    setForm((p) => ({ ...p, [name]: type === "checkbox" ? checked : value }));
-    setErrors((p) => ({ ...p, [name]: "" }));
+    let val = type === "checkbox" ? checked : value;
+
+    if (name === "cpf") val = val.replace(/\D/g, "");
+    if (name === "phone_number") val = val.replace(/\D/g, "");
+
+    setForm((prev) => ({ ...prev, [name]: val }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
     setSuccess("");
+
+    validateField(name, val);
+
+    if (name === "cpf") checkUnique("cpf", val);
+    if (name === "email") checkUnique("email", val);
   }
 
-  function validateRequired() {
-    const req = [
-      "name",
-      "email",
-      "cpf",
-      "birth",
-      "address",
-      "neighborhood",
-      "city",
-      "cep",
-      "number",
-      "password",
-      "confirmPassword",
-    ];
+  async function checkUnique(field, value) {
+    if (!value) return;
+    try {
+      const { data, error } = await supabase
+        .from("DBclients")
+        .select("id")
+        .eq(field, value)
+        .limit(1)
+        .single();
 
-    const newErr = {};
-    req.forEach((k) => {
-      if (!form[k] || (typeof form[k] === "string" && !form[k].trim())) {
-        newErr[k] = "Campo obrigatório";
+      if (error && error.code !== "PGRST116") {
+        setErrors((prev) => ({ ...prev, [field]: "Erro ao verificar" }));
+        return;
       }
-    });
 
-    // Email
-    if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErr.email = "E-mail inválido";
+      if (data) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: field === "cpf" ? "CPF já cadastrado" : "Email já cadastrado",
+        }));
+        setValidFields((prev) => ({ ...prev, [field]: false }));
+      } else {
+        setErrors((prev) => ({ ...prev, [field]: "" }));
+        setValidFields((prev) => ({ ...prev, [field]: true }));
+      }
+    } catch (err) {
+      console.error(err);
     }
-
-    // Senha
-    const pwRe = /^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\\/\-]).{8,15}$/;
-    if (form.password && !pwRe.test(form.password)) {
-      newErr.password = "Senha: 8-15 chars, 1 número e 1 caractere especial";
-    }
-
-    // Confirmação
-    if (form.password && form.confirmPassword && form.password !== form.confirmPassword) {
-      newErr.confirmPassword = "As senhas não coincidem";
-    }
-
-    if (!form.terms) newErr.terms = "É preciso concordar com os termos.";
-
-    return newErr;
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const newErr = validateRequired();
-    if (Object.keys(newErr).length) {
-      setErrors(newErr);
-      setSuccess("");
+  async function handleCepChange(e) {
+    const cep = e.target.value.replace(/\D/g, "");
+    setForm((p) => ({ ...p, cep }));
+
+    if (cep.length !== 8) {
+      setErrors((p) => ({ ...p, cep: "CEP inválido" }));
+      setValidFields((p) => ({ ...p, cep: false }));
       return;
     }
-    setErrors({});
-    setSuccess("Cadastro realizado com sucesso!");
+
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const data = await res.json();
+
+      if (data.erro) {
+        setErrors((p) => ({ ...p, cep: "CEP não encontrado" }));
+        setValidFields((p) => ({ ...p, cep: false }));
+      } else {
+        setForm((p) => ({
+          ...p,
+          address: data.logradouro || "",
+          neighborhood: data.bairro || "",
+          city: data.localidade || "",
+          state: data.uf || "",
+        }));
+        setErrors((p) => ({ ...p, cep: "" }));
+        setValidFields((p) => ({
+          ...p,
+          cep: true,
+          address: true,
+          neighborhood: true,
+          city: true,
+          state: true,
+        }));
+      }
+    } catch (err) {
+      console.error("Erro ao buscar CEP:", err);
+      setErrors((p) => ({ ...p, cep: "Erro ao buscar CEP" }));
+      setValidFields((p) => ({ ...p, cep: false }));
+    }
   }
+
+  function validateField(name, value) {
+    let error = "";
+    let valid = true;
+
+    if (name === "terms" && !value) {
+      error = "Você deve aceitar os Termos de Uso";
+      valid = false;
+    } else if (!value || value.toString().trim() === "") {
+      error = "Campo obrigatório";
+      valid = false;
+    } else {
+      switch (name) {
+        case "email":
+          if (
+            !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+          ) {
+            error = "E-mail inválido";
+            valid = false;
+          }
+          break;
+
+        case "cpf":
+          if (!validarCPF(value)) {
+            error = "CPF inválido";
+            valid = false;
+          }
+          break;
+        case "phone_number":
+          if (!/^\d{10,11}$/.test(value)) {
+            error = "Telefone inválido";
+            valid = false;
+          }
+          break;
+        case "password":
+          if (!/^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\\/\-]).{8,15}$/.test(value)) {
+            error = "Senha: 8-15 caracteres, 1 número e 1 símbolo";
+            valid = false;
+          }
+          break;
+        case "confirmPassword":
+          if (value !== form.password) {
+            error = "As senhas não coincidem";
+            valid = false;
+          }
+          break;
+        case "birth":
+          if (!value) {
+            error = "Data de nascimento é obrigatória";
+            valid = false;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    setErrors((prev) => ({ ...prev, [name]: error }));
+    setValidFields((prev) => ({ ...prev, [name]: valid }));
+    return valid;
+  }
+
+  function validarCPF(cpf) {
+    cpf = cpf.replace(/\D/g, "");
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+    let soma = 0;
+    for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+    let resto = soma % 11;
+    let digito1 = resto < 2 ? 0 : 11 - resto;
+    if (digito1 !== parseInt(cpf.charAt(9))) return false;
+
+    soma = 0;
+    for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+    resto = soma % 11;
+    let digito2 = resto < 2 ? 0 : 11 - resto;
+    return digito2 === parseInt(cpf.charAt(10));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const allValid = Object.keys(form).every((key) => validateField(key, form[key]));
+    if (!allValid) return;
+
+    try {
+      const { data: existing } = await supabase
+        .from("DBclients")
+        .select("id, email, cpf")
+        .or(`cpf.eq.${form.cpf},email.eq.${form.email}`)
+        .limit(1)
+        .single();
+
+      if (existing) {
+        if (existing.cpf === form.cpf) setErrors((prev) => ({ ...prev, cpf: "CPF já cadastrado" }));
+        if (existing.email === form.email) setErrors((prev) => ({ ...prev, email: "Email já cadastrado" }));
+        return;
+      }
+
+      const { data: lastUser } = await supabase
+        .from("DBclients")
+        .select("id")
+        .order("id", { ascending: false })
+        .limit(1)
+        .single();
+
+      const newId = lastUser ? lastUser.id + 1 : 1;
+      const hashedPassword = await bcrypt.hash(form.password, 10);
+
+      const { data, error } = await supabase.from("DBclients").insert([
+        {
+          id: newId,
+          name: form.name,
+          email: form.email,
+          cpf: form.cpf,
+          phone_number: form.phone_number,
+          birthday: form.birth ? form.birth.toISOString().split("T")[0] : null,
+          cep: form.cep,
+          neighborhood: form.neighborhood,
+          city: form.city,
+          state: form.state,
+          complement_number: `${form.number}, ${form.complement}`,
+          encrypted_key: hashedPassword,
+        },
+      ]);
+
+      if (error) {
+        setErrors({ form: "Erro ao cadastrar usuário" });
+        console.error(error);
+      } else {
+        setSuccess("✅ Cadastro realizado com sucesso!");
+        setShowSuccessModal(true);
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2500);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrors({ form: "Erro inesperado" });
+    }
+  }
+
+  const renderField = (key, placeholder, type = "text", readOnly = false, extraProps = {}) => (
+    <label
+      key={key}
+      className={`${styles.inputGroup} ${errors[key] ? styles.inputGroupError : validFields[key] ? styles.inputGroupValid : ""
+        }`}
+    >
+      {key === "birth" ? (
+        <DatePicker
+          selected={form.birth}
+          onChange={(date) => {
+            setForm((prev) => ({ ...prev, birth: date }));
+            validateField("birth", date);
+          }}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Data de nascimento"
+          maxDate={new Date()}
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+          className={styles.inputBox}
+          {...extraProps}
+        />
+      ) : (
+        <input
+          className={styles.inputBox}
+          name={key}
+          type={type}
+          placeholder={placeholder}
+          value={form[key]}
+          onChange={key === "cep" ? handleCepChange : handleChange}
+          readOnly={readOnly}
+          {...extraProps}
+        />
+      )}
+      <span className={styles.fieldError}>{errors[key]}</span>
+    </label>
+  );
 
   return (
     <>
@@ -93,129 +317,42 @@ export default function Register() {
       <main className={styles.regContainer}>
         <div className={styles.regCard}>
           <h2 className={styles.regTitle}>Crie sua conta</h2>
-
           <form className={styles.regForm} onSubmit={handleSubmit} noValidate>
-            {[{ name: "name", placeholder: "Nome" },
-            { name: "email", placeholder: "Email" }].map((field) => (
-              <label
-                key={field.name}
-                className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-              >
-                <input
-                  className={styles.inputBox}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  value={form[field.name]}
-                  onChange={handleChange}
-                />
-                {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
-              </label>
-            ))}
+            {["name", "email", "phone_number"].map((k) =>
+              renderField(
+                k,
+                k === "name"
+                  ? "Nome completo"
+                  : k === "email"
+                    ? "E-mail"
+                    : "Telefone"
+              )
+            )}
 
             <div className={`${styles.row} ${styles.two}`}>
-              {[{ name: "cpf", placeholder: "CPF" },
-              { name: "birth", placeholder: "dd/mm/aaaa" }].map((field) => (
-                <label
-                  key={field.name}
-                  className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-                >
-                  <input
-                    className={styles.inputBox}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={form[field.name]}
-                    onChange={handleChange}
-                  />
-                  {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
-                </label>
-              ))}
-            </div>
-
-
-            <div className={`${styles.row} ${styles.two}`}>
-              {[{ name: "cep", placeholder: "CEP" },
-              { name: "number", placeholder: "Número" }].map((field) => (
-                <label
-                  key={field.name}
-                  className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-                >
-                  <input
-                    className={styles.inputBox}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={form[field.name]}
-                    onChange={handleChange}
-                  />
-                  {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
-                </label>
-              ))}
+              {renderField("cpf", "CPF")}
+              {renderField("birth", "Data de nascimento")}
             </div>
 
             <div className={`${styles.row} ${styles.two}`}>
-              {[{ name: "address", placeholder: "Endereço" },
-              { name: "neighborhood", placeholder: "Bairro" }].map((field) => (
-                <label
-                  key={field.name}
-                  className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-                >
-                  <input
-                    className={styles.inputBox}
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    value={form[field.name]}
-                    onChange={handleChange}
-                  />
-                  {errors[field.name] && <span className={styles.fieldError}>{errors[field.name]}</span>}
-                </label>
-              ))}
+              {renderField("cep", "CEP")}
+              {renderField("number", "Número")}
             </div>
 
-            <label className={`${styles.inputGroup} ${errors.city ? styles.inputGroupError : ""}`}>
-              <input
-                className={styles.inputBox}
-                name="city"
-                placeholder="Cidade"
-                value={form.city}
-                onChange={handleChange}
-              />
-              {errors.city && <span className={styles.fieldError}>{errors.city}</span>}
-            </label>
-
-
-
-            <label className={`${styles.inputGroup} ${errors.complement ? styles.inputGroupError : ""}`}>
-              <input
-                className={styles.inputBox}
-                name="complement"
-                placeholder="Complemento"
-                value={form.complement}
-                onChange={handleChange}
-              />
-              {errors.complement && <span className={styles.fieldError}>{errors.complement}</span>}
-            </label>
+            <div className={`${styles.row} ${styles.two}`}>
+              {renderField("address", "Endereço", "text", true)}
+              {renderField("neighborhood", "Bairro", "text", true)}
+            </div>
 
             <div className={`${styles.row} ${styles.two}`}>
-              {[{ name: "password", placeholder: "Senha", type: "password" },
-              { name: "confirmPassword", placeholder: "Confirme a senha", type: "password" }].map(
-                (field) => (
-                  <label
-                    key={field.name}
-                    className={`${styles.inputGroup} ${errors[field.name] ? styles.inputGroupError : ""}`}
-                  >
-                    <input
-                      className={styles.inputBox}
-                      type={field.type}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      value={form[field.name]}
-                      onChange={handleChange}
-                    />
-                    {errors[field.name] && (
-                      <span className={styles.fieldError}>{errors[field.name]}</span>
-                    )}
-                  </label>
-                )
-              )}
+              {renderField("city", "Cidade", "text", true)}
+              {renderField("state", "UF", "text", true)}
+            </div>
+
+            {renderField("complement", "Complemento")}
+            <div className={`${styles.row} ${styles.two}`}>
+              {renderField("password", "Senha", "password")}
+              {renderField("confirmPassword", "Confirmar senha", "password")}
             </div>
 
             <div className={styles.termsRow}>
@@ -225,8 +362,11 @@ export default function Register() {
                   name="terms"
                   checked={form.terms}
                   onChange={handleChange}
+                  required
                 />
-                <span> Concordo com os Termos de Uso e Serviço do site</span>
+                <span onClick={() => setShowTermsModal(true)} style={{ cursor: "pointer", textDecoration: "underline", color: "green" }}>
+                  Concordo com os Termos de Uso e Serviço do site
+                </span>
               </label>
               {errors.terms && <div className={styles.fieldError}>{errors.terms}</div>}
             </div>
@@ -238,45 +378,58 @@ export default function Register() {
             <button className={styles.submitBtn} type="submit">
               Cadastrar
             </button>
+            {errors.form && <div className={styles.fieldError}>{errors.form}</div>}
           </form>
 
-          <button type="button" className={styles.googleButton}>
-            <span className={styles.googleIcon} aria-hidden>
-              <svg
-                viewBox="0 0 533.5 544.3"
-                width="18"
-                height="18"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="#4285F4"
-                  d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272v95.4h147.1c-6.3 34.3-25.1 63.4-53.6 83v68h86.6c50.6-46.6 81.4-115.4 81.4-196z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M272 544.3c72.6 0 133.6-24 178.2-65.3l-86.6-68c-24 16.2-54.8 25.7-91.6 25.7-70.4 0-130-47.5-151.3-111.4H30.9v69.9C75.3 485.9 167.4 544.3 272 544.3z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M120.7 325.3c-8.8-26.6-8.8-55.4 0-82l-89.8-69.9C7.2 214.7 0 242.6 0 272s7.2 57.3 30.9 98.6l89.8-69.9z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M272 108.1c39.5 0 75 13.6 103 40.4l77.4-77.4C405.6 24.1 344.6 0 272 0 167.4 0 75.3 58.4 30.9 145.7l89.8 69.9C142 155.6 201.6 108.1 272 108.1z"
-                />
-              </svg>
-            </span>
-            <span>Criar conta com Google</span>
-          </button>
-
-          {Object.keys(errors).length > 0 && (
-            <div className={styles.formError}>Por favor, corrija os campos destacados.</div>
-          )}
           {success && <div className={styles.formSuccess}>{success}</div>}
-
         </div>
       </main>
       <ShortFooter />
+
+      {/* Modal de termos */}
+      {showTermsModal && (
+        <div className={styles.modalBackdrop} onClick={() => setShowTermsModal(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <h2>Termos de Uso e Serviço</h2>
+            <div className={styles.modalBody}>
+              <p>
+                Ao acessar e utilizar este site, você concorda com nossos termos de uso e política de privacidade. Se não concordar, não utilize nossos serviços.
+              </p>
+              <p>
+                É proibido utilizar o site para fins ilegais ou fraudulentos. Todas as informações de produtos e preços podem ser alteradas sem aviso prévio.
+              </p>
+              <p>
+                Seus dados pessoais são protegidos e utilizados apenas para processar pedidos e melhorar nossos serviços.
+              </p>
+            </div>
+            <button className={styles.closeModal} onClick={() => setShowTermsModal(false)}>
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de sucesso */}
+      {showSuccessModal && (
+        <div className={styles.modalBackdrop}>
+          <div className={styles.successContainer}>
+            <div className={styles.loader}>
+              <svg viewBox="0 0 52 52" className={styles.checkmark}>
+                <circle cx="26" cy="26" r="25" fill="green" />
+                <path
+                  d="M14 27l10 10 15-15"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <div style={{color: 'white'}} className={styles.confirmationText}>Conta criada com sucesso!</div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
