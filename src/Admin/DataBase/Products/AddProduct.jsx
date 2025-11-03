@@ -81,7 +81,7 @@ export default function AddProduct() {
             // Usamos .select() para pedir ao Supabase o registro recém-criado
             // =================================================================
             const { data: insertedData, error: insertError } = await supabase
-                .from('produtos')
+                .from('DBproducts')
                 .insert([newProduct])
                 .select('id') // Pede para retornar APENAS o ID do novo produto
                 .single(); // Espera um único objeto, não um array
@@ -99,7 +99,7 @@ export default function AddProduct() {
             const finalUrl = `https://www.brasmerica.com.br/produtos?productID=${newID}`;
 
             const { error: updateError } = await supabase
-                .from('produtos')
+                .from('DBproducts')
                 .update({ url: finalUrl }) // Salva a URL final...
                 .eq('id', newID);          // ...no produto com o ID que acabamos de criar.
 

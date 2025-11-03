@@ -43,7 +43,7 @@ function ProductCard({
   useEffect(() => {
     async function fetchProducts() {
       try {
-        let query = supabase.from("produtos").select("*");
+        let query = supabase.from('DBproducts').select("*");
 
         // 🔸 Sempre mostrar apenas produtos disponíveis (disponible = 0)
         query = query.eq("disponible", 0);
