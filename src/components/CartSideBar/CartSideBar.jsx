@@ -1,9 +1,46 @@
-import React, { useState } from "react";
+// CartSideBar.jsx
+import React, { useState, useEffect } from "react";
 import { mockProducts } from "../../mocks/products";
 import "./CartSideBar.css"
 
+const STORAGE_KEY = "cart_v1";
+
 export default function CartSidebar({ isOpen, onClose }) {
-  const [cartItems, setCartItems] = useState(mockProducts);
+  // Carrega do localStorage, se existir, senão usa mockProducts
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : mockProducts;
+    } catch (e) {
+      console.error("Erro ao ler cart do localStorage:", e);
+      return mockProducts;
+    }
+  });
+
+  // Sempre que cartItems mudar, salva no localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+    } catch (e) {
+      console.error("Erro ao salvar cart no localStorage:", e);
+    }
+  }, [cartItems]);
+
+  // Sincroniza multi-aba: quando outro tab altera o storage, atualiza UI
+  useEffect(() => {
+    function onStorage(e) {
+      if (e.key === STORAGE_KEY) {
+        try {
+          const newCart = e.newValue ? JSON.parse(e.newValue) : [];
+          setCartItems(newCart);
+        } catch (err) {
+          console.error("Erro ao parsear storage event:", err);
+        }
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const increaseQuantity = (id) => {
     setCartItems((prev) =>
@@ -92,7 +129,9 @@ export default function CartSidebar({ isOpen, onClose }) {
 
         <div className="cart-footer">
           <strong>Total: R$ {total.toFixed(2)}</strong>
+          <a href="/carrinho">
           <button className="checkout-btn">Finalizar Compra</button>
+          </a>
         </div>
       </div>
     </>
