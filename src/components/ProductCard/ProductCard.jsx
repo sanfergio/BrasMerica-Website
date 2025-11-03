@@ -14,9 +14,9 @@ export function currencyBRL(value) {
   return value == null
     ? "-"
     : Number(value).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+        style: "currency",
+        currency: "BRL",
+      });
 }
 
 /**
@@ -29,6 +29,7 @@ export function currencyBRL(value) {
  * @param {string=} props.orderBy - Campo de ordenação (ex: "unitssold", "reviewcount", "price")
  * @param {"asc"|"desc"=} props.orderDirection - Direção da ordenação
  * @param {boolean=} props.onlyAvailable - Se true, filtra apenas disponíveis (disponible = 0) (default: true)
+ * @param {Array<{min:number,max:number}>=} props.priceRanges - Array de faixas de preço para filtrar (client-side)
  */
 function ProductCard({
   category,
@@ -37,16 +38,19 @@ function ProductCard({
   orderBy,
   orderDirection = "desc",
   onlyAvailable = true,
+  priceRanges = [],
 }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function fetchProducts() {
       try {
-        let query = supabase.from('DBproducts').select("*");
+        let query = supabase.from("DBproducts").select("*");
 
         // 🔸 Sempre mostrar apenas produtos disponíveis (disponible = 0)
-        query = query.eq("disponible", 0);
+        if (onlyAvailable) {
+          query = query.eq("disponible", 0);
+        }
 
         // 🔸 Filtros opcionais
         if (category) query = query.eq("category", category);
@@ -54,7 +58,9 @@ function ProductCard({
 
         // 🔸 Ordenação (mais vendidos, melhor avaliados, etc.)
         if (orderBy) {
-          query = query.order(orderBy, { ascending: orderDirection === "asc" });
+          query = query.order(orderBy, {
+            ascending: orderDirection === "asc",
+          });
         } else {
           query = query.order("name", { ascending: true });
         }
@@ -69,7 +75,7 @@ function ProductCard({
           return;
         }
 
-        const mapped = data.map((p) => ({
+        const mapped = (data || []).map((p) => ({
           id: p.id,
           name: p.name,
           price: Number(p.price),
@@ -96,14 +102,39 @@ function ProductCard({
           buyNowUrl: p.url || "#",
         }));
 
-        setProducts(mapped);
+        // Se houver priceRanges, filtra client-side: produto entra se estiver em qualquer faixa selecionada
+        let final = mapped;
+        if (Array.isArray(priceRanges) && priceRanges.length > 0) {
+          final = mapped.filter((prod) =>
+            priceRanges.some((r) => {
+              const price = Number(prod.price);
+              // caso r.min ou r.max sejam null/undefined, tratar como aberto
+              const minOk = r.min == null ? true : price >= r.min;
+              const maxOk = r.max == null ? true : price <= r.max;
+              return minOk && maxOk;
+            })
+          );
+        }
+
+        setProducts(final);
       } catch (err) {
         console.error("Erro ao buscar produtos:", err);
       }
     }
 
     fetchProducts();
-  }, [category, subcategory, limit, orderBy, orderDirection, onlyAvailable]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    category,
+    subcategory,
+    limit,
+    orderBy,
+    orderDirection,
+    onlyAvailable,
+    // não incluir priceRanges aqui porque filtragem é client-side após fetch;
+    // porém adicionamos uma small trick: quando priceRanges mudar, re-run effect to re-fetch (ok to include)
+    JSON.stringify(priceRanges),
+  ]);
 
   return (
     <div className={styles.productsContainer}>
@@ -112,7 +143,6 @@ function ProductCard({
       ) : (
         products.map((product) => (
           <div className={styles.productCard} key={product.id}>
-
             <div className={styles.freeShipping}>
               <span>
                 <FaShippingFast /> FRETE GRÁTIS
