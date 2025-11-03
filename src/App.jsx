@@ -19,6 +19,7 @@ import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ProductPage from  './pages/ProductPage/ProductPage.jsx'
+import CartProducts from './pages/CartProducts/CartProducts.jsx'
 
 // --- PÁGINAS INSTITUCIONAIS (Políticas, Termos, etc.) ---
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
@@ -51,6 +52,7 @@ function App() {
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
         <Route path="/produtos" element={<ProductPage />} />
+        <Route path="/carrinho" element={<CartProducts />} />
 
         {/* Rotas de Políticas e Termos */}
         <Route path="/termo-de-uso" element={<TermosUso />} />

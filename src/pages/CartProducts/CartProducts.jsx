@@ -2,17 +2,55 @@ import React, { useState, useEffect } from "react";
 import "./CartProducts.css";
 import { mockProducts } from "../../mocks/products";
 
+const STORAGE_KEY = "cart_v1";
+
 export default function CartProduct() {
-  const [cart, setCart] = useState(mockProducts);
+  // Inicializa a partir do localStorage, se existir; caso contrário usa mockProducts
+  const [cart, setCart] = useState(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : mockProducts;
+    } catch (e) {
+      console.error("Erro ao ler cart do localStorage:", e);
+      return mockProducts;
+    }
+  });
+
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
+  // Redireciona se o carrinho ficou vazio (mantive sua lógica)
   useEffect(() => {
     if (cart.length === 0) {
       window.location.href =
         "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal";
     }
   }, [cart]);
+
+  // Salva no localStorage sempre que o cart mudar
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+    } catch (e) {
+      console.error("Erro ao salvar cart no localStorage:", e);
+    }
+  }, [cart]);
+
+  // Sincroniza mudanças feitas em outra aba/componente (ex: CartSidebar)
+  useEffect(() => {
+    function onStorage(e) {
+      if (e.key === STORAGE_KEY) {
+        try {
+          const newCart = e.newValue ? JSON.parse(e.newValue) : [];
+          setCart(newCart);
+        } catch (err) {
+          console.error("Erro ao parsear storage event:", err);
+        }
+      }
+    }
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
 
   const increaseQuantity = (id) => {
     setCart((prev) =>
@@ -113,7 +151,9 @@ export default function CartProduct() {
           </div>
 
           <button className="checkout-button">Prosseguir compra</button>
+          <a href="../">
           <button className="continue-button">Continuar comprando</button>
+          </a>
         </div>
       </div>
 
