@@ -1,3 +1,4 @@
+// ProductCard.jsx
 import React, { useState, useEffect } from "react";
 import styles from "./ProductCard.module.css";
 import { FaShippingFast } from "react-icons/fa";
@@ -9,6 +10,8 @@ const supabase = createClient(
   "https://vutcznlbeyvnzaoehdje.supabase.co",
   "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
 );
+
+const STORAGE_KEY = "cart_v1";
 
 export function currencyBRL(value) {
   return value == null
@@ -131,10 +134,50 @@ function ProductCard({
     orderBy,
     orderDirection,
     onlyAvailable,
-    // não incluir priceRanges aqui porque filtragem é client-side após fetch;
-    // porém adicionamos uma small trick: quando priceRanges mudar, re-run effect to re-fetch (ok to include)
     JSON.stringify(priceRanges),
   ]);
+
+  // --- Função para adicionar item ao cart salvo no localStorage ---
+  const handleAddToCart = (product) => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const cart = raw ? JSON.parse(raw) : [];
+
+      // Procura item pelo id
+      const idx = cart.findIndex((it) => String(it.id) === String(product.id));
+
+      if (idx > -1) {
+        // incrementa quantidade
+        cart[idx].productQuantity = Number(cart[idx].productQuantity || 0) + 1;
+      } else {
+        // adiciona novo item com a estrutura esperada pelo carrinho
+        const newItem = {
+          id: product.id,
+          productName: product.title || product.name || "",
+          productPrice: product.price != null ? product.price : 0,
+          productQuantity: 1,
+          productImage: product.image || (product.images && product.images[0]) || "",
+        };
+        cart.push(newItem);
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+
+      // Emite evento customizado para permitir que componentes na mesma aba possam reagir sem reload.
+      try {
+        window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
+      } catch (e) {
+        // fallback: dispatch plain Event and rely on reading localStorage
+        try {
+          window.dispatchEvent(new Event("cartUpdated"));
+        } catch (er) {
+          // ignore
+        }
+      }
+    } catch (e) {
+      console.error("Erro ao adicionar item ao carrinho:", e);
+    }
+  };
 
   return (
     <div className={styles.productsContainer}>
@@ -172,7 +215,10 @@ function ProductCard({
             </div>
 
             <div className={styles.productActions}>
-              <button className={`${styles.btn} ${styles.btnCart}`}>
+              <button
+                className={`${styles.btn} ${styles.btnCart}`}
+                onClick={() => handleAddToCart(product)}
+              >
                 ADICIONAR <FaCartShopping />
               </button>
               <a

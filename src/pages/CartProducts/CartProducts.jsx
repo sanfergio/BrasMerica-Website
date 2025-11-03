@@ -1,3 +1,4 @@
+// CartProduct.jsx
 import React, { useState, useEffect } from "react";
 import "./CartProducts.css";
 import { mockProducts } from "../../mocks/products";
@@ -5,7 +6,6 @@ import { mockProducts } from "../../mocks/products";
 const STORAGE_KEY = "cart_v1";
 
 export default function CartProduct() {
-  // Inicializa a partir do localStorage, se existir; caso contrário usa mockProducts
   const [cart, setCart] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -15,11 +15,9 @@ export default function CartProduct() {
       return mockProducts;
     }
   });
-
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Redireciona se o carrinho ficou vazio (mantive sua lógica)
   useEffect(() => {
     if (cart.length === 0) {
       window.location.href =
@@ -31,12 +29,16 @@ export default function CartProduct() {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      // emitir também cartUpdated para demais listeners na mesma aba
+      try {
+        window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
+      } catch (e) {}
     } catch (e) {
       console.error("Erro ao salvar cart no localStorage:", e);
     }
   }, [cart]);
 
-  // Sincroniza mudanças feitas em outra aba/componente (ex: CartSidebar)
+  // Sincroniza mudanças feitas em outra aba/componente (ex: ProductCard ou CartSidebar)
   useEffect(() => {
     function onStorage(e) {
       if (e.key === STORAGE_KEY) {
@@ -48,8 +50,26 @@ export default function CartProduct() {
         }
       }
     }
+
+    function onCartUpdated(e) {
+      if (e && e.detail) {
+        setCart(e.detail);
+      } else {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          setCart(raw ? JSON.parse(raw) : []);
+        } catch (err) {
+          console.error("Erro ao ler cart no evento cartUpdated:", err);
+        }
+      }
+    }
+
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener("cartUpdated", onCartUpdated);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("cartUpdated", onCartUpdated);
+    };
   }, []);
 
   const increaseQuantity = (id) => {
