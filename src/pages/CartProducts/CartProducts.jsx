@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import "./CartProducts.css";
 import { mockProducts } from "../../mocks/products";
+import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import ShortHeader from "../../components/ShortHeader/ShortHeader";
+import WhatsAppButton from "../../components/WhatsappButton";
 
 const STORAGE_KEY = "cart_v1";
 
@@ -20,10 +23,10 @@ export default function CartProduct() {
 
   useEffect(() => {
     if (cart.length === 0) {
-      window.location.href =
-        "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal";
+      alert("Seu carrinho está vazio. Adicione produtos antes de prosseguir.");
+      window.location.href = "./";
     }
-  }, [cart]);
+  })
 
   // Salva no localStorage sempre que o cart mudar
   useEffect(() => {
@@ -32,7 +35,7 @@ export default function CartProduct() {
       // emitir também cartUpdated para demais listeners na mesma aba
       try {
         window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
-      } catch (e) {}
+      } catch (e) { }
     } catch (e) {
       console.error("Erro ao salvar cart no localStorage:", e);
     }
@@ -119,6 +122,7 @@ export default function CartProduct() {
 
   return (
     <>
+      <ShortHeader />
       <div className="cart-container">
         <div className="cart-products">
           {cart.map((item) => (
@@ -172,7 +176,7 @@ export default function CartProduct() {
 
           <button className="checkout-button">Prosseguir compra</button>
           <a href="../">
-          <button className="continue-button">Continuar comprando</button>
+            <button className="continue-button">Continuar comprando</button>
           </a>
         </div>
       </div>
@@ -196,6 +200,7 @@ export default function CartProduct() {
           </div>
         </div>
       )}
+      <ShortFooter />
     </>
   );
 }
