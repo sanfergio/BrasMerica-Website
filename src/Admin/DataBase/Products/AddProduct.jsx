@@ -25,6 +25,7 @@ const initialState = {
     tags: '',
     shortdesc: '',
     longdesc: '',
+    company_name: ''
 };
 
 // Removi o 'useEffect' e 'generateSlug'
@@ -73,6 +74,7 @@ export default function AddProduct() {
             tags: product.tags,
             shortdesc: product.shortdesc,
             longdesc: product.longdesc,
+            company_name: product.company_name || "Sem marca"
         };
 
         try {
@@ -176,6 +178,10 @@ export default function AddProduct() {
                         <label>
                             Subcategoria
                             <input type="text" name="subcategory" value={product.subcategory} onChange={handleChange} required />
+                        </label>
+                        <label>
+                            Nome da Empresa / Marca
+                            <input type="text" name="company_name" value={product.company_name} onChange={handleChange} placeholder="Sem marca" />
                         </label>
 
                         {/* --- Estoque e Vendas --- */}
