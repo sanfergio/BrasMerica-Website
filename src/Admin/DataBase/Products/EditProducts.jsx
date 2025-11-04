@@ -24,6 +24,7 @@ const initialState = {
     tags: '',
     shortdesc: '', // Novo campo
     longdesc: '',  // Novo campo
+    company_name: ''
 };
 
 export default function EditProduct() {
@@ -79,6 +80,7 @@ export default function EditProduct() {
                         tags: data.tags || '',
                         shortdesc: data.shortdesc || '', // Novo campo
                         longdesc: data.longdesc || '',   // Novo campo
+                        company_name: data.company_name || ''
                     });
                 } else {
                     setError(`Produto com ID ${id} não encontrado.`);
@@ -131,6 +133,7 @@ export default function EditProduct() {
             tags: product.tags,
             shortdesc: product.shortdesc, // Novo campo
             longdesc: product.longdesc,   // Novo campo
+            company_name: product.company_name || "Sem marca"
         };
 
         try {
@@ -211,6 +214,11 @@ export default function EditProduct() {
                             <input type="text" name="subcategory" value={product.subcategory} onChange={handleChange} />
                         </label>
 
+                        <label>
+                            Nome da Empresa / Marca
+                            <input type="text" name="company_name" value={product.company_name} onChange={handleChange} placeholder="Sem marca" />
+                        </label>
+                        
                         {/* --- Estoque e Vendas --- */}
                         <label>
                             Qtd. em Estoque

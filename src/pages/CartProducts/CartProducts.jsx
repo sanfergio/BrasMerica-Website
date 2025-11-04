@@ -1,6 +1,5 @@
-// CartProduct.jsx
 import React, { useState, useEffect } from "react";
-import "./CartProducts.css";
+import styles from "./CartProducts.module.css";
 import { mockProducts } from "../../mocks/products";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import ShortHeader from "../../components/ShortHeader/ShortHeader";
@@ -123,30 +122,30 @@ export default function CartProduct() {
   return (
     <>
       <ShortHeader />
-      <div className="cart-container">
-        <div className="cart-products">
+      <div className={styles.cartContainer}>
+        <div className={styles.cartProducts}>
           {cart.map((item) => (
-            <div key={item.id} className="cart-item">
+            <div key={item.id} className={styles.cartItem}>
               <img
                 src={item.productImage}
                 alt={item.productName}
-                className="cart-item-image"
+                className={styles.cartItemImage}
               />
 
-              <div className="cart-item-details">
-                <div className="cart-item-info">
+              <div className={styles.cartItemDetails}>
+                <div className={styles.cartItemInfo}>
                   <h3>{item.productName}</h3>
                   <p>R$ {item.productPrice.toFixed(2)}</p>
                 </div>
 
-                <div className="quantity-control">
+                <div className={styles.quantityControl}>
                   <button onClick={() => decreaseQuantity(item.id)}>-</button>
                   <input type="text" value={item.productQuantity} readOnly />
                   <button onClick={() => increaseQuantity(item.id)}>+</button>
                 </div>
 
                 <button
-                  className="remove-button"
+                  className={styles.removeButton}
                   onClick={() => {
                     setSelectedItem(item);
                     setShowModal(true);
@@ -159,41 +158,41 @@ export default function CartProduct() {
           ))}
         </div>
 
-        <div className="cart-summary">
+        <div className={styles.cartSummary}>
           <h2>Resumo</h2>
-          <div className="summary-item">
+          <div className={styles.summaryItem}>
             <span>Subtotal</span>
             <span>R$ {subtotal.toFixed(2)}</span>
           </div>
-          <div className="summary-item">
+          <div className={styles.summaryItem}>
             <span>Frete</span>
             <span>Grátis</span>
           </div>
-          <div className="summary-item total">
+          <div className={`${styles.summaryItem} ${styles.total}`}>
             <span>Total</span>
             <span>R$ {total.toFixed(2)}</span>
           </div>
 
-          <button className="checkout-button">Prosseguir compra</button>
+          <a href="/checkout"><button className={styles.checkoutButton}>Prosseguir compra</button></a>
           <a href="../">
-            <button className="continue-button">Continuar comprando</button>
+            <button className={styles.continueButton}>Continuar comprando</button>
           </a>
         </div>
       </div>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
             <h3>Remover produto</h3>
             <p>
               Tem certeza que deseja remover{" "}
               <strong>{selectedItem?.productName}</strong> do carrinho?
             </p>
-            <div className="modal-buttons">
-              <button className="confirm-button" onClick={confirmRemove}>
+            <div className={styles.modalButtons}>
+              <button className={styles.confirmButton} onClick={confirmRemove}>
                 Sim, remover
               </button>
-              <button className="cancel-button" onClick={cancelRemove}>
+              <button className={styles.cancelButton} onClick={cancelRemove}>
                 Cancelar
               </button>
             </div>
