@@ -19,7 +19,11 @@ import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ProductPage from  './pages/ProductPage/ProductPage.jsx'
+
+// --- PÁGINAS DE CARRINHO E CHECKOUT ---
+// Componentes relacionados ao carrinho de compras e processo de checkout
 import CartProducts from './pages/CartProducts/CartProducts.jsx'
+import CheckoutForm from './pages/CheckoutForm/CheckoutForm.jsx'
 
 // --- PÁGINAS INSTITUCIONAIS (Políticas, Termos, etc.) ---
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
@@ -53,6 +57,7 @@ function App() {
         <Route path="/quem-somos" element={<QuemSomos />} />
         <Route path="/produtos" element={<ProductPage />} />
         <Route path="/carrinho" element={<CartProducts />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
 
         {/* Rotas de Políticas e Termos */}
         <Route path="/termo-de-uso" element={<TermosUso />} />
