@@ -33,6 +33,7 @@ export function currencyBRL(value) {
  * @param {"asc"|"desc"=} props.orderDirection - Direção da ordenação
  * @param {boolean=} props.onlyAvailable - Se true, filtra apenas disponíveis (disponible = 0) (default: true)
  * @param {Array<{min:number,max:number}>=} props.priceRanges - Array de faixas de preço para filtrar (client-side)
+ * @param {Array<string>=} props.company_name - Array de nomes de marca para filtrar (campo no BD: company_name)
  */
 function ProductCard({
   category,
@@ -42,6 +43,7 @@ function ProductCard({
   orderDirection = "desc",
   onlyAvailable = true,
   priceRanges = [],
+  company_name = [],
 }) {
   const [products, setProducts] = useState([]);
 
@@ -58,6 +60,13 @@ function ProductCard({
         // 🔸 Filtros opcionais
         if (category) query = query.eq("category", category);
         if (subcategory) query = query.eq("subcategory", subcategory);
+
+        // 🔸 Filtrar por marcas (company_name) se fornecido — usa o campo exatamente como no BD
+        if (Array.isArray(company_name) && company_name.length > 0) {
+          // garante que todos os itens são strings
+          const brands = company_name.map((b) => String(b));
+          query = query.in("company_name", brands);
+        }
 
         // 🔸 Ordenação (mais vendidos, melhor avaliados, etc.)
         if (orderBy) {
@@ -135,6 +144,7 @@ function ProductCard({
     orderDirection,
     onlyAvailable,
     JSON.stringify(priceRanges),
+    JSON.stringify(company_name),
   ]);
 
   // --- Função para adicionar item ao cart salvo no localStorage ---

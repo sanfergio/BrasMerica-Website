@@ -1,3 +1,4 @@
+//ProductPage.jsx
 "use client"
 
 // 'useSearchParams' e 'Suspense' foram removidos
@@ -264,6 +265,10 @@ export default function ProductPage() {
 
                 <DetailRow label="Quantidade em estoque:">
                   <span>{product.stockqty || 0}</span>
+                </DetailRow>
+
+                <DetailRow label="Nome da marca:">
+                  <span>{product.company_name ? product.company_name : "N/A"}</span>
                 </DetailRow>
 
                 <DetailRow label="Tags:">

@@ -75,6 +75,7 @@
 /* Main image comes first on mobile */
 .mainImage {
   width: 100%;
+  height: 32rem;
   border: 2px solid var(--gray-200);
   border-radius: 0.5rem;
   overflow: hidden;

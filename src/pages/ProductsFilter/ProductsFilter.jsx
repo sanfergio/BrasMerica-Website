@@ -41,6 +41,39 @@ export default function ProductsFilter() {
     });
   };
 
+  // NOVO: lista de marcas (na ordem exata e com a grafia exata solicitada)
+  const brandsList = [
+    "Shell",
+    "Mobil",
+    "Ipiranga",
+    "Motul",
+    "Levorin",
+    "Maggion",
+    "Ira",
+    "Yamalube",
+    "Texaco",
+    "Philips",
+    "San Marino",
+    "FortLub",
+    "DIAFRAG",
+    "Megaville",
+    "ERBS",
+    "BrasPlus",
+    "Flahstyre",
+  ];
+
+  // Estado para marcas selecionadas
+  const [selectedBrands, setSelectedBrands] = useState(() => new Set());
+
+  const toggleBrand = (brand) => {
+    setSelectedBrands((prevSet) => {
+      const next = new Set(prevSet);
+      if (next.has(brand)) next.delete(brand);
+      else next.add(brand);
+      return next;
+    });
+  };
+
   // Ordenação: 'relevance' (padrão), 'price-asc', 'price-desc'
   const [orderValue, setOrderValue] = useState("relevance");
 
@@ -143,15 +176,16 @@ export default function ProductsFilter() {
             <div className="filtro-grupo">
               <h4>Marca</h4>
               <div className="checkboxes">
-                <label>
-                  <input type="checkbox" /> Pirelli
-                </label>
-                <label>
-                  <input type="checkbox" /> Ipiranga
-                </label>
-                <label>
-                  <input type="checkbox" /> Motul
-                </label>
+                {brandsList.map((brand) => (
+                  <label key={brand}>
+                    <input
+                      type="checkbox"
+                      checked={selectedBrands.has(brand)}
+                      onChange={() => toggleBrand(brand)}
+                    />{" "}
+                    {brand}
+                  </label>
+                ))}
               </div>
             </div>
 
@@ -188,6 +222,8 @@ export default function ProductsFilter() {
               orderBy={orderByProp}
               orderDirection={orderDirectionProp}
               limit={limitProp}
+              // Passa a lista de marcas selecionadas; usa o nome do campo do BD conforme solicitado
+              company_name={Array.from(selectedBrands)}
             />
           </div>
         </div>
