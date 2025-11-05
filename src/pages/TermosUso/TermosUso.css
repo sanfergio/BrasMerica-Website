@@ -1,61 +1,148 @@
 .termos-container {
-    width: 100vw;
-    background-color: #f5f5f5;
-    padding: 4rem 1rem;
+  width: 100%;
+  background-color: #fafafa;
+  padding: 3rem 1rem;
+  font-family: "Inter", "Poppins", sans-serif;
 }
 
 .termos-conteudo {
-    max-width: 64rem;
-    margin: 0 auto;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 3rem 3.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.termos-conteudo:hover {
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 }
 
 .termos-titulo {
-    font-size: 2.25rem;
-    font-weight: bold;
-    margin: 2rem 0px;
-    text-align: center;
-    color: #b22234;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b22234;
+  text-align: center;
+  position: relative;
+  letter-spacing: -0.5px;
+}
+
+.termos-titulo::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #b22234;
+  border-radius: 3px;
+  opacity: 0.8;
 }
 
 .termos-lista {
-    list-style: none;
-    counter-reset: termos;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .termo-item {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background: #fff;
+  border-left: 4px solid #b22234;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.termo-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
 .termo-numero {
-    font-size: 2rem;
-    font-weight: bold;
-    flex-shrink: 0;
-    color: #b22234;
+  background-color: #b22234;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(178, 34, 52, 0.4);
 }
 
 .termo-textos {
-    flex: 1;
-    padding-top: 0.5rem;
+  flex: 1;
+  text-align: left;
 }
 
 .termo-subtitulo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0px;
-    color: #b22234;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #b22234;
+  margin-bottom: 0.5rem;
 }
 
 .termo-descricao {
-    line-height: 1.5rem;
-    color: #333;
-    margin: 0px 0px 10px 0px;
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .termos-conteudo {
+    padding: 2rem 1.5rem;
+  }
+
+  .termos-titulo {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .termo-item {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+
+  .termo-numero {
+    width: 2.2rem;
+    height: 2.2rem;
     font-size: 1rem;
+  }
+
+  .termo-subtitulo {
+    font-size: 1.25rem;
+  }
+
+  .termo-descricao {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 480px) {
+  .termos-titulo {
+    font-size: 1.75rem;
+  }
+
+  .termo-subtitulo {
+    font-size: 1.1rem;
+  }
+
+  .termo-descricao {
+    font-size: 0.9rem;
+  }
 }

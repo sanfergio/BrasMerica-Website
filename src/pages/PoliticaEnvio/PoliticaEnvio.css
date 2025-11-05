@@ -1,55 +1,94 @@
 .shipping-container {
   min-height: 100vh;
-  width: 100vw;
-  background-color: #f5f5f5;
-  padding: 3rem 1rem;
-}
-
-.shipping-wrapper {
-  max-width: 64rem;
-  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(135deg, #f5f5f5, #eaeaea);
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .shipping-card {
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  padding: 3rem 2rem;
+  max-width: 900px;
+  animation: fadeIn 0.8s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (min-width: 768px) {
-  .shipping-card {
-    padding: 3rem;
-  }
+.shipping-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .shipping-header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  position: relative;
+  border: none; 
 }
 
 .shipping-icon {
   width: 3rem;
   height: 3rem;
   color: #b22234;
+  transition: transform 0.4s ease;
+}
+
+.shipping-header:hover .shipping-icon {
+  transform: rotate(-10deg) scale(1.1);
 }
 
 .shipping-title {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   color: #b22234;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.shipping-title::after {
+  content: "";
+  display: block;
+  width: 2rem; 
+  height: 2px;
+  background-color: #b22234;
+  margin-top: 0.3rem; 
+  border-radius: 2px;
 }
 
 .shipping-text {
-  color: #333;
-  line-height: 1.75;
+  color: #444;
+  line-height: 1.8;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .shipping-text p {
   margin: 0;
+  text-align: justify;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .shipping-card {
+    padding: 4rem 3rem;
+  }
+
 }
