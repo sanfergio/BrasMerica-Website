@@ -16,7 +16,7 @@ export default function PoliticaPrivacidade() {
                     <div className="politica-card">
                         <div className="politica-header">
                             <Shield className="politica-icon" />
-                            <h1 className="politica-title">Privacy Policy</h1>
+                            <h1 className="politica-title">Política de privacidade</h1>
                         </div>
 
                         <div className="politica-text">
