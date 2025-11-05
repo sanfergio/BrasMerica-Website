@@ -5,10 +5,12 @@ import "./Header.module.css";
 import MenuMobile from "../MenuMobile/MenuMobile";
 import CartSideBar from "../CartSideBar/CartSideBar";
 
+import InputSearch from "../InputSearch/InputSearch"; // adicionado
+
 function Header() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); //adicionar
+  const [isCartOpen, setIsCartOpen] = useState(false); 
 
   return (
     <>
@@ -35,8 +37,7 @@ function Header() {
           </div>
 
           <div className={styles.inputSearch}>
-            <input type="text" placeholder="O quê você procura?" />
-            <FaSearch className={styles.searchIcon} />
+            <InputSearch />
           </div>
 
           <div className={styles.userActions}>
