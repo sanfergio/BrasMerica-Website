@@ -120,7 +120,7 @@ export default function ProductsFilter() {
 
         {/* TOPO DESKTOP */}
         <div className="filtro">
-          <h2 className="titulo-pagina">Todos os produtos</h2>
+          <h2 className="titulo-pagina">Todos(as) os(as) {categorie}</h2>
 
           {/* Ordenação Desktop */}
           <div className="ordenacao desktop">
@@ -135,7 +135,7 @@ export default function ProductsFilter() {
 
         {/* FILTROS MOBILE */}
         <div className="filtros-mobile">
-          <div className="mobile">
+          <div style={{ display: 'none' }} className="mobile">
             <label>Filtrar por</label>
             <select>
               <option>Preço</option>
