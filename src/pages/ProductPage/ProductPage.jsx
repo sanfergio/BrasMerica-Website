@@ -3,7 +3,6 @@
 
 // 'useSearchParams' e 'Suspense' foram removidos
 import React, { useState, useEffect } from "react"
-import { createClient } from "@supabase/supabase-js"
 import { Star, Truck, ShoppingCart, ChevronRight } from "lucide-react"
 import styles from "./ProductPage.module.css"
 import HomeButton from '../../components/HomeButton.jsx';
@@ -13,7 +12,9 @@ import Footer from '../../components/Footer/Footer.jsx'
 import NavBar from '../../components/Navbar/NavBar.jsx'
 
 // Inicializa o cliente Supabase
-const supabase = createClient("https://vutcznlbeyvnzaoehdje.supabase.co", "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI");
+import SupabaseClient from "../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 // --- Componentes Internos (Sub-componentes da página) ---
 // (Estes componentes são idênticos aos da versão anterior)

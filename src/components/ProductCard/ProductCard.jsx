@@ -4,12 +4,9 @@ import styles from "./ProductCard.module.css";
 import { FaShippingFast } from "react-icons/fa";
 import { SiPix } from "react-icons/si";
 import { FaCartShopping } from "react-icons/fa6";
-import { createClient } from "@supabase/supabase-js";
+import SupabaseClient from "../KEYS/App.jsx";
 
-const supabase = createClient(
-  "https://vutcznlbeyvnzaoehdje.supabase.co",
-  "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
-);
+const supabase = SupabaseClient;
 
 const STORAGE_KEY = "cart_v1";
 
