@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaTimes, FaChevronDown, FaChevronUp, FaUser } from "react-icons/fa";
-import "./MenuMobile.css";
+import styles from "./MenuMobile.module.css";
 
 function MenuMobile({ isOpen, onClose }) {
   const [showCategorias, setShowCategorias] = useState(false);
@@ -8,36 +8,36 @@ function MenuMobile({ isOpen, onClose }) {
   return (
     <>
       <div
-        className={`menu-overlay ${isOpen ? "show" : ""}`}
+        className={`${styles.menuOverlay} ${isOpen ? styles.show : ""}`}
         onClick={onClose}
       ></div>
 
-      <div className={`menu-mobile ${isOpen ? "open" : ""}`}>
-        <div className="menu-header">
-          <h2>Olá Visitante</h2>
-          <FaTimes className="close-icon" onClick={onClose} />
+      <div className={`${styles.menuMobile} ${isOpen ? styles.open : ""}`}>
+        <div className={styles.menuHeader}>
+          <p>Olá Visitante</p>
+          <FaTimes className={styles.closeIcon} onClick={onClose} />
         </div>
 
-        <div className="menu-login">
-          <FaUser className="login-icon" />
+        <div className={styles.menuLogin}>
+          <FaUser className={styles.loginIcon} />
           <p>
             <a href="/login">Entrar</a> / <a href="/register">Cadastrar-se</a>
           </p>
         </div>
 
-        <ul className="menu-list">
+        <ul className={styles.menuList}>
           <li>
             <a href="./">Início</a>
           </li>
 
-          <li className="menu-item-categorias">
+          <li className={styles.menuItemCategorias}>
             <button onClick={() => setShowCategorias(!showCategorias)}>
               <span>Categorias</span>
               {showCategorias ? <FaChevronUp /> : <FaChevronDown />}
             </button>
 
             {showCategorias && (
-              <ul className="submenu">
+              <ul className={styles.submenu}>
                 <li>
                   <a href="/categorias?categoria=acessorios">Acessórios</a>
                 </li>

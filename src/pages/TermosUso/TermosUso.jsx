@@ -1,5 +1,5 @@
 import React from "react";
-import "./TermosUso.css";
+import styles from "./TermosUso.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
@@ -37,16 +37,16 @@ export default function TermosUso() {
         <>
             <Header />
             <WhatsAppButton />
-            <main className="termos-container">
-                <div className="termos-conteudo">
-                    <h1 className="termos-titulo">Termos de Uso</h1>
-                    <ol className="termos-lista">
+            <main className={styles.termosContainer}>
+                <div className={styles.termosConteudo}>
+                    <h1 className={styles.termosTitulo}>Termos de Uso</h1>
+                    <ol className={styles.termosLista}>
                         {terms.map((term, index) => (
-                            <li key={index} className="termo-item">
-                                <span className="termo-numero">{index + 1}.</span>
-                                <div className="termo-textos">
-                                    <h2 className="termo-subtitulo">{term.title}</h2>
-                                    <p className="termo-descricao">{term.content}</p>
+                            <li key={index} className={styles.termoItem}>
+                                <span className={styles.termoNumero}>{index + 1}.</span>
+                                <div className={styles.termoTextos}>
+                                    <h2 className={styles.termoSubtitulo}>{term.title}</h2>
+                                    <p className={styles.termoDescricao}>{term.content}</p>
                                 </div>
                             </li>
                         ))}

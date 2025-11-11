@@ -1,0 +1,25 @@
+{
+  "name": "Brasmérica Motopeças",
+  "short_name": "Brasmérica",
+  "description": "Loja oficial de peças e acessórios para motos - Brasmérica Motopeças",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FF0000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["auto parts", "shopping", "motorcycles"]
+}

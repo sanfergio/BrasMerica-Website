@@ -1,6 +1,6 @@
 import React from "react";
 import { RotateCcw } from "lucide-react";
-import "./PoliticaDevolucao.css";
+import styles from "./PoliticaDevolucao.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
@@ -11,15 +11,15 @@ export default function PoliticaDevolucao() {
     <>
       <Header />
       <WhatsAppButton />
-      <div className="return-container">
-        <div className="return-wrapper">
-          <div className="return-card">
-            <div className="return-header">
-              <RotateCcw className="return-icon" />
-              <h1 className="return-title">Política de Devolução</h1>
+      <div className={styles.returnContainer}>
+        <div className={styles.returnWrapper}>
+          <div className={styles.returnCard}>
+            <div className={styles.returnHeader}>
+              <RotateCcw className={styles.returnIcon} />
+              <h1 className={styles.returnTitle}>Política de Devolução</h1>
             </div>
 
-            <div className="return-text">
+            <h2 className={styles.returnText}>
               <p>
                 A Brasmerica preza pela satisfação completa de seus clientes ao adquirir motopeças importadas.
                 Nossa política de devolução e troca foi desenvolvida em total conformidade com o Código de Defesa
@@ -49,7 +49,7 @@ export default function PoliticaDevolucao() {
                 equipe de atendimento está sempre disponível para esclarecer dúvidas e garantir a melhor e mais transparente
                 experiência de compra.
               </p>
-            </div>
+            </h2>
           </div>
         </div>
       </div>

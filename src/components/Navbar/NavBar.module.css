@@ -1,4 +1,4 @@
-nav {
+.nav {
     background-color: #ffffff;
     height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -11,12 +11,12 @@ nav {
     padding: 15px 0;    
 }
 
-nav a {
+.nav a {
     text-decoration: none;
     color: inherit;
 }
 
-.card-navbar {
+.cardNavbar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,7 +26,7 @@ nav a {
     cursor: pointer;
 }
 
-.card-navbar img {
+.cardNavbar img {
     width: 40px;
     height: 40px;
     display: flex;
@@ -35,12 +35,12 @@ nav a {
     margin-bottom: 10px;
 }
 
-.card-navbar span {
+.cardNavbar span {
     font-size: 12px;
     height: 10px;
 }
 
-.categories-section{
+.categoriesSection {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -50,8 +50,7 @@ nav a {
 }
 
 @media (max-width: 1150px) {
-
-    .card-navbar {
+    .cardNavbar {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -67,7 +66,7 @@ nav a {
         transition: 0.3s;
     }
 
-    .card-navbar img {
+    .cardNavbar img {
         width: 20px;
         height: 20px;
         object-fit: contain;
@@ -75,16 +74,15 @@ nav a {
         filter: brightness(0) invert(1);
     }
 
-    .card-navbar span {
+    .cardNavbar span {
         font-size: 8px;
     }
 
-    .card-navbar:hover {
+    .cardNavbar:hover {
         background: #333;
     }
 
-
-    nav {
+    .nav {
         background-color: #ffff;
         height: auto;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -92,10 +90,8 @@ nav a {
         align-items: center;
         justify-content: space-evenly;
         gap: 0px;
-        color: black;
+        color: rgb(255, 255, 255);
         width: 100%;
         height: auto;
-
     }
-
 }

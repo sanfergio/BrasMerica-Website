@@ -1,6 +1,6 @@
 import React from "react";
 import { Truck } from "lucide-react";
-import "./PoliticaEnvio.css";
+import styles from "./PoliticaEnvio.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
@@ -10,15 +10,15 @@ export default function PoliticaEnvio() {
         <>
             <Header />
             <WhatsAppButton />
-            <div className="shipping-container">
-                <div className="shipping-wrapper">
-                    <div className="shipping-card">
-                        <div className="shipping-header">
-                            <Truck className="shipping-icon" />
-                            <h1 className="shipping-title">Política de Envio</h1>
+            <div className={styles.shippingContainer}>
+                <div className={styles.shippingWrapper}>
+                    <div className={styles.shippingCard}>
+                        <div className={styles.shippingHeader}>
+                            <Truck className={styles.shippingIcon} />
+                            <h1 className={styles.shippingTitle}>Política de Envio</h1>
                         </div>
 
-                        <div className="shipping-text">
+                        <h2 className={styles.shippingText}>
                             <p>
                                 A Brasmérica assegura que a sua motopeça importada chegue até você com a máxima agilidade e segurança. Para isso, nossa política de envio é baseada em uma logística eficiente que utiliza os serviços de transporte mais confiáveis do mercado, incluindo os Correios do Brasil e transportadoras privadas parceiras. Nosso foco é garantir a entrega das suas peças em todo o território nacional, mantendo a integridade e a qualidade dos produtos.
                             </p>
@@ -34,7 +34,7 @@ export default function PoliticaEnvio() {
                             <p>
                                 Com uma logística de distribuição robusta e parcerias com transportadoras de excelência, a Brasmérica reafirma o seu compromisso em oferecer um serviço de envio de alto padrão. Trabalhamos incansavelmente para que você receba suas motopeças importadas no prazo e nas condições esperadas, garantindo a sua satisfação e fidelidade.
                             </p>
-                        </div>
+                        </h2>
                     </div>
                 </div>
             </div>
