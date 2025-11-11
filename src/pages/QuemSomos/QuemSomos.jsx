@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Target, Eye, Heart } from "lucide-react";
 import styles from "./QuemSomos.module.css";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 
 export default function QuemSomos() {
+  useEffect(() => {
+    try {
+      document.title = "Brasmérica | Quem somos";
+    } catch (e) {
+      // ambiente sem DOM: ignora
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -17,7 +25,7 @@ export default function QuemSomos() {
             <div>
               <h1 className={styles.sobreTitle}>Quem somos</h1>
               <h2 className={styles.sobreText}>
-                Nós somos a <strong>Brasmerica</strong>, sua distribuidora de confiança, comprometida em trazer
+                Nós somos a <strong>Brasmérica</strong>, sua distribuidora de confiança, comprometida em trazer
                 a excelência e a qualidade internacional do mercado de motopeças. Nossa jornada começou com uma visão clara:
                 conectar o Brasil diretamente à vasta oferta de peças de reposição e performance dos Estados Unidos.
               </h2>
@@ -90,7 +98,7 @@ export default function QuemSomos() {
         </div>
       </div>
 
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

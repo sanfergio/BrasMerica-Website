@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./NossaLoja.module.css";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 
 export default function NossaLoja() {
+  useEffect(() => {
+    try {
+      document.title = "Brasmérica | Nossa Loja";
+    } catch (e) {
+      // ambiente sem DOM: ignora
+    }
+  }, []);
+
   return (
     <div className={styles.nossaLoja}>
       <StoreLocation />
@@ -43,7 +51,7 @@ function StoreLocation() {
         </p>
       </div>
     </div>
-    <ShortFooter />
+    <Footer />
   </>
   );
 }

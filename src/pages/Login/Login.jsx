@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import Header from "../../components/Header/Header";
@@ -18,6 +18,15 @@ export default function Login() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+
+  // Define o título da página conforme solicitado
+  useEffect(() => {
+    try {
+      document.title = "Brasmérica | Login";
+    } catch (e) {
+      // ambiente sem DOM — ignora
+    }
+  }, []);
 
   // 🔤 Atualiza campos
   function handleChange(e) {

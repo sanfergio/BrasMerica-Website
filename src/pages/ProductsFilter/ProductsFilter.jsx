@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import styles from "./ProductsFilter.module.css";
 import Footer from "../../components/Footer/Footer.jsx";
@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header.jsx";
 import WhatsAppButton from "../../components/WhatsappButton.jsx";
 
 export default function ProductsFilter() {
+  // OBS: mantive a extração inicial do parâmetro como você já tinha
   var urlParams = new URLSearchParams(window.location.search);
   var categorie = urlParams.get("categoria");
 
@@ -18,7 +19,58 @@ export default function ProductsFilter() {
     pecas: "Peças",
   };
 
-  categorie = categoryMap[categorie] || "None";
+  // Converte o parâmetro 'categoria' para o nome canônico (se possível)
+  categorie = categoryMap[categorie] || null;
+
+  // Lista canônica de categorias (usadas para validação)
+  const canonicalCategories = ["Acessórios", "Pneus", "Peças", "Óleos"];
+
+  // --- Helpers para normalizar e mapear strings (remove acentos, espaços, lower)
+  const normalize = (s) =>
+    typeof s === "string"
+      ? s
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "") // remove acentos
+          .replace(/[|:—\-]/g, " ") // normaliza certos separadores para espaço
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase()
+      : "";
+
+  const normalizedToCanonical = {
+    acessorios: "Acessórios",
+    pneus: "Pneus",
+    pecas: "Peças",
+    oleos: "Óleos",
+    // variações comuns (sem 's' etc.)
+    acessorio: "Acessórios",
+    oleo: "Óleos",
+    peca: "Peças",
+    pneu: "Pneus",
+  };
+
+  // Extrai possível categoria de uma query de busca (ex: "Brasmérica | categoria x" ou "Brasmérica categoria x")
+  function extractCategoryFromQuery(q) {
+    if (!q) return null;
+    let cleaned = q.replace(/brasm[ée]rica/ig, ""); // remove palavra brasmérica se existir
+    cleaned = cleaned.replace(/categoria/ig, ""); // remove palavra 'categoria'
+    cleaned = cleaned.replace(/[|:—\-]/g, " ");
+    cleaned = cleaned.replace(/\s+/g, " ").trim();
+    if (!cleaned) return null;
+
+    const norm = normalize(cleaned);
+
+    // Se a string inteira corresponde a uma categoria normalizada
+    if (normalizedToCanonical[norm]) return normalizedToCanonical[norm];
+
+    // Tentar procurar palavras individuais que batam
+    const parts = norm.split(" ");
+    for (let p of parts) {
+      if (normalizedToCanonical[p]) return normalizedToCanonical[p];
+    }
+
+    return null;
+  }
 
   // Defina aqui as faixas de preço que aparecem como checkboxes
   const priceOptions = [
@@ -106,6 +158,63 @@ export default function ProductsFilter() {
     limitProp = 8;
   }
 
+  // ---------------------------------------------------------------------
+  // EFEITO: define o document.title sempre como o nome da categoria canônica
+  // ---------------------------------------------------------------------
+  useEffect(() => {
+    // prioridade: parametro 'categoria' na URL (já normalizado em 'categorie')
+    let finalCategory = null;
+
+    if (categorie && canonicalCategories.includes(categorie)) {
+      finalCategory = categorie;
+    } else {
+      // tenta extrair de parâmetros de busca (q / search)
+      const sp = new URLSearchParams(window.location.search);
+      const qParam = sp.get("q") || sp.get("search") || null;
+
+      if (qParam) {
+        const fromQ = extractCategoryFromQuery(qParam);
+        if (fromQ) finalCategory = fromQ;
+      }
+
+      // se ainda não achou, tenta extrair do referrer (ex: google ?q=...)
+      if (!finalCategory) {
+        try {
+          const ref = document.referrer || "";
+          if (ref && ref.includes("?")) {
+            const refUrl = new URL(ref);
+            const rq = refUrl.searchParams.get("q");
+            if (rq) {
+              const fromRef = extractCategoryFromQuery(rq);
+              if (fromRef) finalCategory = fromRef;
+            }
+          }
+        } catch (e) {
+          // ignora erros de parsing do referrer
+        }
+      }
+    }
+
+    const defaultTitle = "Categorias — Brasmérica";
+    const newTitle = finalCategory || categorie || defaultTitle;
+
+    try {
+      document.title = "Brasmérica | " + newTitle;
+
+      // Atualiza ou cria meta og:title para compartilhamento
+      let og = document.querySelector('meta[property="og:title"]');
+      if (!og) {
+        og = document.createElement("meta");
+        og.setAttribute("property", "og:title");
+        document.head.appendChild(og);
+      }
+      og.setAttribute("content", newTitle);
+    } catch (err) {
+      // ambiente sem DOM: ignora
+      console.warn("Não foi possível definir document.title", err);
+    }
+  }, []); // roda uma vez no mount
+
   return (
     <>
       <Header />
@@ -114,12 +223,12 @@ export default function ProductsFilter() {
       <HomeButton />
       <div style={{ width: "100vw" }} className={styles.produtosContainer}>
         <div className={styles.breadcrumb}>
-          <span>Início → Categorias → {categorie}</span>
+          <span>Início → Categorias → {categorie || "Todas"}</span>
         </div>
 
         {/* TOPO DESKTOP */}
         <div className={styles.filtro}>
-          <h1 className={styles.tituloPagina}>Todos(as) os(as) {categorie}</h1>
+          <h1 className={styles.tituloPagina}>Todos(as) os(as) {categorie || "Produtos"}</h1>
 
           {/* Ordenação Desktop */}
           <div className={`${styles.ordenacao} desktop`}>

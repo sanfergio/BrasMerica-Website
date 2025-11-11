@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./TermosUso.module.css";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 
 export default function TermosUso() {
+    useEffect(() => {
+        try {
+            document.title = "Brasmérica | Termos de Uso";
+        } catch (e) {
+            // ambiente sem DOM: ignora
+        }
+    }, []);
+
     const terms = [
         {
             title: "Termos",
@@ -53,7 +61,7 @@ export default function TermosUso() {
                     </ol>
                 </div>
             </main>
-            <ShortFooter />
+            <Footer />
         </>
     );
 }
