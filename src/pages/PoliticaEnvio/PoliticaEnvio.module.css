@@ -1,4 +1,4 @@
-.return-container {
+.shippingContainer {
   min-height: 100vh;
   width: 100%;
   background: linear-gradient(135deg, #f5f5f5, #eaeaea);
@@ -7,8 +7,8 @@
   justify-content: center;
   align-items: flex-start;
 }
- 
-.return-card {
+
+.shippingCard {
   background-color: #fff;
   border-radius: 1rem;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
@@ -18,50 +18,50 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.return-card:hover {
+.shippingCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.return-header {
+.shippingHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding-bottom: 0.75rem;
   position: relative;
-  border: none;
+  border: none; 
 }
 
-.return-icon {
+.shippingIcon {
   width: 3rem;
   height: 3rem;
   color: #b22234;
   transition: transform 0.4s ease;
 }
 
-.return-header:hover .return-icon {
+.shippingHeader:hover .shippingIcon {
   transform: rotate(-10deg) scale(1.1);
 }
 
-.return-title {
+.shippingTitle {
   font-size: 2rem;
   font-weight: 700;
   color: #b22234;
   letter-spacing: 0.5px;
   position: relative;
 }
-  
-.return-title::after {
+
+.shippingTitle::after {
   content: "";
   display: block;
-  width: 2rem;  
+  width: 2rem; 
   height: 2px;
   background-color: #b22234;
-  margin-top: 0.3rem;
+  margin-top: 0.3rem; 
   border-radius: 2px;
 }
 
-.return-text {
+.shippingText {
   color: #444;
   line-height: 1.8;
   display: flex;
@@ -69,7 +69,7 @@
   gap: 1rem;
 }
 
-.return-text p {
+.shippingText p {
   margin: 0;
   text-align: justify;
   font-size: 1rem;
@@ -87,7 +87,7 @@
 }
 
 @media (min-width: 768px) {
-  .return-card {
+  .shippingCard {
     padding: 4rem 3rem;
   }
 }

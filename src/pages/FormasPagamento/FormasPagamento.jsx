@@ -1,6 +1,6 @@
 import React from "react";
 import { CreditCard } from "lucide-react";
-import "./FormasPagamento.css";
+import styles from "./FormasPagamento.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
@@ -10,15 +10,15 @@ export default function FormasPagamento() {
     <>
       <Header />
       <WhatsAppButton />
-      <div className="pagamento-container">
-        <div className="pagamento-wrapper">
-          <div className="pagamento-card">
-            <div className="pagamento-header">
-              <CreditCard className="pagamento-icon" />
-              <h1 className="pagamento-title">Formas de Pagamento</h1>
+      <div className={styles.pagamentoContainer}>
+        <div className={styles.pagamentoWrapper}>
+          <div className={styles.pagamentoCard}>
+            <div className={styles.pagamentoHeader}>
+              <CreditCard className={styles.pagamentoIcon} />
+              <h1 className={styles.pagamentoTitle}>Formas de Pagamento</h1>
             </div>
 
-            <div className="pagamento-text">
+            <h2 className={styles.pagamentoText}>
               <p>
                 A Brasmérica está comprometida em oferecer a você uma experiência de compra ágil, segura e totalmente
                 descomplicada. Para processar todos os pagamentos de forma transparente e protegida, utilizamos
@@ -48,7 +48,7 @@ export default function FormasPagamento() {
                 assegurar que a etapa de pagamento seja a mais segura, prática e eficiente de todo o seu processo de
                 compra.
               </p>
-            </div>
+            </h2>
           </div>
         </div>
       </div>

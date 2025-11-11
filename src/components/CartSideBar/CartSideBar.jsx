@@ -1,6 +1,5 @@
-// CartSideBar.jsx
 import React, { useState, useEffect } from "react";
-import "./CartSideBar.css";
+import styles from "./CartSideBar.module.css";
 
 const STORAGE_KEY = "cart_v1";
 
@@ -93,63 +92,65 @@ export default function CartSidebar({ isOpen, onClose }) {
   return (
     <>
       <div
-        className={`cart-overlay ${isOpen ? "show" : ""}`}
+        className={`${styles.cartOverlay} ${isOpen ? styles.show : ""}`}
         onClick={onClose}
       ></div>
 
-      <div className={`cart-sidebar ${isOpen ? "open" : ""}`}>
-        <div className="cart-header">
-          <h2>Meu Carrinho</h2>
-          <button className="close-btn" onClick={onClose}>
+      <div className={`${styles.cartSidebar} ${isOpen ? styles.open : ""}`}>
+        <div className={styles.cartHeader}>
+          <p>Meu Carrinho</p>
+          <button className={styles.closeBtn} onClick={onClose}>
             ✕
           </button>
         </div>
 
-        {cartItems.length === 0 ? (
-          <p>Seu carrinho está vazio.</p>
-        ) : (
-          <ul>
-            {cartItems.map((item) => (
-              <li key={item.id} className="cart-item">
-                <div className="cart-item-content">
-                  <img
-                    src={item.productImage}
-                    alt={item.productName}
-                    className="cart-item-img"
-                  />
-                  <div className="cart-item-info">
-                    <strong>{item.productName}</strong>
-                    <p>R$ {item.productPrice}</p>
+        <div className={styles.cartItemsContainer}>
+          {cartItems.length === 0 ? (
+            <p>Seu carrinho está vazio.</p>
+          ) : (
+            <ul>
+              {cartItems.map((item) => (
+                <li key={item.id} className={styles.cartItem}>
+                  <div className={styles.cartItemContent}>
+                    <img
+                      src={item.productImage}
+                      alt={item.productName}
+                      className={styles.cartItemImg}
+                    />
+                    <div className={styles.cartItemInfo}>
+                      <strong>{item.productName}</strong>
+                      <p>R$ {item.productPrice}</p>
 
-                    <div className="cart-controls">
-                      <div className="cart-quantity">
-                        <button onClick={() => decreaseQuantity(item.id)}>
-                          -
-                        </button>
-                        <span>{item.productQuantity}</span>
-                        <button onClick={() => increaseQuantity(item.id)}>
-                          +
+                      <div className={styles.cartControls}>
+                        <div className={styles.cartQuantity}>
+                          <button onClick={() => decreaseQuantity(item.id)}>
+                            -
+                          </button>
+                          <span>{item.productQuantity}</span>
+                          <button onClick={() => increaseQuantity(item.id)}>
+                            +
+                          </button>
+                        </div>
+
+                        <button
+                          className={styles.removeBtn}
+                          onClick={() => removeItem(item.id)}
+                        >
+                          Excluir
                         </button>
                       </div>
-
-                      <button
-                        className="remove-btn"
-                        onClick={() => removeItem(item.id)}
-                      >
-                        Excluir
-                      </button>
                     </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
 
-        <div className="cart-footer">
+        <div className={styles.cartFooter}>
           <strong>Total: R$ {total.toFixed(2)}</strong>
           <button
-            className="checkout-btn"
+            className={styles.checkoutBtn}
             onClick={() => {
               if (cartItems.length > 0) {
                 window.location.href = "/carrinho";
@@ -161,7 +162,6 @@ export default function CartSidebar({ isOpen, onClose }) {
             Finalizar Compra
           </button>
         </div>
-
       </div>
     </>
   );

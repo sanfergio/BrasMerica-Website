@@ -1,11 +1,11 @@
-.termos-container {
+.termosContainer {
   width: 100%;
   background-color: #fafafa;
   padding: 3rem 1rem;
   font-family: "Inter", "Poppins", sans-serif;
 }
 
-.termos-conteudo {
+.termosConteudo {
   max-width: 900px;
   margin: 0 auto;
   background-color: #ffffff;
@@ -15,11 +15,11 @@
   transition: all 0.3s ease;
 }
 
-.termos-conteudo:hover {
+.termosConteudo:hover {
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 }
 
-.termos-titulo {
+.termosTitulo {
   font-size: 2rem;
   font-weight: 700;
   color: #b22234;
@@ -28,7 +28,7 @@
   letter-spacing: -0.5px;
 }
 
-.termos-titulo::after {
+.termosTitulo::after {
   content: "";
   position: absolute;
   bottom: -0.75rem;
@@ -41,7 +41,7 @@
   opacity: 0.8;
 }
 
-.termos-lista {
+.termosLista {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -50,7 +50,7 @@
   gap: 1rem;
 }
 
-.termo-item {
+.termoItem {
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
@@ -62,12 +62,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.termo-item:hover {
+.termoItem:hover {
   transform: translateY(-3px);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
-.termo-numero {
+.termoNumero {
   background-color: #b22234;
   color: #fff;
   font-weight: 600;
@@ -82,19 +82,19 @@
   box-shadow: 0 0 6px rgba(178, 34, 52, 0.4);
 }
 
-.termo-textos {
+.termoTextos {
   flex: 1;
   text-align: left;
 }
 
-.termo-subtitulo {
+.termoSubtitulo {
   font-size: 1.4rem;
   font-weight: 600;
   color: #b22234;
   margin-bottom: 0.5rem;
 }
 
-.termo-descricao {
+.termoDescricao {
   font-size: 1.05rem;
   color: #333;
   line-height: 1.8;
@@ -102,47 +102,47 @@
 }
 
 @media (max-width: 768px) {
-  .termos-conteudo {
+  .termosConteudo {
     padding: 2rem 1.5rem;
   }
 
-  .termos-titulo {
+  .termosTitulo {
     font-size: 2rem;
     margin-bottom: 2rem;
   }
 
-  .termo-item {
+  .termoItem {
     flex-direction: column;
     gap: 1rem;
     padding: 1.25rem;
   }
 
-  .termo-numero {
+  .termoNumero {
     width: 2.2rem;
     height: 2.2rem;
     font-size: 1rem;
   }
 
-  .termo-subtitulo {
+  .termoSubtitulo {
     font-size: 1.25rem;
   }
 
-  .termo-descricao {
+  .termoDescricao {
     font-size: 0.95rem;
     line-height: 1.7;
   }
 }
 
 @media (max-width: 480px) {
-  .termos-titulo {
+  .termosTitulo {
     font-size: 1.75rem;
   }
 
-  .termo-subtitulo {
+  .termoSubtitulo {
     font-size: 1.1rem;
   }
 
-  .termo-descricao {
+  .termoDescricao {
     font-size: 0.9rem;
   }
 }

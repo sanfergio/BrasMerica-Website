@@ -1,5 +1,5 @@
 import { Shield } from "lucide-react"
-import "./PoliticaPrivacidade.css"
+import styles from "./PoliticaPrivacidade.module.css"
 
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import Header from "../../components/Header/Header"
@@ -11,15 +11,15 @@ export default function PoliticaPrivacidade() {
             <Header />
             <WhatsAppButton />
 
-            <div className="politica-container">
-                <div className="politica-wrapper">
-                    <div className="politica-card">
-                        <div className="politica-header">
-                            <Shield className="politica-icon" />
-                            <h1 className="politica-title">Política de privacidade</h1>
+            <div className={styles.politicaContainer}>
+                <div className={styles.politicaWrapper}>
+                    <div className={styles.politicaCard}>
+                        <div className={styles.politicaHeader}>
+                            <Shield className={styles.politicaIcon} />
+                            <h1 className={styles.politicaTitle}>Política de privacidade</h1>
                         </div>
 
-                        <div className="politica-text">
+                        <h2 className={styles.politicaText}>
                             <p>
                                 A segurança e a privacidade dos dados de nossos clientes e parceiros são prioridades fundamentais para a Brasmerica - Distribuidora de Motopeças. Empregamos as mais rigorosas e avançadas medidas de segurança para proteger todas as informações pessoais que nos são confiadas, garantindo que sejam mantidas em total confidencialidade e utilizadas de maneira responsável.
                             </p>
@@ -35,7 +35,7 @@ export default function PoliticaPrivacidade() {
                             <p>
                                 Em suma, a Brasmerica está comprometida em garantir um ambiente online totalmente seguro e confiável. Adotamos as melhores práticas e tecnologias disponíveis no mercado para blindar seus dados e assegurar sua privacidade, permitindo que você se concentre na performance da sua moto com total tranquilidade.
                             </p>
-                        </div>
+                        </h2>
                     </div>
                 </div>
             </div>

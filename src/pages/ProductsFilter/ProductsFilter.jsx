@@ -1,7 +1,6 @@
-//ProductsFilter.jsx
 import React, { useState } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import "./ProductsFilter.css";
+import styles from "./ProductsFilter.module.css";
 import Footer from "../../components/Footer/Footer.jsx";
 import NavBar from "../../components/Navbar/NavBar.jsx";
 import HomeButton from "../../components/HomeButton.jsx";
@@ -113,17 +112,17 @@ export default function ProductsFilter() {
       <WhatsAppButton />
       <NavBar />
       <HomeButton />
-      <div style={{ width: "100vw" }} className="produtos-container">
-        <div className="breadcrumb">
+      <div style={{ width: "100vw" }} className={styles.produtosContainer}>
+        <div className={styles.breadcrumb}>
           <span>Início → Categorias → {categorie}</span>
         </div>
 
         {/* TOPO DESKTOP */}
-        <div className="filtro">
-          <h2 className="titulo-pagina">Todos(as) os(as) {categorie}</h2>
+        <div className={styles.filtro}>
+          <h1 className={styles.tituloPagina}>Todos(as) os(as) {categorie}</h1>
 
           {/* Ordenação Desktop */}
-          <div className="ordenacao desktop">
+          <div className={`${styles.ordenacao} desktop`}>
             <label>Ordenar por</label>
             <select value={orderValue} onChange={handleOrderChange}>
               <option value="relevance">Relevância</option>
@@ -134,7 +133,7 @@ export default function ProductsFilter() {
         </div>
 
         {/* FILTROS MOBILE */}
-        <div className="filtros-mobile">
+        <div className={styles.filtrosMobile}>
           <div style={{ display: 'none' }} className="mobile">
             <label>Filtrar por</label>
             <select>
@@ -154,10 +153,10 @@ export default function ProductsFilter() {
           </div>
         </div>
 
-        <div className="produtos-layout">
+        <div className={styles.produtosLayout}>
           {/* FILTROS DESKTOP */}
-          <aside className="filtros">
-            <div className="filtro-grupo">
+          <aside className={styles.filtros}>
+            <div className={styles.filtroGrupo}>
               <h4>Preço</h4>
               <div className="checkboxes">
                 {priceOptions.map((opt) => (
@@ -173,7 +172,7 @@ export default function ProductsFilter() {
               </div>
             </div>
 
-            <div className="filtro-grupo">
+            <div className={styles.filtroGrupo}>
               <h4>Marca</h4>
               <div className="checkboxes">
                 {brandsList.map((brand) => (
@@ -189,7 +188,7 @@ export default function ProductsFilter() {
               </div>
             </div>
 
-            <div className="filtro-grupo">
+            <div className={styles.filtroGrupo}>
               <h4>Cor</h4>
               <div className="checkboxes">
                 <label>
@@ -214,7 +213,7 @@ export default function ProductsFilter() {
             </div>
           </aside>
 
-          <div className="produtos-principal">
+          <div className={styles.produtosPrincipal}>
             {/* Passa as faixas de preço ativas para o ProductCard */}
             <ProductCard
               category={categorie}

@@ -1,21 +1,21 @@
-.nossa-loja {
+.nossaLoja {
   width: 100%;
   background-color: #ffffff;
   font-family: "Inter", "Roboto", sans-serif;
 }
 
-.store-container {
+.storeContainer {
   max-width: 1000px;
   margin: 0 auto;
   padding: 3rem 1rem;
 }
 
-.store-section {
+.storeSection {
   margin-bottom: 4rem;
   text-align: center;
 }
 
-.store-title {
+.storeTitle {
   font-size: 2rem;
   font-weight: 700;
   color: #b22234;
@@ -24,7 +24,7 @@
   margin-bottom: 1.5rem;
 }
 
-.store-title::after {
+.storeTitle::after {
   content: "";
   position: absolute;
   bottom: -0.5rem;
@@ -36,7 +36,7 @@
   border-radius: 3px;
 }
 
-.store-description {
+.storeDescription {
   font-size: 1.1rem;
   line-height: 1.9;
   color: #444;
@@ -45,12 +45,12 @@
   text-align: justify;
 }
 
-.visit-section {
+.visitSection {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.visit-title {
+.visitTitle {
   font-size: 1.875rem;
   font-weight: 700;
   color: #0057a0;
@@ -58,7 +58,7 @@
   position: relative;
 }
 
-.visit-title::after {
+.visitTitle::after {
   content: "";
   position: absolute;
   bottom: -0.5rem;
@@ -71,7 +71,7 @@
 }
 
 /* ====== MAPA ====== */
-.map-placeholder {
+.mapPlaceholder {
   width: 100%;
   max-width: 900px;
   height: 26rem;
@@ -83,11 +83,11 @@
   transition: transform 0.4s ease;
 }
 
-.map-placeholder:hover {
+.mapPlaceholder:hover {
   transform: scale(1.01);
 }
 
-.visit-text {
+.visitText {
   font-size: 1rem;
   color: #333;
   line-height: 1.7;
@@ -96,55 +96,54 @@
 }
 
 @media (max-width: 992px) {
-  .store-container {
+  .storeContainer {
     padding: 3rem 1.5rem;
   }
 
-  .store-description {
+  .storeDescription {
     text-align: justify;
     font-size: 1rem;
   }
 
-  .map-placeholder {
+  .mapPlaceholder {
     height: 22rem;
   }
 }
 
 @media (max-width: 768px) {
-
-  .visit-title {
+  .visitTitle {
     font-size: 1.6rem;
   }
 
-  .map-placeholder {
+  .mapPlaceholder {
     height: 20rem;
   }
 
-  .store-description,
-  .visit-text {
+  .storeDescription,
+  .visitText {
     font-size: 0.95rem;
     text-align: left;
   }
 }
 
 @media (max-width: 480px) {
-  .store-title {
+  .storeTitle {
     font-size: 1.6rem;
   }
 
-  .visit-title {
+  .visitTitle {
     font-size: 1.4rem;
   }
 
-  .map-placeholder {
+  .mapPlaceholder {
     height: 18rem;
   }
 
-  .store-description {
+  .storeDescription {
     font-size: 0.9rem;
   }
 
-  .visit-text {
+  .visitText {
     font-size: 0.9rem;
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavBar.css';
+import styles from './NavBar.module.css';
 // Os ícones do Font Awesome (fa) podem ser usados, mas como você está usando <img>,
 // vou manter os imports apenas como referência, pois não estão sendo usados
 // no JSX do código original com <img>.
@@ -41,9 +41,9 @@ const navItems = [
 
 function NavBar() {
     return (
-        <nav>
+        <nav className={styles.nav}>
             {navItems.map((item) => (
-                <a key={item.name} className="card-navbar" href={item.href}>
+                <a key={item.name} className={styles.cardNavbar} href={item.href}>
                     <img src={item.iconUrl} alt={`Ícone da categoria ${item.name}`} />
                     <span>{item.name}</span>
                 </a>

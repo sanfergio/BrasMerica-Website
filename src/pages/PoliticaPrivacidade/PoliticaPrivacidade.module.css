@@ -1,16 +1,16 @@
-.politica-container {
+.politicaContainer {
   width: 100%;
   background-color: #f9f9f9;
   padding: 3rem 1rem;
   font-family: "Inter", "Poppins", sans-serif;
 }
 
-.politica-wrapper {
+.politicaWrapper {
   max-width: 900px;
   margin: 0 auto;
 }
 
-.politica-card {
+.politicaCard {
   background-color: #ffffff;
   border-radius: 12px;
   padding: 3rem 3.5rem;
@@ -18,17 +18,17 @@
   transition: all 0.3s ease;
 }
 
-.politica-card:hover {
+.politicaCard:hover {
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 }
 
-.politica-header {
+.politicaHeader {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.politica-icon {
+.politicaIcon {
   width: 3.5rem;
   height: 3.5rem;
   color: #b22234;
@@ -36,11 +36,11 @@
   transition: transform 0.4s ease;
 }
 
-.politica-header:hover .politica-icon {
+.politicaHeader:hover .politicaIcon {
   transform: rotate(-10deg) scale(1.1);
 }
 
-.politica-title {
+.politicaTitle {
   font-size: 2rem;
   font-weight: 700;
   color: #b22234;
@@ -48,7 +48,7 @@
   letter-spacing: -0.5px;
 }
 
-.politica-title::after {
+.politicaTitle::after {
   content: "";
   position: absolute;
   bottom: -0.75rem;
@@ -60,47 +60,47 @@
   opacity: 0.8;
 }
 
-.politica-text {
+.politicaText {
   color: #333333;
   line-height: 1.8;
   text-align: justify;
 }
 
-.politica-text p {
+.politicaText p {
   margin-bottom: 1rem;
   font-size: 1rem;
 }
 
 @media (max-width: 768px) {
-  .politica-card {
+  .politicaCard {
     padding: 2rem 2rem;
   }
 
-  .politica-title {
+  .politicaTitle {
     font-size: 2rem;
   }
 
-  .politica-icon {
+  .politicaIcon {
     width: 3rem;
     height: 3rem;
   }
 
-  .politica-text {
+  .politicaText {
     font-size: 1rem;
     line-height: 1.7;
   }
 }
 
 @media (max-width: 480px) {
-  .politica-card {
+  .politicaCard {
     padding: 1.5rem 1.5rem;
   }
 
-  .politica-title {
+  .politicaTitle {
     font-size: 1.75rem;
   }
 
-  .politica-text {
+  .politicaText {
     font-size: 0.95rem;
   }
 }

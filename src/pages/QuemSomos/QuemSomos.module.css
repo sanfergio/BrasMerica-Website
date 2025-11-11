@@ -5,12 +5,12 @@
     font-family: "Inter", "Roboto", sans-serif;
 }
 
-.sobre-container {
+.sobreContainer {
     max-width: 1000px;
     margin: 0 auto;
 }
 
-.sobre-grid {
+.sobreGrid {
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
@@ -19,13 +19,13 @@
 }
 
 @media (min-width: 992px) {
-    .sobre-grid {
+    .sobreGrid {
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
     }
 }
 
-.sobre-title {
+.sobreTitle {
     font-size: 2rem;
     font-weight: 600;
     color: #b22234;
@@ -34,7 +34,7 @@
     position: relative;
 }
 
-.sobre-title::after {
+.sobreTitle::after {
     content: "";
     position: absolute;
     bottom: -0.5rem;
@@ -45,7 +45,7 @@
     border-radius: 2px;
 }
 
-.sobre-text {
+.sobreText {
     font-size: 1.05rem;
     line-height: 1.8;
     color: #444;
@@ -53,7 +53,7 @@
     margin-bottom: 1rem;
 }
 
-.sobre-imagem {
+.sobreImagem {
     position: relative;
     overflow: hidden;
     border-radius: 0.75rem;
@@ -63,7 +63,7 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.sobre-imagem img {
+.sobreImagem img {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -71,16 +71,16 @@
     transition: transform 0.5s ease;
 }
 
-.sobre-imagem:hover img {
+.sobreImagem:hover img {
     transform: scale(1.03);
 }
 
-.botao-container {
+.botaoContainer {
     text-align: center;
     margin-bottom: 5rem;
 }
 
-.botao-contato {
+.botaoContato {
     display: inline-block;
     border: 2px solid #b22234;
     color: #b22234;
@@ -92,19 +92,19 @@
     transition: all 0.3s ease;
 }
 
-.botao-contato:hover {
+.botaoContato:hover {
     background-color: #b22234;
     color: #fff;
 }
 
-.cards-grid {
+.cardsGrid {
     display: grid;
     gap: 1.5rem;
     grid-template-columns: 1fr;
 }
 
 @media (min-width: 1150px) {
-    .cards-grid {
+    .cardsGrid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -122,11 +122,11 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-content {
+.cardContent {
     padding: 2rem 1.5rem;
 }
 
-.card-icone {
+.cardIcone {
     width: 3rem;
     height: 3rem;
     border-radius: 9999px;
@@ -142,25 +142,25 @@
     color: #ffffff;
 }
 
-.card-vermelho { border-color: #b22234; }
-.icone-vermelho { background-color: #b22234; }
-.titulo-vermelho { color: #b22234; }
+.cardVermelho { border-color: #b22234; }
+.iconeVermelho { background-color: #b22234; }
+.tituloVermelho { color: #b22234; }
 
-.card-azul { border-color: #0057a0; }
-.icone-azul { background-color: #0057a0; }
-.titulo-azul { color: #0057a0; }
+.cardAzul { border-color: #0057a0; }
+.iconeAzul { background-color: #0057a0; }
+.tituloAzul { color: #0057a0; }
 
-.card-verde { border-color: #3b9c58; }
-.icone-verde { background-color: #3b9c58; }
-.titulo-verde { color: #3b9c58; }
+.cardVerde { border-color: #3b9c58; }
+.iconeVerde { background-color: #3b9c58; }
+.tituloVerde { color: #3b9c58; }
 
-.card-titulo {
+.cardTitulo {
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
 }
 
-.card-texto {
+.cardTexto {
     line-height: 1.7;
     color: #333333;
 }
@@ -170,21 +170,21 @@
         padding: 3rem 1.5rem;
     }
 
-    .sobre-title {
+    .sobreTitle {
         font-size: 1.8rem;
         text-align: center;
     }
 
-    .sobre-title::after {
+    .sobreTitle::after {
         left: 50%;
         transform: translateX(-50%);
     }
 
-    .sobre-text {
+    .sobreText {
         text-align: left;
     }
 
-    .sobre-imagem {
+    .sobreImagem {
         margin-top: 1rem;
     }
 }

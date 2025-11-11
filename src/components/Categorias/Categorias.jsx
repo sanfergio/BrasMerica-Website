@@ -1,5 +1,5 @@
 import React from 'react';
-import './Categorias.css';
+import styles from './Categorias.module.css';
 
 // 1. Defina seus dados (Array de Objetos JS)
 const categoryData = [
@@ -23,17 +23,16 @@ const categoryData = [
         imageUrl: "https://tediousrepairs.com/wp-content/uploads/2023/07/Oil-Change.png",
         url: '/categorias?categoria=oleos'
     }
-
 ];
 
 function Categories() {
     return (
-        <div className="categories">
+        <div className={styles.categories}>
             {/* 2. Use o método .map() para iterar sobre os dados */}
             {categoryData.map((category) => (
                 // 3. Renderize um 'category-item' para cada objeto
                 // A prop 'key' é essencial no React para listas!
-                <a href={category.url} key={category.name} className="category-item">
+                <a href={category.url} key={category.name} className={styles.categoryItem}>
                     <img src={category.imageUrl} alt={`Imagem da categoria ${category.name}`} />
                     <h4>{category.name}</h4>
                 </a>
