@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Truck } from "lucide-react";
 import styles from "./PoliticaEnvio.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
+
 
 export default function PoliticaEnvio() {
+    useEffect(() => {
+        try {
+            document.title = "Brasmérica | Política de Envio e Entrega";
+        } catch (e) {
+            // ambiente sem DOM: ignora
+        }
+    }, []);
+
     return (
         <>
             <Header />
@@ -38,7 +47,7 @@ export default function PoliticaEnvio() {
                     </div>
                 </div>
             </div>
-            <ShortFooter />
+            <Footer />
         </>
     );
 }

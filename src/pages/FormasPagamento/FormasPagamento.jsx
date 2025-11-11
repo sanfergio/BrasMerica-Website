@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CreditCard } from "lucide-react";
 import styles from "./FormasPagamento.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 
 export default function FormasPagamento() {
+  useEffect(() => {
+    try {
+      document.title = "Brasmérica | Formas de Pagamento";
+    } catch (e) {
+      // ambiente sem DOM: ignora
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -52,7 +60,7 @@ export default function FormasPagamento() {
           </div>
         </div>
       </div>
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

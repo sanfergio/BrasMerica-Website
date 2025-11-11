@@ -25,13 +25,13 @@ export default function Footer() {
           <div>
             <h6 className={styles.footerHeading}>Institucional</h6>
             <div className={styles.footerLinks}>
-              <a href="/quem-somos">Sobre nós</a>
+              <a href="/quem-somos">Quem Somos</a>
               <a href="/termo-de-uso">Termos de Uso</a>
               <a href="/politica-privacidade">Política de Privacidade</a>
-              <a href="/politica-envio">Política de envio e entrega</a>
-              <a href="/politica-devolucao">Política de devolução</a>
-              <a target="_blank" href="https://api.whatsapp.com/send/?phone=553334122593&text=Ol%C3%A1%21+Vim+pelo+website+e+desejo+tirar+d%C3%BAvidas.&type=phone_number&app_absent=0">Entre em contato</a>
-              <a href="/formas-pagamento">Formas de pagamento</a>
+              <a href="/politica-envio">Política de Envio e Entrega</a>
+              <a href="/politica-devolucao">Política de Devolução</a>
+              <a target="_blank" href="https://api.whatsapp.com/send/?phone=553334122593&text=Ol%C3%A1%21+Vim+pelo+website+e+desejo+tirar+d%C3%BAvidas.&type=phone_number&app_absent=0">Entre em Contato</a>
+              <a href="/formas-pagamento">Formas de Pagamento</a>
             </div>
           </div>
 

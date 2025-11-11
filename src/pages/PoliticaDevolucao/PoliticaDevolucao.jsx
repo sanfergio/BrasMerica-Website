@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RotateCcw } from "lucide-react";
 import styles from "./PoliticaDevolucao.module.css";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
-
+import Footer from "../../components/Footer/Footer";
 
 export default function PoliticaDevolucao() {
+  useEffect(() => {
+    try {
+      document.title = "Brasmérica | Política de Devolução";
+    } catch (e) {
+      // ambiente sem DOM: ignora
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -53,7 +60,7 @@ export default function PoliticaDevolucao() {
           </div>
         </div>
       </div>
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

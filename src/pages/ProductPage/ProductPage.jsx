@@ -1,7 +1,8 @@
-//ProductPage.jsx
 "use client"
 
-// 'useSearchParams' e 'Suspense' foram removidos
+// ProductPage.jsx — versão atualizada para definir o document.title como o nome do produto
+// e para lidar com pesquisas do tipo "brasmérica produto x". (Comentários comentam as mudanças.)
+
 import React, { useState, useEffect } from "react"
 import { createClient } from "@supabase/supabase-js"
 import { Star, Truck, ShoppingCart, ChevronRight } from "lucide-react"
@@ -12,12 +13,9 @@ import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx'
 import NavBar from '../../components/Navbar/NavBar.jsx'
 
-// Inicializa o cliente Supabase
 const supabase = createClient("https://vutcznlbeyvnzaoehdje.supabase.co", "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI");
 
-// --- Componentes Internos (Sub-componentes da página) ---
-// (Estes componentes são idênticos aos da versão anterior)
-
+// pequenos subcomponentes (idênticos ao que você já tinha)
 const StarRating = ({ rating, reviewCount }) => {
   const numRating = Number(rating) || 0;
   const numReviewCount = Number(reviewCount) || 0;
@@ -54,7 +52,7 @@ const ImageGallery = ({ images, name }) => {
     if (validImages.length > 0) {
       setSelected(validImages[0]);
     } else {
-      setSelected("/placeholder.svg"); // Garante que o placeholder seja usado se as imagens mudarem para vazio
+      setSelected("/placeholder.svg");
     }
   }, [images]);
 
@@ -138,24 +136,52 @@ const DetailRow = ({ label, children }) => (
   </div>
 )
 
+// --- FUNÇÃO AUXILIAR: limpar query de busca ---
+function cleanSearchQuery(q) {
+  if (!q) return null;
+  try {
+    // Descodifica e normaliza espaços + remove prefixo "brasmérica" se existir
+    let decoded = decodeURIComponent(q.replace(/\+/g, ' '));
+    decoded = decoded.replace(/\s+/g, ' ').trim();
+    decoded = decoded.replace(/brasm[ée]rica[:\-\s]*/i, ''); // remove variações de brasmérica
+    return decoded.trim() || null;
+  } catch (e) {
+    return q;
+  }
+}
 
-// --- Componente Principal da Página ---
-// Unificamos ProductContent e ProductPage
+// --- Componente Principal ---
 export default function ProductPage() {
-
-  // Estados para gerenciar os dados, carregamento e erros
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [fallbackTitle, setFallbackTitle] = useState(null);
 
-  // ==================================================================
-  // MUDANÇA PRINCIPAL: Busca de dados com useEffect e window.location
-  // ==================================================================
   useEffect(() => {
-    // Acessamos 'window.location.search' aqui dentro
-    // O 'useEffect' com [] só roda no cliente, após a montagem
     const urlParams = new URLSearchParams(window.location.search);
-    const productID = urlParams.get('productID'); // Pega o ID da URL
+    const productID = urlParams.get('productID');
+    const qParam = urlParams.get('q') || urlParams.get('search') || null;
+
+    // Se houver um parâmetro de busca (ex: vindo do Google/site search), tenta extrair um título
+    if (qParam) {
+      const candidate = cleanSearchQuery(qParam);
+      if (candidate) setFallbackTitle(candidate);
+    } else {
+      // Tenta extrair do referrer (ex.: quando o usuário veio de uma busca com q=...)
+      try {
+        const ref = document.referrer || '';
+        if (ref.includes('?')) {
+          const refUrl = new URL(ref);
+          const rq = refUrl.searchParams.get('q');
+          if (rq) {
+            const candidate = cleanSearchQuery(rq);
+            if (candidate) setFallbackTitle(candidate);
+          }
+        }
+      } catch (e) {
+        // ignora erros no parsing do referrer
+      }
+    }
 
     const fetchProduct = async () => {
       if (!productID) {
@@ -174,9 +200,7 @@ export default function ProductPage() {
           .eq('id', productID)
           .single();
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
         if (data) {
           setProduct(data);
@@ -192,12 +216,32 @@ export default function ProductPage() {
       }
     };
 
-
     fetchProduct();
-  }, []); // O array de dependência vazio [] garante que isso rode APENAS UMA VEZ no carregamento.
+  }, []);
 
+  // Garante que o título da aba (document.title) seja sempre o nome do produto quando disponível.
+  // Se não houver produto mas houver um fallback vindo de uma busca que contenha "brasmérica ...",
+  // o título será definido para esse fallback.
+  useEffect(() => {
+    const defaultSiteTitle = 'Produto — Brasmérica';
+    const newTitle = (product && product.name) ? product.name : (fallbackTitle || defaultSiteTitle);
 
-  // ----- Renderização do Layout (Cabeçalho, Rodapé, etc.) -----
+    try {
+      document.title = "Brasmérica | " + newTitle;
+
+      // Atualiza / cria meta og:title para SEO compartilhamento quando possível (client-side)
+      let og = document.querySelector('meta[property="og:title"]');
+      if (!og) {
+        og = document.createElement('meta');
+        og.setAttribute('property', 'og:title');
+        document.head.appendChild(og);
+      }
+      og.setAttribute('content', newTitle);
+    } catch (e) {
+      // se estiver em ambiente sem DOM, ignora
+    }
+  }, [product, fallbackTitle]);
+
   return (
     <>
       <Header />
@@ -205,8 +249,6 @@ export default function ProductPage() {
       <WhatsAppButton />
 
       <div className={styles.container}>
-        {/* ----- Renderização Condicional do Conteúdo ----- */}
-
         {loading && (
           <div className={styles.statusMessage}><h2>Carregando produto...</h2></div>
         )}
@@ -219,10 +261,8 @@ export default function ProductPage() {
           <div className={styles.statusMessage}><h2>Produto não encontrado.</h2></div>
         )}
 
-        {/* ----- Renderização do Produto (se tudo deu certo) ----- */}
         {product && (
           <>
-            {/* Bloco 1: Imagens e Ações */}
             <div className={styles.card}>
               <div className={styles.product}>
                 <ImageGallery
@@ -246,7 +286,6 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* Bloco 2: Detalhes e Descrição */}
             <div className={styles.card}>
               <section className={styles.section}>
                 <h2>Detalhes do Produto</h2>

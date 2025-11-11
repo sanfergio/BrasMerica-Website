@@ -1,11 +1,19 @@
+import React, { useEffect } from "react";
 import { Shield } from "lucide-react"
 import styles from "./PoliticaPrivacidade.module.css"
-
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header"
 import WhatsAppButton from "../../components/WhatsappButton"
 
 export default function PoliticaPrivacidade() {
+    useEffect(() => {
+        try {
+            document.title = "Brasmérica | Política de Privacidade";
+        } catch (e) {
+            // ambiente sem DOM: ignora
+        }
+    }, []);
+
     return (
         <>
             <Header />
@@ -39,7 +47,7 @@ export default function PoliticaPrivacidade() {
                     </div>
                 </div>
             </div>
-            <ShortFooter />
+            <Footer />
         </>
 
     )
