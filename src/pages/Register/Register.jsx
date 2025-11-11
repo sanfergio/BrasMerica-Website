@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import bcrypt from "bcryptjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,10 +9,9 @@ import WhatsAppButton from "../../components/WhatsappButton";
 import { useNavigate } from "react-router-dom";
 
 // Initialize Supabase client
-const supabase = createClient(
-  "https://vutcznlbeyvnzaoehdje.supabase.co",
-  "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
-);
+import SupabaseClient from "../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 export default function Register() {
   const navigate = useNavigate();

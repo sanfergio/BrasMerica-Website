@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { FaSearch } from "react-icons/fa";
 import styles from "./InputSearch.module.css";
 
 // 🔧 Configuração do Supabase
-const supabase = createClient(
-  "https://vutcznlbeyvnzaoehdje.supabase.co",
-  "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
-);
+import SupabaseClient from "../KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 export default function InputSearch() {
   const [termo, setTermo] = useState("");

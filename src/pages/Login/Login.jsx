@@ -3,14 +3,12 @@ import styles from "./Login.module.css";
 import ShortFooter from "../../components/ShortFooter/ShortFooter";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
-import { createClient } from "@supabase/supabase-js";
 import bcrypt from "bcryptjs";
 
 // Inicializa o cliente Supabase
-const supabase = createClient(
-  "https://vutcznlbeyvnzaoehdje.supabase.co",
-  "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI"
-);
+import SupabaseClient from "../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 export default function Login() {
   const [formData, setFormData] = useState({

@@ -4,7 +4,6 @@
 // e para lidar com pesquisas do tipo "brasmérica produto x". (Comentários comentam as mudanças.)
 
 import React, { useState, useEffect } from "react"
-import { createClient } from "@supabase/supabase-js"
 import { Star, Truck, ShoppingCart, ChevronRight } from "lucide-react"
 import styles from "./ProductPage.module.css"
 import HomeButton from '../../components/HomeButton.jsx';
@@ -13,7 +12,10 @@ import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx'
 import NavBar from '../../components/Navbar/NavBar.jsx'
 
-const supabase = createClient("https://vutcznlbeyvnzaoehdje.supabase.co", "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI");
+// Inicializa o cliente Supabase
+import SupabaseClient from "../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 // pequenos subcomponentes (idênticos ao que você já tinha)
 const StarRating = ({ rating, reviewCount }) => {
