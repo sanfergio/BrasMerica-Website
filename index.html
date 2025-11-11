@@ -2,63 +2,95 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="Brasmérica Motopeças">
+  <!-- ⚙️ Configurações básicas -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Giovani_Sanfer">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#FFFFFF">
 
+  <!-- 🧩 Título e Descrição -->
   <title>Brasmérica Motopeças - Peças e Acessórios para Motos</title>
   <meta name="description"
     content="Encontre as melhores peças e acessórios para sua moto na Brasmérica Motopeças. Qualidade, variedade e os melhores preços em motopeças. Compre online com segurança.">
   <meta name="keywords"
     content="motopeças, peças para motos, acessórios para motos, Brasmérica, loja de motopeças, capacetes, pneus de moto, escapamentos, freios">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="httpsas://brasmerica.com.br/pt-BR">
 
-  <meta name="google-site-verification" content="SEU_CODIGO_DO_GOOGLE_AQUI">
-  <meta name="facebook-domain-verification" content="SEU_CODIGO_DO_FACEBOOK_AQUI">
+  <!-- 🔗 Canonical e idioma -->
+  <link rel="canonical" href="https://www.brasmerica.com.br/pt-BR">
+  <meta http-equiv="content-language" content="pt-BR">
 
-  <link rel="icon" type="image/png"
+  <!-- 📱 Ícones e Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32"
     href="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true">
   <link rel="apple-touch-icon" sizes="180x180"
     href="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true">
+  <link rel="manifest" href="/manifest.json"> <!-- para PWA -->
+  <meta name="application-name" content="Brasmérica Motopeças">
 
-  <meta name="theme-color" content="#FFFFFF">
-  <script>
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-      var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'SEU_ID_GTM_AQUI');
-  </script>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,700;1,600&display=swap">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap&subset=latin-ext"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <!-- 🧭 Open Graph (Facebook / WhatsApp / LinkedIn) -->
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Brasmérica Motopeças">
   <meta property="og:title" content="Brasmérica Motopeças - Peças e Acessórios para Motos">
   <meta property="og:description"
     content="Encontre as melhores peças e acessórios para sua moto na Brasmérica Motopeças. Qualidade, variedade e os melhores preços. Compre online!">
-  <meta property="og:url" content="httpsas://brasmerica.com.br/pt-BR">
+  <meta property="og:url" content="https://www.brasmerica.com.br/pt-BR">
   <meta property="og:image"
     content="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true">
-  <meta property="og:locale" content="pt_BR">
 
+  <!-- 🐦 Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Brasmérica Motopeças - Peças e Acessórios para Motos">
   <meta name="twitter:description"
     content="Encontre as melhores peças e acessórios para sua moto na Brasmérica Motopeças. Qualidade, variedade e os melhores preços. Compre online!">
   <meta name="twitter:image"
     content="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true">
+
+  <!-- 🔍 Verificações -->
+  <meta name="google-site-verification" content="SEU_CODIGO_DO_GOOGLE_AQUI">
+  <meta name="facebook-domain-verification" content="SEU_CODIGO_DO_FACEBOOK_AQUI">
+
+  <!-- 🧠 Dados estruturados Schema.org (JSON-LD para loja online) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Brasmérica Motopeças",
+    "url": "https://www.brasmerica.com.br",
+    "logo": "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true",
+    "image": "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true",
+    "description": "Encontre as melhores peças e acessórios para sua moto na Brasmérica Motopeças. Qualidade, variedade e os melhores preços em motopeças. Compre online com segurança.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "BR"
+    }
+  }
+  </script>
+
+  <!-- 📊 Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'SEU_ID_GTM_AQUI');
+  </script>
+
+  <!-- 🧷 Fonts e Estilos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,700;1,600&family=Open+Sans:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 
 <body>
