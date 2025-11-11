@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { createClient } from "@supabase/supabase-js";
 import styles from './DashboardProducts.module.css'; // Reutilizando os mesmos estilos
 
-// Inicializa o cliente Supabase (mesmo do seu Dashboard)
-const supabase = createClient("https://vutcznlbeyvnzaoehdje.supabase.co", "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI");
+// Inicializa o cliente Supabase
+import SupabaseClient from "../../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 // Estado inicial para um novo formulário ou enquanto carrega
 const initialState = {

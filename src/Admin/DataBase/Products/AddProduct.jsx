@@ -1,9 +1,10 @@
 import React, { useState } from 'react'; // Removido 'useEffect' que não era mais necessário
-import { createClient } from "@supabase/supabase-js";
 import styles from './DashboardProducts.module.css';
 
 // Inicializa o cliente Supabase
-const supabase = createClient("https://vutcznlbeyvnzaoehdje.supabase.co", "sb_publishable_NfkLxVMoxM-hv5Me_46Bxg_bC7xgIJI");
+import SupabaseClient from "../../../components/KEYS/App.jsx";
+
+const supabase = SupabaseClient;
 
 // Estado inicial para um novo produto
 // Removi a 'url' daqui, pois ela será definida após o submit
