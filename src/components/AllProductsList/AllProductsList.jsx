@@ -33,6 +33,8 @@ function AllProductsList() {
 
   return (
     <div className={styles.container}>
+      <hr className={styles.divider} />
+      <h5 className={styles.title}> NOSSO CATÁLOGO </h5>
       <ul className={styles.lista}>
         {produtos.map((produto, index) => (
           <li key={index} className={styles.item}>

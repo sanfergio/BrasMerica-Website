@@ -4,16 +4,32 @@
   padding: 20px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.divider {
+  width: 90%;
+  height: 0.5px;
+  color: #ccc
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bolder;
+  color: #333;
 }
 
 .lista {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 👉 4 colunas fixas no PC */
+  grid-template-columns: repeat(6, 1fr);
+  /* 👉 4 colunas fixas no PC */
   list-style: none;
   gap: 15px;
   padding: 0;
   margin: 0;
-  width: 100vw;
+  width: 90vw;
 }
 
 .item {
