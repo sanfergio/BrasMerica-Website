@@ -328,7 +328,7 @@ export default function ProductPage() {
 
               <section className={styles.section}>
                 <h2>Descrição do Produto</h2>
-                <h2 style={{ color: 'black' }}>{product.longdesc}</h2>
+                <h2 style={{ color: 'black', fontSize: '95%' }}>{product.longdesc}</h2>
               </section>
             </div>
           </>
