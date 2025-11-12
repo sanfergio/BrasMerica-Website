@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CheckoutForm.module.css";
 import ShortHeader from "../../components/ShortHeader/ShortHeader.jsx";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 
 const STORAGE_KEY = "cart_v1";
 const CUPONS_VALIDOS = ["GIOVANI", "CUPOMPEDRO", "DESCONTOALL", "NATAL", "LUDTKE", "VICTOR01", "EDUARDA", "EMANUEL10", "PAIXAO", "DUDA10"];
@@ -705,7 +705,7 @@ export default function CheckoutForm() {
       </div>
 
       <PaymentModal />
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

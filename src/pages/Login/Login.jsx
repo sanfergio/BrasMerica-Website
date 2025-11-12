@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 import bcrypt from "bcryptjs";
@@ -202,7 +202,7 @@ export default function Login() {
           </form>
         </div>
       </main>
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

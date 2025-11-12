@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CartProducts.module.css";
 import { mockProducts } from "../../mocks/products";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import ShortHeader from "../../components/ShortHeader/ShortHeader";
 import WhatsAppButton from "../../components/WhatsappButton";
 
@@ -199,7 +199,7 @@ export default function CartProduct() {
           </div>
         </div>
       )}
-      <ShortFooter />
+      <Footer />
     </>
   );
 }

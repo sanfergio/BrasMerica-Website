@@ -198,7 +198,7 @@
 }
 
 /* 📱 Ajustes específicos para mobile */
-@media (max-width: 768px) {
+@media (max-width: 1150px) {
   .footerMain {
     padding-left: 1.75rem;
     padding-right: 1.25rem;
@@ -215,14 +215,30 @@
     font-size: 1rem;
   }
 
-  .newsletter h3 {
-    font-size: 1.15rem;
-    text-align: center;
+  .newsletter {
+    background-color: #b22234;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px ;
+    flex-direction: column;
+  }
+
+  .newsletterLogo {
+    height: auto;
+    object-fit: contain;
+  }
+
+  .newsletter h6 {
+    font-size: 0.2rem;
+    text-align: left;
   }
 
   .newsletterInput input {
-    width: 200px;
-    font-size: 1rem;
+    width: 100%;
+
   }
 
   .followContent {
