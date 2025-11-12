@@ -17,6 +17,7 @@ import AllProductsList from '../../components/AllProductsList/AllProductsList.js
 import SupabaseClient from "../../components/KEYS/App.jsx";
 
 const supabase = SupabaseClient;
+const STORAGE_KEY = "cart_v1"; // mesmo key usado no CartSideBar
 
 // pequenos subcomponentes (idênticos ao que você já tinha)
 const StarRating = ({ rating, reviewCount }) => {
@@ -115,9 +116,76 @@ const ShippingCalculator = () => {
   )
 }
 
-const ProductActions = ({ productId }) => {
-  const addToCart = () => console.log("Adicionando ao carrinho:", productId)
-  const buyNow = () => console.log("Comprando agora:", productId)
+// ======= ALTERAÇÃO IMPORTANTE AQUI: ProductActions recebe o objeto `product` =======
+const ProductActions = ({ product }) => {
+  // função helper para normalizar preço (retorna number)
+  const parsePrice = (p) => {
+    if (p === undefined || p === null) return 0;
+    if (typeof p === "string") return Number(p.replace(',', '.')) || 0;
+    return Number(p) || 0;
+  };
+
+  // função interna que adiciona o produto ao cart no localStorage (incrementa se já existir)
+  const addProductToLocalCart = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const cart = raw ? JSON.parse(raw) : [];
+
+      const existingIndex = cart.findIndex((it) => String(it.id) === String(product.id));
+
+      const priceNumber = parsePrice(product.price);
+
+      const newItem = {
+        id: product.id,
+        productName: product.name || "Produto",
+        productPrice: priceNumber,
+        productImage: product.img1 || product.img || "/placeholder.svg",
+        productQuantity: 1
+      };
+
+      if (existingIndex > -1) {
+        cart[existingIndex].productQuantity = (Number(cart[existingIndex].productQuantity) || 0) + 1;
+      } else {
+        cart.push(newItem);
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      try {
+        window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
+      } catch (e) {}
+      return cart;
+    } catch (err) {
+      console.error("Erro ao adicionar ao cart local:", err);
+      return null;
+    }
+  };
+
+  const addToCart = () => {
+    const cart = addProductToLocalCart();
+    try {
+      // Notifica para mostrar a notificação de adição
+      window.dispatchEvent(new Event("showAddNotification"));
+    } catch (e) {}
+    try {
+      // Opcional: abrir sidebar também
+      window.dispatchEvent(new Event("openCartSidebar"));
+    } catch (e) {}
+    console.log("Adicionado ao carrinho:", product.id);
+  }
+
+  const buyNow = () => {
+    // Adiciona o produto ao carrinho (ou incrementa se já estiver)
+    const cart = addProductToLocalCart();
+
+    // Garantir que outros listeners vejam a alteração
+    try {
+      window.dispatchEvent(new Event("showAddNotification"));
+    } catch (e) {}
+
+    // Redireciona para a página do carrinho (CartProducts.jsx espera os dados em localStorage 'cart_v1')
+    // Usamos a rota /carrinho porque é a mesma rota utilizada em outros pontos (ex: CartSideBar).
+    window.location.href = "/carrinho";
+  }
 
   return (
     <div className={styles.actions}>
@@ -223,8 +291,6 @@ export default function ProductPage() {
   }, []);
 
   // Garante que o título da aba (document.title) seja sempre o nome do produto quando disponível.
-  // Se não houver produto mas houver um fallback vindo de uma busca que contenha "brasmérica ...",
-  // o título será definido para esse fallback.
   useEffect(() => {
     const defaultSiteTitle = 'Produto — Brasmérica';
     const newTitle = (product && product.name) ? product.name : (fallbackTitle || defaultSiteTitle);
@@ -284,7 +350,8 @@ export default function ProductPage() {
                   </div>
 
                   <ShippingCalculator />
-                  <ProductActions productId={product.id} />
+                  {/* passa o objeto product inteiro */}
+                  <ProductActions product={product} />
                 </div>
               </div>
             </div>
