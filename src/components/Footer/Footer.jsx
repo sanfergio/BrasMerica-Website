@@ -2,14 +2,11 @@ import { Mail, Phone, Clock, Instagram, Facebook, CreditCard } from "lucide-reac
 import { SiPix, SiVisa, SiMastercard, SiAmericanexpress } from "react-icons/si";
 
 import styles from "./Footer.module.css"
-import AllProductsList from "../AllProductsList/AllProductsList";
 
 export default function Footer() {
   return (
 
     <footer className={styles.footerContainer}>
-
-      <AllProductsList />
 
       <div className={styles.newsletter}>
         <img

@@ -11,6 +11,7 @@ import Header from '../../components/Header/Header.jsx';
 import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx'
 import NavBar from '../../components/Navbar/NavBar.jsx'
+import AllProductsList from '../../components/AllProductsList/AllProductsList.jsx'
 
 // Inicializa o cliente Supabase
 import SupabaseClient from "../../components/KEYS/App.jsx";
@@ -327,13 +328,13 @@ export default function ProductPage() {
 
               <section className={styles.section}>
                 <h2>Descrição do Produto</h2>
-                <h2 style={{color: 'black'}}>{product.longdesc}</h2>
+                <h2 style={{ color: 'black' }}>{product.longdesc}</h2>
               </section>
             </div>
           </>
         )}
       </div>
-
+      <AllProductsList />
       <Footer />
     </>
   )

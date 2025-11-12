@@ -10,6 +10,7 @@ import HomeButton from '../../components/HomeButton.jsx';
 import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header.jsx';
 import WhatsAppButton from '../../components/WhatsappButton.jsx';
+import AllProductsList from '../../components/AllProductsList/AllProductsList.jsx'
 
 function Home() {
     return (
@@ -69,6 +70,7 @@ function Home() {
                     <img src="https://paulinhomotos.fbitsstatic.net/img/b/e45e2155-1f7a-4069-91b2-409ad5eeeb8f.jpg" alt="Banner 2" />
                 </div>
             </main>
+            <AllProductsList />
             <Footer />
         </>
     )

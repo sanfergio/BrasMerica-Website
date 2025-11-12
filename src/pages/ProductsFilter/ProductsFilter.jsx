@@ -6,6 +6,7 @@ import NavBar from "../../components/Navbar/NavBar.jsx";
 import HomeButton from "../../components/HomeButton.jsx";
 import Header from "../../components/Header/Header.jsx";
 import WhatsAppButton from "../../components/WhatsappButton.jsx";
+import AllProductsList from '../../components/AllProductsList/AllProductsList.jsx'
 
 export default function ProductsFilter() {
   // OBS: mantive a extração inicial do parâmetro como você já tinha
@@ -336,6 +337,7 @@ export default function ProductsFilter() {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );
