@@ -8,6 +8,8 @@ import './App.css';
 // --- COMPONENTES GLOBAIS ---
 // Componentes reutilizáveis que aparecem em várias partes do site
 import Loading from './components/Loading.jsx';
+import RedirectToPix from './components/RedirectPayment/RedirectToPix.jsx';
+import RedirectToCard from './components/RedirectPayment/RedirectToCard.jsx';
 
 // --- PÁGINAS PÚBLICAS (Pages) ---
 // Componentes que representam uma "página" inteira
@@ -18,7 +20,7 @@ import NossaLoja from './pages/NossaLoja/NossaLoja.jsx';
 import ProductsFilter from './pages/ProductsFilter/ProductsFilter.jsx';
 import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx';
-import ProductPage from  './pages/ProductPage/ProductPage.jsx'
+import ProductPage from './pages/ProductPage/ProductPage.jsx'
 
 // --- PÁGINAS DE CARRINHO E CHECKOUT ---
 // Componentes relacionados ao carrinho de compras e processo de checkout
@@ -70,6 +72,10 @@ function App() {
         <Route path="/admin/dataBase/products" element={<DashboardProducts />} />
         <Route path="/admin/dataBase/products/edit" element={<EditProduct />} />
         <Route path="/admin/dataBase/products/add" element={<AddProduct />} />
+
+        {/* Forma de pagamento */}
+        <Route path="/pix-payment" element={<RedirectToPix />} />
+        <Route path="/card-payment" element={<RedirectToCard />} />
 
         {/* Rota "Não Encontrado" (Catch-all) */}
         {/* Deve ser sempre a última rota da lista */}
