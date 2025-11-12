@@ -6,6 +6,7 @@ import RemoveCart from "../Alerts/RemoveCart";
 const STORAGE_KEY = "cart_v1";
 
 export default function CartSidebar({ isOpen, onClose }) {
+  // cartItems: array de itens no carrinho
   const [cartItems, setCartItems] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -16,10 +17,13 @@ export default function CartSidebar({ isOpen, onClose }) {
     }
   });
 
+  // showAdd / showRemove controlam os componentes de notificação
   const [showAdd, setShowAdd] = useState(false);
   const [showRemove, setShowRemove] = useState(false);
 
-  // ... (todo o código de useEffect permanece o mesmo) ...
+  // internalOpen permite que o sidebar seja aberto por evento global
+  const [internalOpen, setInternalOpen] = useState(false);
+
   // Atualiza o localStorage sempre que o carrinho muda
   useEffect(() => {
     try {
@@ -34,7 +38,7 @@ export default function CartSidebar({ isOpen, onClose }) {
     }
   }, [cartItems]);
 
-  // Sincroniza multi-aba
+  // Sincroniza multi-aba e listeners customizados
   useEffect(() => {
     function onStorage(e) {
       if (e.key === STORAGE_KEY) {
@@ -60,16 +64,40 @@ export default function CartSidebar({ isOpen, onClose }) {
       }
     }
 
+    // Listener para mostrar a notificação de item adicionado (disparado em ProductPage)
+    function onShowAddNotification() {
+      // Força o "reset" do componente de notificação
+      setShowAdd(false);
+      setTimeout(() => {
+        setShowAdd(true);
+      }, 10);
+    }
+
+    // Listener para abrir o sidebar (disparado em ProductPage)
+    function onOpenCartSidebar() {
+      setInternalOpen(true);
+      // também garante que a notificação de adição apareça (caso venha ao mesmo tempo)
+      setShowAdd(false);
+      setTimeout(() => {
+        setShowAdd(true);
+      }, 10);
+    }
+
     window.addEventListener("storage", onStorage);
     window.addEventListener("cartUpdated", onCartUpdated);
+    window.addEventListener("showAddNotification", onShowAddNotification);
+    window.addEventListener("openCartSidebar", onOpenCartSidebar);
+
     return () => {
       window.removeEventListener("storage", onStorage);
       window.removeEventListener("cartUpdated", onCartUpdated);
+      window.removeEventListener("showAddNotification", onShowAddNotification);
+      window.removeEventListener("openCartSidebar", onOpenCartSidebar);
     };
   }, []);
 
   // =================================================================
-  // AQUI ESTÁ A CORREÇÃO
+  // AQUI ESTÁ A CORREÇÃO (mantive seu código de manipulação de quantidade)
   // =================================================================
 
   const increaseQuantity = (id) => {
@@ -101,7 +129,7 @@ export default function CartSidebar({ isOpen, onClose }) {
   const removeItem = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
 
-    // Força o "reset" do componente de notificação
+    // Força o "reset" do componente de notificação de remoção
     setShowRemove(false);
     setTimeout(() => {
       setShowRemove(true);
@@ -117,25 +145,38 @@ export default function CartSidebar({ isOpen, onClose }) {
     0
   );
 
+  // Determina se o sidebar deve estar visível (prop OR interno)
+  const open = Boolean(isOpen) || internalOpen;
+
+  // Função de fechamento que respeita pai e estado interno
+  const handleClose = () => {
+    setInternalOpen(false);
+    if (typeof onClose === "function") {
+      try {
+        onClose();
+      } catch (e) {
+        // ignore
+      }
+    }
+  };
+
   return (
     <>
-      {/* Isso agora funciona. Quando showAdd vira 'false', o componente
-        é destruído. 10ms depois, ele vira 'true' e é recriado.
-      */}
-      {showAdd && <AddCart onDone={() => setShowAdd(false)} />}
+      {/* passamos `show={showAdd}` para AddCart porque o useEffect dentro de AddCart verifica `show`. */}
+      {showAdd && <AddCart show={showAdd} duration={3000} />}
       {showRemove && <RemoveCart onDone={() => setShowRemove(false)} />}
 
       {/* Overlay */}
       <div
-        className={`${styles.cartOverlay} ${isOpen ? styles.show : ""}`}
-        onClick={onClose}
+        className={`${styles.cartOverlay} ${open ? styles.show : ""}`}
+        onClick={handleClose}
       ></div>
 
       {/* Sidebar */}
-      <div className={`${styles.cartSidebar} ${isOpen ? styles.open : ""}`}>
+      <div className={`${styles.cartSidebar} ${open ? styles.open : ""}`}>
         <div className={styles.cartHeader}>
           <p>Meu Carrinho</p>
-          <button className={styles.closeBtn} onClick={onClose}>
+          <button className={styles.closeBtn} onClick={handleClose}>
             ✕
           </button>
         </div>
