@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export default function RedirectToCard() {
 
-    let url = "src/Payment/card-payment.php";
+    let url = "card-payment.php";
 
     useEffect(() => {
         window.location.href = url; // Redireciona para o PHP

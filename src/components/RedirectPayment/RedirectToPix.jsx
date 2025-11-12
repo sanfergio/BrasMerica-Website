@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 export default function RedirectToPix() {
 
-  let url = "src/Payment/pix-payment.php";
+  let url = "pix-payment.php";
 
   useEffect(() => {
     window.location.href = url; // Redireciona para o PHP
