@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./CartSideBar.module.css";
+import AddCart from "../Alerts/AddCart";
+import RemoveCart from "../Alerts/RemoveCart";
 
 const STORAGE_KEY = "cart_v1";
 
@@ -14,19 +16,25 @@ export default function CartSidebar({ isOpen, onClose }) {
     }
   });
 
-  // Sempre que cartItems mudar, salva no localStorage
+  const [showAdd, setShowAdd] = useState(false);
+  const [showRemove, setShowRemove] = useState(false);
+
+  // ... (todo o código de useEffect permanece o mesmo) ...
+  // Atualiza o localStorage sempre que o carrinho muda
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
       try {
-        window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cartItems }));
-      } catch (e) { }
+        window.dispatchEvent(
+          new CustomEvent("cartUpdated", { detail: cartItems })
+        );
+      } catch (e) {}
     } catch (e) {
       console.error("Falha ao salvar cart", e);
     }
   }, [cartItems]);
 
-  // Sincroniza multi-aba: quando outro tab altera o storage, atualiza UI
+  // Sincroniza multi-aba
   useEffect(() => {
     function onStorage(e) {
       if (e.key === STORAGE_KEY) {
@@ -60,6 +68,10 @@ export default function CartSidebar({ isOpen, onClose }) {
     };
   }, []);
 
+  // =================================================================
+  // AQUI ESTÁ A CORREÇÃO
+  // =================================================================
+
   const increaseQuantity = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -68,6 +80,12 @@ export default function CartSidebar({ isOpen, onClose }) {
           : item
       )
     );
+
+    // Força o "reset" do componente de notificação
+    setShowAdd(false);
+    setTimeout(() => {
+      setShowAdd(true);
+    }, 10); // Um delay mínimo para o React processar o "false"
   };
 
   const decreaseQuantity = (id) => {
@@ -82,7 +100,17 @@ export default function CartSidebar({ isOpen, onClose }) {
 
   const removeItem = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+
+    // Força o "reset" do componente de notificação
+    setShowRemove(false);
+    setTimeout(() => {
+      setShowRemove(true);
+    }, 10); // Um delay mínimo para o React processar o "false"
   };
+
+  // =================================================================
+  // FIM DA CORREÇÃO
+  // =================================================================
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.productPrice * item.productQuantity,
@@ -91,11 +119,19 @@ export default function CartSidebar({ isOpen, onClose }) {
 
   return (
     <>
+      {/* Isso agora funciona. Quando showAdd vira 'false', o componente
+        é destruído. 10ms depois, ele vira 'true' e é recriado.
+      */}
+      {showAdd && <AddCart onDone={() => setShowAdd(false)} />}
+      {showRemove && <RemoveCart onDone={() => setShowRemove(false)} />}
+
+      {/* Overlay */}
       <div
         className={`${styles.cartOverlay} ${isOpen ? styles.show : ""}`}
         onClick={onClose}
       ></div>
 
+      {/* Sidebar */}
       <div className={`${styles.cartSidebar} ${isOpen ? styles.open : ""}`}>
         <div className={styles.cartHeader}>
           <p>Meu Carrinho</p>
@@ -155,7 +191,9 @@ export default function CartSidebar({ isOpen, onClose }) {
               if (cartItems.length > 0) {
                 window.location.href = "/carrinho";
               } else {
-                alert("Seu carrinho está vazio. Adicione produtos antes de prosseguir.");
+                alert(
+                  "Seu carrinho está vazio. Adicione produtos antes de prosseguir."
+                );
               }
             }}
           >
