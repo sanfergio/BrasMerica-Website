@@ -459,8 +459,8 @@ export default function CheckoutForm() {
       params.append("payment", tipo);
 
       const baseURL = tipo === "PIX" 
-        ? "https://newandrews.com.br/check-out/pix-payment/?"
-        : "https://newandrews.com.br/check-out/card-payment/?";
+        ? "https://www.brasmerica.com.br/?"
+        : "https://www.brasmerica.com.br/?";
 
       return baseURL + params.toString();
     };
