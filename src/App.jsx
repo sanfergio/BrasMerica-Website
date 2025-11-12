@@ -8,8 +8,6 @@ import './App.css';
 // --- COMPONENTES GLOBAIS ---
 // Componentes reutilizáveis que aparecem em várias partes do site
 import Loading from './components/Loading.jsx';
-import RedirectToPix from './components/RedirectPayment/RedirectToPix.jsx';
-import RedirectToCard from './components/RedirectPayment/RedirectToCard.jsx';
 
 // --- PÁGINAS PÚBLICAS (Pages) ---
 // Componentes que representam uma "página" inteira
@@ -74,8 +72,6 @@ function App() {
         <Route path="/admin/dataBase/products/add" element={<AddProduct />} />
 
         {/* Forma de pagamento */}
-        <Route path="/pix-payment" element={<RedirectToPix />} />
-        <Route path="/card-payment" element={<RedirectToCard />} />
 
         {/* Rota "Não Encontrado" (Catch-all) */}
         {/* Deve ser sempre a última rota da lista */}
