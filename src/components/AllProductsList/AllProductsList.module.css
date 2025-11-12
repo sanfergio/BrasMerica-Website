@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  background-color: whitesmoke;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.lista {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 👉 4 colunas fixas no PC */
+  list-style: none;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+}
+
+.item {
+  background: whitesmoke;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+  padding: 12px;
+  transition: all 0.3s ease;
+}
+
+.item a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.item:hover {
+  background-color: #e6e6e6;
+}
+
+/* 📱 Responsivo: 1 coluna no mobile */
+@media (max-width: 1150px) {
+  .lista {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

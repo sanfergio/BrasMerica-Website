@@ -5,6 +5,8 @@ import { FaShippingFast } from "react-icons/fa";
 import { SiPix } from "react-icons/si";
 import { FaCartShopping } from "react-icons/fa6";
 import SupabaseClient from "../KEYS/App.jsx";
+import AddCart from "../Alerts/AddCart";
+import CartSidebar from "../CartSideBar/CartSideBar.jsx";
 
 const supabase = SupabaseClient;
 
@@ -14,9 +16,9 @@ export function currencyBRL(value) {
   return value == null
     ? "-"
     : Number(value).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      });
+      style: "currency",
+      currency: "BRL",
+    });
 }
 
 /**
@@ -43,6 +45,8 @@ function ProductCard({
   company_name = [],
 }) {
   const [products, setProducts] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showAddCart, setShowAddCart] = useState(false);
 
   useEffect(() => {
     async function fetchProducts() {
@@ -147,6 +151,9 @@ function ProductCard({
   // --- Função para adicionar item ao cart salvo no localStorage ---
   const handleAddToCart = (product) => {
     try {
+      // Mostra a notificação
+      setShowAddCart(true);
+
       const raw = localStorage.getItem(STORAGE_KEY);
       const cart = raw ? JSON.parse(raw) : [];
 
@@ -170,6 +177,9 @@ function ProductCard({
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
 
+      // Abre o carrinho automaticamente
+      setIsCartOpen(true);
+
       // Emite evento customizado para permitir que componentes na mesma aba possam reagir sem reload.
       try {
         window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
@@ -181,64 +191,76 @@ function ProductCard({
           // ignore
         }
       }
+
+      // Esconde a notificação após um tempo
+      setTimeout(() => {
+        setShowAddCart(false);
+      }, 3000);
+
     } catch (e) {
       console.error("Erro ao adicionar item ao carrinho:", e);
     }
   };
 
   return (
-    <div className={styles.productsContainer}>
-      {products.length === 0 ? (
-        <p>Nenhum produto encontrado.</p>
-      ) : (
-        products.map((product) => (
-          <div className={styles.productCard} key={product.id}>
-            <div className={styles.freeShipping}>
-              <span>
-                <FaShippingFast /> FRETE GRÁTIS
-              </span>
-            </div>
+    <>
+      <AddCart show={showAddCart} duration={3000} />
+      
+      <div className={styles.productsContainer}>
+        {products.length === 0 ? (
+          <p>Nenhum produto encontrado.</p>
+        ) : (
+          products.map((product) => (
+            <div className={styles.productCard} key={product.id}>
+              <div className={styles.freeShipping}>
+                <span>
+                  <FaShippingFast /> FRETE GRÁTIS
+                </span>
+              </div>
 
-            <a href={product.buyNowUrl}>
-              <img
-                src={product.image}
-                alt={product.title}
-                className={styles.productImage}
-              />
-            </a>
-
-            <div className={styles.productInfo}>
-              <h3 title={product.title} className={styles.productTitle}>
-                {product.title}
-              </h3>
-              <p className={styles.productPrice}>
-                R${product.price.toFixed(2).replace(".", ",")}
-                {product.oldPrice && (
-                  <span className={styles.productOldPrice}>
-                    R${product.oldPrice.toFixed(2).replace(".", ",")}
-                  </span>
-                )}
-              </p>
-            </div>
-
-            <div className={styles.productActions}>
-              <button
-                className={`${styles.btn} ${styles.btnCart}`}
-                onClick={() => handleAddToCart(product)}
-              >
-                ADICIONAR <FaCartShopping />
-              </button>
-              <a
-                href={product.buyNowUrl}
-                className={`${styles.btn} ${styles.btnBuy}`}
-              >
-                VER PRODUTO!
+              <a href={product.buyNowUrl}>
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className={styles.productImage}
+                />
               </a>
+
+              <div className={styles.productInfo}>
+                <h3 title={product.title} className={styles.productTitle}>
+                  {product.title}
+                </h3>
+                <p className={styles.productPrice}>
+                  R${product.price.toFixed(2).replace(".", ",")}
+                  {product.oldPrice && (
+                    <span className={styles.productOldPrice}>
+                      R${product.oldPrice.toFixed(2).replace(".", ",")}
+                    </span>
+                  )}
+                </p>
+              </div>
+
+              <div className={styles.productActions}>
+                <button
+                  className={`${styles.btn} ${styles.btnCart}`}
+                  onClick={() => handleAddToCart(product)}
+                >
+                  ADICIONAR <FaCartShopping />
+                </button>
+                <a
+                  href={product.buyNowUrl}
+                  className={`${styles.btn} ${styles.btnBuy}`}
+                >
+                  VER PRODUTO!
+                </a>
+              </div>
             </div>
-          </div>
-        ))
-      )}
-    </div>
+          ))
+        )}
+      </div>
+
+      <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </>
   );
 }
 

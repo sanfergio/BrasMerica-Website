@@ -2,17 +2,22 @@ import { Mail, Phone, Clock, Instagram, Facebook, CreditCard } from "lucide-reac
 import { SiPix, SiVisa, SiMastercard, SiAmericanexpress } from "react-icons/si";
 
 import styles from "./Footer.module.css"
+import AllProductsList from "../AllProductsList/AllProductsList";
 
 export default function Footer() {
   return (
+
     <footer className={styles.footerContainer}>
+
+      <AllProductsList />
+
       <div className={styles.newsletter}>
         <img
           src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/icon-logo2.png?raw=true"
           alt="Logo do rodapé"
           className={styles.newsletterLogo}
         />
-        <h6 style={{fontSize: '90%'}}>RECEBA NOSSAS NOVIDADES!</h6>
+        <h6 style={{ fontSize: '90%' }}>RECEBA NOSSAS NOVIDADES!</h6>
         <div className={styles.newsletterInput}>
           <input type="email" placeholder="Digite seu email" />
           <button aria-label="enviar">➤</button>

@@ -15,13 +15,14 @@ export default function InputSearch() {
   const [ativo, setAtivo] = useState(false);
   const containerRef = useRef(null);
 
-  // 🔄 Busca todos os produtos no Supabase
+  // 🔄 Busca apenas produtos com disponible = 0
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       const { data, error } = await supabase
         .from("DBproducts")
-        .select("id, name, img1, price, url");
+        .select("id, name, img1, price, url, disponible")
+        .eq("disponible", 0); // ✅ busca somente os disponíveis
 
       if (error) {
         console.error("Erro ao buscar produtos:", error);
@@ -76,12 +77,8 @@ export default function InputSearch() {
           placeholder="O que você procura?"
         />
         <a href="#inputSearchText">
-          <FaSearch
-            className={styles.searchIcon}
-            onClick={handleActivate}
-          />
+          <FaSearch className={styles.searchIcon} onClick={handleActivate} />
         </a>
-
       </div>
 
       {ativo && (

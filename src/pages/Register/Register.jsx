@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./Register.module.css";
-import ShortFooter from "../../components/ShortFooter/ShortFooter";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
 import { useNavigate } from "react-router-dom";
@@ -382,7 +382,7 @@ export default function Register() {
           {success && <div className={styles.formSuccess}>{success}</div>}
         </div>
       </main>
-      <ShortFooter />
+      <Footer />
 
       {/* Modal de termos */}
       {showTermsModal && (
