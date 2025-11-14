@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./CheckoutForm.module.css";
 import ShortHeader from "../../components/ShortHeader/ShortHeader.jsx";
 import Footer from "../../components/Footer/Footer";
+import IframePayment from "../../components/IframePayment/IframePayment.jsx";
+import {VindiToken} from "../../components/KEYS/App.jsx";
 
 const STORAGE_KEY = "cart_v1";
 const CUPONS_VALIDOS = ["GIOVANI", "CUPOMPEDRO", "DESCONTOALL", "NATAL", "LUDTKE", "VICTOR01", "EDUARDA", "EMANUEL10", "PAIXAO", "DUDA10"];
@@ -99,7 +101,7 @@ export default function CheckoutForm() {
     // Buscar dados do usuário se email estiver na URL
     const urlParams = new URLSearchParams(window.location.search);
     const emailUser = urlParams.get('email');
-    
+
     if (emailUser && validarEmail(emailUser)) {
       setFormData(prev => ({ ...prev, email: emailUser }));
       buscarDadosUsuario(emailUser);
@@ -107,7 +109,7 @@ export default function CheckoutForm() {
 
     window.addEventListener("storage", onStorage);
     window.addEventListener("cartUpdated", onCartUpdated);
-    
+
     return () => {
       window.removeEventListener("storage", onStorage);
       window.removeEventListener("cartUpdated", onCartUpdated);
@@ -119,11 +121,11 @@ export default function CheckoutForm() {
     try {
       const response = await fetch(`https://newandrews.com.br/NA-COMPONENTS/User-Name.php?email=${encodeURIComponent(email)}`);
       if (!response.ok) throw new Error("Erro HTTP: " + response.status);
-      
+
       const data = await response.json();
       if (data && data.nome) {
         const updates = {};
-        
+
         if (data.nome) updates.nome = data.nome;
         if (data.cpf) updates.cpf = data.cpf;
         if (data.telefone) updates.telefone = data.telefone;
@@ -131,7 +133,7 @@ export default function CheckoutForm() {
         if (data.complemento) updates.numero = data.complemento;
 
         setFormData(prev => ({ ...prev, ...updates }));
-        
+
         // Disparar validações para campos preenchidos
         setTimeout(() => {
           Object.keys(updates).forEach(field => {
@@ -191,7 +193,7 @@ export default function CheckoutForm() {
   // Buscar CEP
   const buscarCEP = async (cep) => {
     cep = cep.replace(/\D/g, "");
-    
+
     if (cep.length !== 8) {
       setFieldErrors(prev => ({ ...prev, cep: "CEP inválido." }));
       setFieldValidity(prev => ({ ...prev, cep: false }));
@@ -214,7 +216,7 @@ export default function CheckoutForm() {
         };
 
         setFormData(prev => ({ ...prev, ...updates }));
-        
+
         // Validar campos preenchidos automaticamente
         Object.keys(updates).forEach(field => {
           if (updates[field]) {
@@ -337,7 +339,7 @@ export default function CheckoutForm() {
   const handleStep1 = () => {
     const fields = ["nome", "cpf", "email", "telefone"];
     const allValid = fields.every(field => fieldValidity[field]);
-    
+
     if (allValid) {
       setCurrentStep(2);
       window.location.href = "#step2";
@@ -349,7 +351,7 @@ export default function CheckoutForm() {
   const handleStep2 = () => {
     const fields = ["cep", "endereco", "cidade", "bairro", "uf", "numero"];
     const allValid = fields.every(field => fieldValidity[field]);
-    
+
     if (allValid) {
       setCurrentStep(3);
       window.location.href = "#step3";
@@ -412,7 +414,7 @@ export default function CheckoutForm() {
     });
 
     const subtotal = itensComDesconto.reduce((acc, item) => acc + item.precoTotal, 0);
-    
+
     return { itensComDesconto, subtotal };
   };
 
@@ -424,11 +426,13 @@ export default function CheckoutForm() {
   const PaymentModal = () => {
     if (!showPaymentModal) return null;
 
+    const [paymentUrl, setPaymentUrl] = useState(null);
+
     const formatarURLPagamento = (tipo) => {
       const params = new URLSearchParams();
-      
+
       const cupomValue = formData.cupom && formData.cupom.trim().length >= 1 ? formData.cupom : "NONE";
-      
+
       params.append("cupom", cupomValue);
       params.append("email", formData.email);
       params.append("name", formData.nome);
@@ -440,6 +444,8 @@ export default function CheckoutForm() {
       params.append("neighborhood", formData.bairro);
       params.append("city", formData.cidade);
       params.append("state", formData.uf);
+      params.append("token", VindiToken); 
+      params.append("urlRedirect", 'www.brasmerica.com.br');
 
       cart.forEach((item, index) => {
         const precoUnitario = item.productPrice;
@@ -458,28 +464,43 @@ export default function CheckoutForm() {
       params.append("totalValue", total.toFixed(2));
       params.append("payment", tipo);
 
-      const baseURL = tipo === "PIX" 
-        ? "https://www.brasmerica.com.br/?"
-        : "https://www.brasmerica.com.br/?";
+      const baseURL = tipo === "PIX"
+        ? "https://www.newandrews.com.br/paymentVindi/pix-payment/?"
+        : "https://www.newandrews.com.br/paymentVindi/card-payment/?";
 
       return baseURL + params.toString();
     };
 
+    const handlePaymentClick = (tipo) => {
+      const url = formatarURLPagamento(tipo);
+      setPaymentUrl(url);
+    };
+
+    const handleCloseIframe = () => {
+      setPaymentUrl(null);
+    };
+
+    // Se tiver paymentUrl, mostra o iframe com overlay
+    if (paymentUrl) {
+      return <IframePayment url={paymentUrl} onClose={handleCloseIframe} />;
+    }
+
+    // Senão, mostra o modal normal de seleção de pagamento
     return (
       <div className={styles.modalOverlay} onClick={() => setShowPaymentModal(false)}>
         <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
           <h2>Escolha a forma de pagamento</h2>
           <div className={styles.paymentOptions}>
-            <button 
+            <button
               className={styles.paymentOption}
-              onClick={() => window.location.href = formatarURLPagamento("PIX")}
+              onClick={() => handlePaymentClick("PIX")}
             >
               <img src="https://img.icons8.com/color/200/pix.png" alt="PIX" />
               <span>PIX</span>
             </button>
-            <button 
+            <button
               className={styles.paymentOption}
-              onClick={() => window.location.href = formatarURLPagamento("CARD")}
+              onClick={() => handlePaymentClick("CARD")}
             >
               <img src="https://cdn-icons-png.flaticon.com/512/7510/7510522.png" alt="Cartão" />
               <span>Cartão de Crédito</span>
@@ -493,8 +514,8 @@ export default function CheckoutForm() {
   // Finalizar compra
   const handleFinalize = (e) => {
     e.preventDefault();
-    
-    const allFieldsValid = Object.keys(fieldValidity).every(key => 
+
+    const allFieldsValid = Object.keys(fieldValidity).every(key =>
       key === "cupom" ? true : fieldValidity[key]
     );
 
@@ -514,130 +535,130 @@ export default function CheckoutForm() {
           {/* --- Etapa 1 --- */}
           <div className={`${styles.checkoutCard} ${currentStep >= 1 ? styles.active : ''}`}>
             <h3><span className={styles.cardNumber}>1</span> Dados cadastrais</h3>
-            <input 
-              name="nome" 
-              value={formData.nome} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Nome completo" 
+            <input
+              name="nome"
+              value={formData.nome}
+              onChange={handleChange}
+              type="text"
+              placeholder="Nome completo"
               className={fieldValidity.nome ? styles.valid : fieldErrors.nome ? styles.invalid : ''}
             />
             {fieldErrors.nome && <span className={styles.error}>{fieldErrors.nome}</span>}
-            
-            <input 
-              name="cpf" 
-              value={formData.cpf} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="CPF" 
+
+            <input
+              name="cpf"
+              value={formData.cpf}
+              onChange={handleChange}
+              type="text"
+              placeholder="CPF"
               className={fieldValidity.cpf ? styles.valid : fieldErrors.cpf ? styles.invalid : ''}
             />
             {fieldErrors.cpf && <span className={styles.error}>{fieldErrors.cpf}</span>}
-            
-            <input 
-              name="email" 
-              value={formData.email} 
-              onChange={handleChange} 
-              type="email" 
-              placeholder="E-mail" 
+
+            <input
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              type="email"
+              placeholder="E-mail"
               className={fieldValidity.email ? styles.valid : fieldErrors.email ? styles.invalid : ''}
             />
             {fieldErrors.email && <span className={styles.error}>{fieldErrors.email}</span>}
-            
-            <input 
-              name="telefone" 
-              value={formData.telefone} 
-              onChange={handleChange} 
-              type="tel" 
-              placeholder="Telefone/Celular" 
+
+            <input
+              name="telefone"
+              value={formData.telefone}
+              onChange={handleChange}
+              type="tel"
+              placeholder="Telefone/Celular"
               className={fieldValidity.telefone ? styles.valid : fieldErrors.telefone ? styles.invalid : ''}
             />
             {fieldErrors.telefone && <span className={styles.error}>{fieldErrors.telefone}</span>}
-            
+
             <button className={styles.cardButton} onClick={handleStep1}>Continuar</button>
           </div>
 
           {/* --- Etapa 2 --- */}
           <div className={`${styles.checkoutCard} ${currentStep >= 2 ? styles.active : ''}`}>
             <h3><span className={styles.cardNumber}>2</span> Endereço de entrega</h3>
-            <input 
-              name="cep" 
+            <input
+              name="cep"
               id="step2"
-              value={formData.cep} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="CEP para entrega" 
+              value={formData.cep}
+              onChange={handleChange}
+              type="text"
+              placeholder="CEP para entrega"
               className={fieldValidity.cep ? styles.valid : fieldErrors.cep ? styles.invalid : ''}
             />
             {fieldErrors.cep && <span className={styles.error}>{fieldErrors.cep}</span>}
-            
-            <input 
-              name="endereco" 
-              value={formData.endereco} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Endereço" 
+
+            <input
+              name="endereco"
+              value={formData.endereco}
+              onChange={handleChange}
+              type="text"
+              placeholder="Endereço"
               readOnly
               className={fieldValidity.endereco ? styles.valid : fieldErrors.endereco ? styles.invalid : ''}
             />
             {fieldErrors.endereco && <span className={styles.error}>{fieldErrors.endereco}</span>}
-            
-            <input 
-              name="cidade" 
-              value={formData.cidade} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Cidade" 
+
+            <input
+              name="cidade"
+              value={formData.cidade}
+              onChange={handleChange}
+              type="text"
+              placeholder="Cidade"
               readOnly
               className={fieldValidity.cidade ? styles.valid : fieldErrors.cidade ? styles.invalid : ''}
             />
             {fieldErrors.cidade && <span className={styles.error}>{fieldErrors.cidade}</span>}
-            
-            <input 
-              name="bairro" 
-              value={formData.bairro} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Bairro" 
+
+            <input
+              name="bairro"
+              value={formData.bairro}
+              onChange={handleChange}
+              type="text"
+              placeholder="Bairro"
               readOnly
               className={fieldValidity.bairro ? styles.valid : fieldErrors.bairro ? styles.invalid : ''}
             />
             {fieldErrors.bairro && <span className={styles.error}>{fieldErrors.bairro}</span>}
-            
-            <input 
-              name="uf" 
-              value={formData.uf} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="UF" 
+
+            <input
+              name="uf"
+              value={formData.uf}
+              onChange={handleChange}
+              type="text"
+              placeholder="UF"
               readOnly
               className={fieldValidity.uf ? styles.valid : fieldErrors.uf ? styles.invalid : ''}
             />
             {fieldErrors.uf && <span className={styles.error}>{fieldErrors.uf}</span>}
-            
-            <input 
-              name="numero" 
-              value={formData.numero} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Número/Complemento" 
+
+            <input
+              name="numero"
+              value={formData.numero}
+              onChange={handleChange}
+              type="text"
+              placeholder="Número/Complemento"
               className={fieldValidity.numero ? styles.valid : fieldErrors.numero ? styles.invalid : ''}
             />
             {fieldErrors.numero && <span className={styles.error}>{fieldErrors.numero}</span>}
-            
+
             <button className={styles.cardButton} onClick={handleStep2}>Continuar</button>
           </div>
 
           {/* --- Etapa 3 --- */}
           <div className={`${styles.checkoutCard} ${currentStep >= 3 ? styles.active : ''}`}>
             <h3><span className={styles.cardNumber}>3</span> Cupom de desconto</h3>
-            <input 
-              name="cupom" 
+            <input
+              name="cupom"
               id="step3"
-              value={formData.cupom} 
-              onChange={handleChange} 
-              type="text" 
-              placeholder="Cupom (Opcional)" 
+              value={formData.cupom}
+              onChange={handleChange}
+              type="text"
+              placeholder="Cupom (Opcional)"
               className={fieldValidity.cupom ? styles.valid : fieldErrors.cupom ? styles.invalid : ''}
             />
             {fieldErrors.cupom && (
