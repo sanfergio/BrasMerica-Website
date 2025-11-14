@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../components/Header/Header.jsx";
-import ShortFooter from "../../components/ShortFooter/ShortFooter.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 import ProductCard from "../../components/ProductCard/ProductCard.jsx";
 import styles from "./BrandsFilter.module.css";
 
@@ -38,7 +38,7 @@ const BrandsFilter = () => {
         </div>
       </div>
 
-      <ShortFooter />
+      <Footer />
     </div>
   );
 };
