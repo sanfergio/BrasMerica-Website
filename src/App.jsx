@@ -31,7 +31,7 @@ import PoliticaPrivacidade from './pages/PoliticaPrivacidade/PoliticaPrivacidade
 import PoliticaEnvio from "./pages/PoliticaEnvio/PoliticaEnvio.jsx";
 import PoliticaDevolucao from './pages/PoliticaDevolucao/PoliticaDevolucao.jsx';
 import FormasPagamento from './pages/FormasPagamento/FormasPagamento.jsx';
-
+import PerfilUsuario from './pages/UserProfile/UserProfile.jsx'
 // --- PÁGINAS DE ADMIN (Dashboard) ---
 import DashboardProducts from './Admin/DataBase/Products/DashboardProducts.jsx';
 import EditProduct from './Admin/DataBase/Products/EditProducts.jsx';
@@ -58,6 +58,7 @@ function App() {
         <Route path="/produtos" element={<ProductPage />} />
         <Route path="/carrinho" element={<CartProducts />} />
         <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/perfil-usuario" element={<PerfilUsuario />} />
 
         {/* Rotas de Políticas e Termos */}
         <Route path="/termo-de-uso" element={<TermosUso />} />

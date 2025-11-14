@@ -95,7 +95,7 @@ export default function Login() {
 
       // Redireciona após 1s
       setTimeout(() => {
-        window.location.href = `./?email=${encodeURIComponent(user.email)}`;
+        window.location.href = `./`;
       }, 1000);
     } catch (err) {
       console.error("Erro no login:", err);
