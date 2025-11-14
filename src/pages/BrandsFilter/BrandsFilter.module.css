@@ -1,0 +1,143 @@
+html, body, .outerContainer {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 60px;
+  box-sizing: border-box;
+}
+
+.brandHeader {
+  width: 100%;
+  max-width: 1200px;
+  background: linear-gradient(90deg, #831926, #b22234);
+  border-radius: 10px;
+  padding: 30px 40px;
+  margin-bottom: 40px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.brandInfo {
+  flex: 1 1 300px;
+}
+
+.titulo {
+  font-size: 2.4rem;
+  margin: 0;
+  font-weight: 800;
+}
+
+.subtitulo {
+  margin-top: 5px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.brandSearch {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.inputSearch {
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  width: 220px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.btnSearch {
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* 🔹 Mensagem */
+.mensagem {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.gridProdutos {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 1400px;
+  justify-items: center;
+}
+
+@media (max-width: 1024px) {
+  .gridProdutos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .brandHeader {
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .brandSearch input{
+    background-color: white;
+  }
+
+  .brandSearch {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+
+  .gridProdutos {
+    grid-template-columns: 1fr; 
+    gap: 20px;
+  }
+
+  .titulo {
+    font-size: 1.8rem;
+  }
+
+  .brandHeader {
+    padding: 20px;
+  }
+
+  .inputSearch {
+    width: 100%;
+  }
+
+  .brandSearch {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btnSearch {
+    width: 100%;
+  }
+}
