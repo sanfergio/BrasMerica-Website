@@ -10,7 +10,6 @@ import HomeButton from '../../components/HomeButton.jsx';
 import Header from '../../components/Header/Header.jsx';
 import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx'
-import NavBar from '../../components/Navbar/NavBar.jsx'
 import AllProductsList from '../../components/AllProductsList/AllProductsList.jsx'
 
 // Inicializa o cliente Supabase
