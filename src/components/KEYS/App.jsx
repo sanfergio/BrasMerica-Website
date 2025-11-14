@@ -7,4 +7,8 @@ const SupabaseClient = createClient(
     url, publicKey
 );
 
+const VindiToken = import.meta.env.VITE_PHP_VINDI_ACESSTOKEN_PAYMENT;
+
+export { VindiToken };
+
 export default SupabaseClient;
