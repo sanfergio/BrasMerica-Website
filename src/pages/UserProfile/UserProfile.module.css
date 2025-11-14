@@ -1,0 +1,453 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.2s;
+  text-align: left;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.menuItem:hover {
+  background-color: #fef2f2;
+  color: #b22234;
+}
+
+.menuItem.active {
+  background-color: #b22234;
+  color: white;
+  box-shadow: 0 2px 4px rgba(178, 34, 52, 0.3);
+}
+
+.menuItem.active:hover {
+  background-color: #9a1d2c;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.content {
+  flex: 1;
+  max-width: 900px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 45rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #b22234;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #b22234;
+}
+
+.input {
+  padding: 0.875rem 1rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+  color: #b22234;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #b22234;
+  background-color: white;
+}
+
+.input::placeholder {
+  color: #b22234;
+}
+
+.saveButton {
+  padding: 1rem;
+  background-color: #0b5db8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.saveButton:hover {
+  background-color: #9a1d2c;
+}
+
+.shortMessage {
+  color: #666;
+  font-size: 1rem;
+  text-align: center;
+  padding: 3rem;
+}
+
+/* Added styles for My Orders section */
+.ordersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  background: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.orderCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.orderCard.preparing {
+  border-left: 5px solid #ffd447;
+}
+
+.orderCard.on-the-way {
+  border-left: 5px solid #0057a0;
+}
+
+.orderCard.delivered {
+  border-left: 5px solid #16a34a;
+}
+
+.orderCard.canceled {
+  border-left: 5px solid #b22234;
+}
+
+.orderCard.refunded {
+  border-left: 5px solid #9ca3af;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Added styles for transaction ID and tracking code with icons */
+.orderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoIcon {
+  color: #666;
+  flex-shrink: 0;
+}
+
+.transactionId {
+  font-weight: 500;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.trackingCode {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.875rem;
+}
+
+.orderStatus {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-preparing {
+  background-color: #ffe694;
+  color: #92400e;
+}
+
+.status-on-the-way {
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+.status-delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-canceled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status-refunded {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.orderProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.productImage {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  flex-shrink: 0;
+}
+
+.productName {
+  flex: 1;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.productPrice {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.orderTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 2px solid #e5e5e5;
+  margin-top: 0.5rem;
+}
+
+.totalLabel {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.totalValue {
+  font-weight: 700;
+  color: #b22234;
+  font-size: 1.25rem;
+}
+
+/* Added styles for logout section */
+.logoutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profileIconLarge {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b22234;
+  border: 3px solid #b22234;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.userName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.userEmail {
+  font-size: 1rem;
+  color: #666;
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2.5rem;
+  background-color: #b22234;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: #9a1d2c;
+}
+
+/* Added modal styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.modalButtonYes,
+.modalButtonNo {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modalButtonYes {
+  background-color: #b22234;
+  color: white;
+}
+
+.modalButtonYes:hover {
+  background-color: #9a1d2c;
+}
+
+.modalButtonNo {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #e5e5e5;
+}
+
+.modalButtonNo:hover {
+  background-color: #e5e5e5;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
