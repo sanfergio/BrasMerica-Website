@@ -54,7 +54,7 @@ function Header() {
               <FaBars className={styles.icon} />
             </div>
 
-            <a href="./">
+            <a href="../">
               <img
                 src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/logo-sem-fundo-border.png?raw=true"
                 alt="Logo Brasmerica"
