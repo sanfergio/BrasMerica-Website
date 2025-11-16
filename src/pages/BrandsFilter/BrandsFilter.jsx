@@ -21,16 +21,6 @@ const BrandsFilter = () => {
             </p>
           </div>
 
-          <div className={styles.brandSearch}>
-            <input
-              type="text"
-              placeholder={`Buscar produtos da ${nomeMarca}...`}
-              className={styles.inputSearch}
-            />
-            <button className={styles.btnSearch} disabled>
-              🔍
-            </button>
-          </div>
         </div>
 
         <div className={styles.gridProdutos}>

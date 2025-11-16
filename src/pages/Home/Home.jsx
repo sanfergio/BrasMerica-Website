@@ -23,7 +23,7 @@ function Home() {
 
             {/* Conteúdo principal da página */}
             <main className={styles.main} role="main" aria-label="Página inicial da BrasMérica Moto Peças">
-                
+
                 {/* Carrossel principal */}
                 <section className={styles.carousel} aria-label="Carrossel de destaques">
                     <Carousel />
@@ -58,27 +58,37 @@ function Home() {
                         SUA MARCA DE CONFIANÇA
                     </h3>
                     <div className={styles.trustSection}>
-                        <figure className={styles.trustItem}>
-                            <img 
-                                src="https://powersports.honda.com/motorcycle/standard/-/media/products/family/scl500/hero-banner/desktop/2025/2025-scl500-hero-banner-1920x930.jpg"
-                                alt="Motocicleta Honda representando qualidade e desempenho"
-                                title="Motocicleta Honda SCL500 - símbolo de qualidade"
+                        <a href="/marca/honda" className={styles.trustItem}>
+                            <img
+                                src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_tqhi9btqhi9btqhi.png?raw=true"
+                                alt="Logo da Honda, referência mundial em motos e motores"
+                                title="Honda - Qualidade e tecnologia japonesa"
                             />
-                        </figure>
-                        <figure className={styles.trustItem}>
-                            <img 
-                                src="https://mir-s3-cdn-cf.behance.net/projects/404/421919187810179.Y3JvcCwxMDgwLDg0NCwwLDI1MQ.jpg"
-                                alt="Equipe mecânica trabalhando em oficina representando confiança"
-                                title="Equipe profissional - Confiança e qualidade no atendimento"
+                        </a>
+
+                        <a href="/marca/shell" className={styles.trustItem}>
+                            <img
+                                src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_eh47w6eh47w6eh47.png?raw=true"
+                                alt="Logo da Shell, líder global em combustíveis e lubrificantes"
+                                title="Shell - Energia e combustíveis de alta performance"
                             />
-                        </figure>
-                        <figure className={styles.trustItem}>
-                            <img 
-                                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQobQl6LdbndEjaAc31LtZejeNl9oBkv4vH0uGgXkTCRo9SGxP8"
-                                alt="Peças e componentes de motos organizados em prateleira"
-                                title="Estoque de peças de alta qualidade"
+                        </a>
+
+                        <a href="/marca/mobil" className={styles.trustItem}>
+                            <img
+                                src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_i7a7kdi7a7kdi7a7.png?raw=true"
+                                alt="Logo da Mobil, fabricante de óleos sintéticos e lubrificantes avançados"
+                                title="Mobil - Lubrificantes de performance extrema"
                             />
-                        </figure>
+                        </a>
+
+                        <a href="/marca/ipiranga" className={styles.trustItem}>
+                            <img
+                                src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_xxfri5xxfri5xxfr.png?raw=true"
+                                alt="Logo da Ipiranga, rede de postos e combustíveis brasileira"
+                                title="Ipiranga - Apaixonados por carro como todo brasileiro"
+                            />
+                        </a>
                     </div>
                 </section>
 
@@ -103,18 +113,18 @@ function Home() {
                 </section>
 
                 {/* Banners promocionais */}
-                <section className={styles.bannerSection} aria-label="Banners promocionais">
-                    <img 
-                        src="https://paulinhomotos.fbitsstatic.net/img/b/a1c5be88-d5f1-41b2-bc3d-9a3f715ba844.jpg" 
-                        alt="Banner promocional de produtos Honda" 
-                        title="Promoções de peças Honda" 
+                {/* <section className={styles.bannerSection} aria-label="Banners promocionais">
+                    <img
+                        src="https://paulinhomotos.fbitsstatic.net/img/b/a1c5be88-d5f1-41b2-bc3d-9a3f715ba844.jpg"
+                        alt="Banner promocional de produtos Honda"
+                        title="Promoções de peças Honda"
                     />
-                    <img 
-                        src="https://paulinhomotos.fbitsstatic.net/img/b/e45e2155-1f7a-4069-91b2-409ad5eeeb8f.jpg" 
+                    <img
+                        src="https://paulinhomotos.fbitsstatic.net/img/b/e45e2155-1f7a-4069-91b2-409ad5eeeb8f.jpg"
                         alt="Banner de acessórios e equipamentos de motos"
                         title="Acessórios e equipamentos - Linha completa"
                     />
-                </section>
+                </section> */}
             </main>
 
             {/* Listagem de todos os produtos */}

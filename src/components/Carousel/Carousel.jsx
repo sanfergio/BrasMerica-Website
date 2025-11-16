@@ -114,13 +114,11 @@ const carouselCss = `
 // ==========================
 
 const carouselImagesDesktop = [
-    { src: "https://riodejaneiro.pernambucomotos.com.br//k/banners/2102113.png", href: "#", alt: "" },
-    { src: "https://riodejaneiro.pernambucomotos.com.br//k/banners/6265448.png", href: "#", alt: "" },
+    { src: "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/A%20LOJA%20MAIS%20COMPLETA%20DE%20PE%C3%87AS%20PARA%20SUA%20MOTO.png?raw=true", href: "#", alt: "" },
 ];
 
 const carouselImagesMobile = [
-    { src: "https://riodejaneiro.pernambucomotos.com.br//k/banners/2221742.png", href: "#", alt: "" },
-    { src: "https://riodejaneiro.pernambucomotos.com.br//k/banners/6264980.png", href: "#", alt: "" },
+    { src: "https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Moto%20em%20Paisagem%20Des%C3%A9rtica%20ao%20P%C3%B4r%20do%20Sol.png?raw=true", href: "#", alt: "" },
 ];
 
 // ==========================
