@@ -1,0 +1,176 @@
+.relatedSection {
+  margin: 40px auto;
+  max-width: 1300px;
+  padding: 0 20px;
+  position: relative;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.carouselWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 15px;
+  padding-bottom: 10px;
+  scrollbar-width: none;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  min-width: 180px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.04);
+}
+
+.img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  border-bottom: 1px solid #eee;
+}
+
+.nome {
+  font-size: 0.9rem;
+  padding: 8px;
+  color: #333;
+  height: 45px;
+  overflow: hidden;
+}
+
+.preco {
+  font-weight: bold;
+  color: #c00;
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.arrowLeft,
+.arrowRight {
+  background-color: white;
+  border: 1px solid #ddd;
+  width: 42px;
+  height: 42px;
+  font-size: 22px;
+  color: #333;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrowLeft:hover,
+.arrowRight:hover {
+  background-color: #b22234;
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  border: None;
+}
+
+.arrowLeft {
+  left: -25px;
+}
+
+.arrowRight {
+  right: -25px;
+}
+
+@media (max-width: 1024px) {
+  .card {
+    min-width: 160px;
+  }
+
+  .img {
+    height: 160px;
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    left: -18px;
+    right: -18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .relatedSection {
+    padding: 0 10px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .card {
+    min-width: 150px;
+  }
+
+  .img {
+    height: 140px;
+  }
+
+  .nome {
+    font-size: 0.85rem;
+  }
+
+  .preco {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    min-width: 130px;
+  }
+
+  .img {
+    height: 120px;
+  }
+
+  .nome {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+
+  .preco {
+    font-size: 0.85rem;
+  }
+
+  .carousel {
+    gap: 10px;
+  }
+}

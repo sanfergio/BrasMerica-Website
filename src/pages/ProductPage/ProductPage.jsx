@@ -11,6 +11,7 @@ import Header from '../../components/Header/Header.jsx';
 import WhatsAppButton from '../../components/WhatsappButton.jsx';
 import Footer from '../../components/Footer/Footer.jsx'
 import AllProductsList from '../../components/AllProductsList/AllProductsList.jsx'
+import RelatedProducts from "../../components/RelatedProducts/RelatedProducts.jsx";
 
 // Inicializa o cliente Supabase
 import SupabaseClient from "../../components/KEYS/App.jsx";
@@ -400,6 +401,14 @@ export default function ProductPage() {
           </>
         )}
       </div>
+      {/* ADICIONADO — Exibe os produtos relacionados com base no produto apresentado */}
+      {product && (
+        <RelatedProducts
+          company_name={product.company_name}
+          category={product.category}
+          currentProductId={product.id}
+        />
+      )}
       <AllProductsList />
       <Footer />
     </>
