@@ -58,7 +58,7 @@ function Home() {
                         SUA MARCA DE CONFIANÇA
                     </h3>
                     <div className={styles.trustSection}>
-                        <a href="/marca/honda" className={styles.trustItem}>
+                        <a href="/marca/Honda" className={styles.trustItem}>
                             <img
                                 src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_tqhi9btqhi9btqhi.png?raw=true"
                                 alt="Logo da Honda, referência mundial em motos e motores"
@@ -66,7 +66,7 @@ function Home() {
                             />
                         </a>
 
-                        <a href="/marca/shell" className={styles.trustItem}>
+                        <a href="/marca/Shell" className={styles.trustItem}>
                             <img
                                 src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_eh47w6eh47w6eh47.png?raw=true"
                                 alt="Logo da Shell, líder global em combustíveis e lubrificantes"
@@ -74,7 +74,7 @@ function Home() {
                             />
                         </a>
 
-                        <a href="/marca/mobil" className={styles.trustItem}>
+                        <a href="/marca/Mobil" className={styles.trustItem}>
                             <img
                                 src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_i7a7kdi7a7kdi7a7.png?raw=true"
                                 alt="Logo da Mobil, fabricante de óleos sintéticos e lubrificantes avançados"
@@ -82,7 +82,7 @@ function Home() {
                             />
                         </a>
 
-                        <a href="/marca/ipiranga" className={styles.trustItem}>
+                        <a href="/marca/Ipiranga" className={styles.trustItem}>
                             <img
                                 src="https://github.com/machadocalebe/repo-sanfer-imagens/blob/main/brasMerica/imagens/Gemini_Generated_Image_xxfri5xxfri5xxfr.png?raw=true"
                                 alt="Logo da Ipiranga, rede de postos e combustíveis brasileira"

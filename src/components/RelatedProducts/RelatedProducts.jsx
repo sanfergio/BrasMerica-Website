@@ -66,7 +66,7 @@ const RelatedProducts = ({ company_name, category, currentProductId }) => {
         <div className={styles.carousel} ref={carouselRef}>
           {produtos.map((produto) => (
             <div key={produto.id} className={styles.card}>
-              <Link to={`/produto/${produto.id}`} className={styles.link}>
+              <a href={`/produtos?productID=${produto.id}`} className={styles.link}>
                 <img
                   src={produto.productImage}
                   alt={produto.productName}
@@ -76,7 +76,7 @@ const RelatedProducts = ({ company_name, category, currentProductId }) => {
                 <p className={styles.preco}>
                   R${produto.productPrice.toFixed(2).replace(".", ",")}
                 </p>
-              </Link>
+              </a>
             </div>
           ))}
         </div>

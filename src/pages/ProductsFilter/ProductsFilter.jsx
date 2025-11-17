@@ -30,12 +30,12 @@ export default function ProductsFilter() {
   const normalize = (s) =>
     typeof s === "string"
       ? s
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "") // remove acentos
-          .replace(/[|:—\-]/g, " ") // normaliza certos separadores para espaço
-          .replace(/\s+/g, " ")
-          .trim()
-          .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/[|:—\-]/g, " ") // normaliza certos separadores para espaço
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase()
       : "";
 
   const normalizedToCanonical = {
@@ -95,6 +95,7 @@ export default function ProductsFilter() {
 
   // NOVO: lista de marcas (na ordem exata e com a grafia exata solicitada)
   const brandsList = [
+    "Honda",
     "Shell",
     "Mobil",
     "Ipiranga",
