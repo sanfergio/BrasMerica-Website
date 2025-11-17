@@ -1,14 +1,15 @@
 .relatedSection {
-  margin: 40px auto;
-  max-width: 1300px;
+  max-width: 85vw;
+  margin: 0 auto;
   padding: 0 20px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .title {
   font-size: 1.4rem;
   font-weight: bold;
-  color: #333;
+  color: #970000;
   margin-bottom: 20px;
 }
 
@@ -16,6 +17,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .carousel {
@@ -25,6 +27,7 @@
   gap: 15px;
   padding-bottom: 10px;
   scrollbar-width: none;
+  width: 100%;
 }
 
 .carousel::-webkit-scrollbar {
@@ -38,6 +41,7 @@
   border-radius: 6px;
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  flex-shrink: 0;
 }
 
 .card:hover {
@@ -68,6 +72,8 @@
 .link {
   text-decoration: none;
   color: inherit;
+  display: block;
+  height: 100%;
 }
 
 .arrowLeft,
@@ -95,7 +101,7 @@
   background-color: #b22234;
   color: white;
   transform: translateY(-50%) scale(1.1);
-  border: None;
+  border: none;
 }
 
 .arrowLeft {
@@ -104,6 +110,14 @@
 
 .arrowRight {
   right: -25px;
+}
+
+/* Media Query para 1150px */
+@media (max-width: 1150px) {
+  .relatedSection {
+    max-width: 85vw;
+    padding: 0 15px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -120,7 +134,13 @@
     width: 36px;
     height: 36px;
     font-size: 18px;
+  }
+
+  .arrowLeft {
     left: -18px;
+  }
+
+  .arrowRight {
     right: -18px;
   }
 }
@@ -153,6 +173,11 @@
 }
 
 @media (max-width: 480px) {
+  .relatedSection {
+    max-width: 85vw;
+    padding: 0 5px;
+  }
+
   .card {
     min-width: 130px;
   }
@@ -172,5 +197,20 @@
 
   .carousel {
     gap: 10px;
+  }
+
+  .arrowLeft,
+  .arrowRight {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .arrowLeft {
+    left: -16px;
+  }
+
+  .arrowRight {
+    right: -16px;
   }
 }

@@ -152,7 +152,7 @@ const ProductActions = ({ product }) => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
       try {
         window.dispatchEvent(new CustomEvent("cartUpdated", { detail: cart }));
-      } catch (e) {}
+      } catch (e) { }
       return cart;
     } catch (err) {
       console.error("Erro ao adicionar ao cart local:", err);
@@ -165,11 +165,11 @@ const ProductActions = ({ product }) => {
     try {
       // Notifica para mostrar a notificação de adição
       window.dispatchEvent(new Event("showAddNotification"));
-    } catch (e) {}
+    } catch (e) { }
     try {
       // Opcional: abrir sidebar também
       window.dispatchEvent(new Event("openCartSidebar"));
-    } catch (e) {}
+    } catch (e) { }
     console.log("Adicionado ao carrinho:", product.id);
   }
 
@@ -180,7 +180,7 @@ const ProductActions = ({ product }) => {
     // Garantir que outros listeners vejam a alteração
     try {
       window.dispatchEvent(new Event("showAddNotification"));
-    } catch (e) {}
+    } catch (e) { }
 
     // Redireciona para a página do carrinho (CartProducts.jsx espera os dados em localStorage 'cart_v1')
     // Usamos a rota /carrinho porque é a mesma rota utilizada em outros pontos (ex: CartSideBar).
