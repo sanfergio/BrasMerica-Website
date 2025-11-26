@@ -2,14 +2,35 @@
 
 import { useState, useEffect } from "react";
 import { User, Package, Lock, RefreshCw, LogOut, Truck, CreditCard } from 'lucide-react';
+import { validateUserData } from "../../utils/validation";
 import styles from "./UserProfile.module.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import WhatsAppButton from "../../components/WhatsappButton";
+import SupabaseClient from "../../components/KEYS/App.jsx";
+
+
+const supabase = SupabaseClient;
 
 export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("personal-data");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone_number: "",
+    cpf: "",
+    birthday: "",
+    cep: "",
+    //address: "",
+    neighborhood: "",
+    city: "",
+    state: "",
+    complement_number: "",
+    houseNumber: "",
+  });
 
   // <-- Toggle aqui: true = exibe mockOrders, false = exibe pedidos reais do cliente (carregados do localStorage)
   // Por padrão defini como true para não quebrar ambientes que ainda não possuem pedidos reais.
@@ -48,11 +69,52 @@ export default function UserProfile() {
     }
   }, []);
 
-  const userData = {
-    name: "João Silva",
-    email: "joao.silva@email.com"
-  };
+  // Carrega dados do usuário do Supabase
+  useEffect(() => {
+    async function loadUser() {
+      const email = localStorage.getItem("userEmail");
+      if (!email) return;
 
+      const { data, error } = await supabase
+        .from("DBclients")
+        .select("*")
+        .eq("email", email)
+        .single();
+
+      if (error || !data) {
+        console.error("Erro ao carregar dados:", error);
+        return;
+      }
+
+      let number = "";
+      let complement = "";
+      if (data.complement_number) {
+        const split = data.complement_number.split(",");
+        number = split[0] || "";
+        complement = split[1]?.trim() || "";
+      }
+
+      setUserData({
+        name: data.name || "",
+        email: data.email || "",
+        phone_number: data.phone_number || "",
+        cpf: data.cpf || "",
+        birthday: data.birthday || "",
+        cep: data.cep || "",
+        //address: data.address || "",
+        neighborhood: data.neighborhood || "",
+        city: data.city || "",
+        state: data.state || "",
+        complement_number: complement,
+        houseNumber: number,
+      });
+
+      setLoading(false);
+    }
+
+    loadUser();
+  }, []);
+  
   const menuItems = [
     { id: "personal-data", label: "Dados pessoais", icon: User },
     { id: "my-orders", label: "Meus Pedidos", icon: Package },
@@ -60,7 +122,7 @@ export default function UserProfile() {
     { id: "refund", label: "Reembolso", icon: RefreshCw },
     { id: "logout", label: "Sair", icon: LogOut },
   ];
-
+  
   const mockOrders = [
     {
       id: "ORD-2024-001",
@@ -115,10 +177,73 @@ export default function UserProfile() {
       total: 149.99
     }
   ];
+  const handleCepChange = async (e) => {
+    const cep = e.target.value.replace(/\D/g, ""); 
 
-  const handleSaveChanges = () => {
-    // TODO: Implement save functionality
-    console.log("Save changes");
+    setUserData(prev => ({ ...prev, cep: e.target.value }));
+
+    if (cep.length === 8) {
+      try {
+        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await res.json();
+
+        if (!data.erro) {
+          setUserData(prev => ({
+            ...prev,
+            //address: data.logradouro || "",
+            neighborhood: data.bairro || "",
+            city: data.localidade || "",
+            state: data.uf || ""
+          }));
+        }
+      } catch (err) {
+        console.log("Erro no ViaCEP:", err);
+      }
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setUserData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSaveChanges = async () => {
+    const email = localStorage.getItem("userEmail");
+    if (!email) return;
+
+    // 1 — validação
+    const errors = validateUserData(userData);
+
+    if (Object.keys(errors).length > 0) {
+      let msg = "Corrija os seguintes erros:\n\n";
+      for (const e in errors) msg += `• ${errors[e]}\n`;
+      alert(msg);
+      return;
+    }
+
+    // 2 — atualização no banco
+    const { error } = await supabase
+      .from("DBclients")
+      .update({
+        name: userData.name,
+        phone_number: userData.phone_number,
+        cpf: userData.cpf,
+        birthday: userData.birthday,
+        cep: userData.cep,
+        //address: userData.address,
+        neighborhood: userData.neighborhood,
+        city: userData.city,
+        state: userData.state,
+        complement_number: `${userData.houseNumber || ""}, ${userData.complement_number || ""}`,
+      })
+      .eq("email", email);
+
+    if (error) {
+      console.error("Erro ao salvar:", error);
+      alert("❌ Erro ao salvar informações");
+    } else {
+      alert("✔️ Informações atualizadas com sucesso!");
+    }
   };
 
   const handleLogoutClick = () => {
@@ -138,6 +263,16 @@ export default function UserProfile() {
   // Decide qual lista exibir: mock ou real
   const ordersToDisplay = useMock ? mockOrders : (realOrders || []);
 
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <p style={{ padding: 40, textAlign: "center" }}>Carregando...</p>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />
@@ -150,9 +285,7 @@ export default function UserProfile() {
             return (
               <button
                 key={item.id}
-                className={`${styles.menuItem} ${
-                  activeTab === item.id ? styles.active : ""
-                }`}
+                className={`${styles.menuItem} ${activeTab === item.id ? styles.active : ""}`}
                 onClick={() => setActiveTab(item.id)}
               >
                 <Icon className={styles.icon} />
@@ -172,9 +305,11 @@ export default function UserProfile() {
                 <div className={styles.formGroup}>
                   <input
                     type="text"
-                    id="fullName"
+                    id="name"
                     className={styles.input}
                     placeholder="Nome completo"
+                    value={userData.name}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -185,15 +320,18 @@ export default function UserProfile() {
                     id="email"
                     className={styles.input}
                     placeholder="Email"
+                    value={userData.email}
                   />
                 </div>
 
                 <div className={styles.formGroup}>
                   <input
                     type="tel"
-                    id="phone"
+                    id="phone_number"
                     className={styles.input}
                     placeholder="Telefone"
+                    value={userData.phone_number}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -204,13 +342,18 @@ export default function UserProfile() {
                       id="cpf"
                       className={styles.input}
                       placeholder="CPF"
+                      value={userData.cpf}
+                      onChange={handleInputChange}
                     />
                   </div>
+
                   <div className={styles.formGroup}>
                     <input
                       type="date"
-                      id="birthDate"
+                      id="birthday"
                       className={styles.input}
+                      value={userData.birthday}
+                      onChange={handleInputChange}
                     />
                   </div>
                 </div>
@@ -219,17 +362,22 @@ export default function UserProfile() {
                   <div className={styles.formGroup}>
                     <input
                       type="text"
-                      id="zipCode"
+                      id="cep"
                       className={styles.input}
                       placeholder="CEP"
+                      value={userData.cep}
+                      onChange={handleCepChange}
                     />
                   </div>
+
                   <div className={styles.formGroup}>
                     <input
                       type="text"
                       id="houseNumber"
                       className={styles.input}
                       placeholder="Número"
+                      value={userData.houseNumber}
+                      onChange={handleInputChange}
                     />
                   </div>
                 </div>
@@ -241,14 +389,19 @@ export default function UserProfile() {
                       id="address"
                       className={styles.input}
                       placeholder="Rua"
+                      value={userData.address}
+                      readOnly
                     />
                   </div>
+
                   <div className={styles.formGroup}>
                     <input
                       type="text"
                       id="neighborhood"
                       className={styles.input}
                       placeholder="Bairro"
+                      value={userData.neighborhood}
+                      readOnly
                     />
                   </div>
                 </div>
@@ -260,8 +413,11 @@ export default function UserProfile() {
                       id="city"
                       className={styles.input}
                       placeholder="Cidade"
+                      value={userData.city}
+                      readOnly
                     />
                   </div>
+
                   <div className={styles.formGroup}>
                     <input
                       type="text"
@@ -269,6 +425,8 @@ export default function UserProfile() {
                       className={styles.input}
                       placeholder="UF"
                       maxLength={2}
+                      value={userData.state}
+                      readOnly
                     />
                   </div>
                 </div>
@@ -276,9 +434,11 @@ export default function UserProfile() {
                 <div className={styles.formGroup}>
                   <input
                     type="text"
-                    id="additionalInfo"
+                    id="complement_number"
                     className={styles.input}
                     placeholder="Complemento"
+                    value={userData.complement_number}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -449,7 +609,7 @@ export default function UserProfile() {
                 onClick={handleLogoutCancel}
               >
                 Não
-              </button>
+              </button >
             </div>
           </div>
         </div>
