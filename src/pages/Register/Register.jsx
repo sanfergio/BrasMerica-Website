@@ -38,6 +38,10 @@ export default function Register() {
   const [success, setSuccess] = useState("");
   const [showTermsModal, setShowTermsModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showPasswords, setShowPasswords] = useState({
+    password: false,
+    confirmPassword: false
+  });
 
   // === Handle form change ===
   function handleChange(e) {
@@ -56,6 +60,14 @@ export default function Register() {
     if (name === "cpf") checkUnique("cpf", val);
     if (name === "email") checkUnique("email", val);
   }
+
+  // 👁️ Alternar visibilidade da senha
+  const togglePasswordVisibility = (field) => {
+    setShowPasswords(prev => ({
+      ...prev,
+      [field]: !prev[field]
+    }));
+  };
 
   async function checkUnique(field, value) {
     if (!value) return;
@@ -247,6 +259,7 @@ export default function Register() {
           birthday: form.birth ? form.birth.toISOString().split("T")[0] : null,
           cep: form.cep,
           neighborhood: form.neighborhood,
+          address: form.address,
           city: form.city,
           state: form.state,
           complement_number: `${form.number}, ${form.complement}`,
@@ -269,6 +282,34 @@ export default function Register() {
       setErrors({ form: "Erro inesperado" });
     }
   }
+
+  // Função auxiliar para renderizar campos de senha com toggle
+  const renderPasswordField = (key, placeholder) => (
+    <label
+      key={key}
+      className={`${styles.inputGroup} ${errors[key] ? styles.inputGroupError : validFields[key] ? styles.inputGroupValid : ""
+        }`}
+    >
+      <div className={styles.passwordInputContainer}>
+        <input
+          className={styles.inputBox}
+          name={key}
+          type={showPasswords[key] ? "text" : "password"}
+          placeholder={placeholder}
+          value={form[key]}
+          onChange={handleChange}
+        />
+        <button
+          type="button"
+          className={styles.passwordToggle}
+          onClick={() => togglePasswordVisibility(key)}
+        >
+          {showPasswords[key] ? "🙈" : "👁️"}
+        </button>
+      </div>
+      <span className={styles.fieldError}>{errors[key]}</span>
+    </label>
+  );
 
   const renderField = (key, placeholder, type = "text", readOnly = false, extraProps = {}) => (
     <label
@@ -348,9 +389,11 @@ export default function Register() {
             </div>
 
             {renderField("complement", "Complemento")}
+            
+            {/* Campos de senha com toggle */}
             <div className={`${styles.row} ${styles.two}`}>
-              {renderField("password", "Senha", "password")}
-              {renderField("confirmPassword", "Confirmar senha", "password")}
+              {renderPasswordField("password", "Senha")}
+              {renderPasswordField("confirmPassword", "Confirmar senha")}
             </div>
 
             <div className={styles.termsRow}>

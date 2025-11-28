@@ -18,6 +18,8 @@ export default function Login() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Define o título da página conforme solicitado
   useEffect(() => {
@@ -35,6 +37,11 @@ export default function Login() {
     setErrors((prev) => ({ ...prev, [name]: "" }));
     setSuccess("");
   }
+
+  // 👁️ Alternar visibilidade da senha
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   // ✅ Validação de e-mail robusta
   function validateEmail(email) {
@@ -64,6 +71,8 @@ export default function Login() {
       return;
     }
 
+    setLoading(true);
+
     try {
       // 🔍 Busca o usuário na tabela correta
       const { data: user, error } = await supabase
@@ -74,6 +83,7 @@ export default function Login() {
 
       if (error || !user) {
         setErrors({ email: "Usuário não encontrado." });
+        setLoading(false);
         return;
       }
 
@@ -85,6 +95,7 @@ export default function Login() {
 
       if (!isValid) {
         setErrors({ password: "Senha incorreta." });
+        setLoading(false);
         return;
       }
 
@@ -102,6 +113,7 @@ export default function Login() {
       setErrors({
         general: "Erro ao conectar ao servidor. Tente novamente mais tarde.",
       });
+      setLoading(false);
     }
   }
 
@@ -140,6 +152,7 @@ export default function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 autoComplete="email"
+                disabled={loading}
               />
             </label>
             {errors.email && (
@@ -173,25 +186,52 @@ export default function Login() {
               </span>
               <input
                 className={styles.inputBox}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Senha"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
                 autoComplete="current-password"
+                disabled={loading}
               />
+              <button
+                type="button"
+                className={styles.passwordToggle}
+                onClick={togglePasswordVisibility}
+                disabled={loading}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
             </label>
             {errors.password && (
               <p className={styles.errorMessage}>{errors.password}</p>
             )}
+
+            {/* Link "Esqueci minha senha" */}
+            <div className={styles.forgotPasswordContainer}>
+              <a 
+                href="/forgot-password" 
+                className={styles.forgotPasswordLink}
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert("Entre em contato com o suporte para recuperar sua senha.");
+                }}
+              >
+                Esqueci minha senha
+              </a>
+            </div>
 
             {/* Botões */}
             <div className={styles.actionsRow}>
               <a className={styles.link} href="/register">
                 Não tenho uma conta
               </a>
-              <button className={styles.signupButton} type="submit">
-                LOGIN
+              <button 
+                className={styles.signupButton} 
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? "Entrando..." : "LOGIN"}
               </button>
             </div>
 

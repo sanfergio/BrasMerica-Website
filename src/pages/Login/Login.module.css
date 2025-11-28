@@ -7,6 +7,91 @@
   --google-blue: #0b5db8;
 }
 
+/* Estilos existentes... */
+
+/* Novos estilos para o toggle de senha */
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputBox {
+  padding-right: 50px !important; /* Espaço para o botão do olho */
+  width: 100%;
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.passwordToggle:hover {
+  background-color: #f0f0f0;
+}
+
+.passwordToggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.passwordToggle:disabled:hover {
+  background-color: transparent;
+}
+
+/* Estilo para o link "Esqueci minha senha" */
+.forgotPasswordContainer {
+  text-align: center;
+  margin: 10px 0 20px 0;
+}
+
+.forgotPasswordLink {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.forgotPasswordLink:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Estilo para botão desabilitado */
+.signupButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.signupButton:disabled:hover {
+  background-color: #ccc;
+  transform: none;
+}
+
+/* Ajuste para garantir que o ícone e o toggle não se sobreponham */
+.inputGroup .icon {
+  z-index: 1;
+}
+
+/* Garantir que o input tenha foco adequado */
+.inputBox:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
 .loginContainer {
   height: auto;
   width: 100vw;
