@@ -78,7 +78,7 @@ const ConfirmationPage = () => {
 
   // Função para voltar à página principal
   const handleBack = () => {
-    window.location.href = `../perfil-usuario`;
+    window.open('../../perfil-usuario', '_blank');
   };
 
   // Função para enviar evento de purchase
