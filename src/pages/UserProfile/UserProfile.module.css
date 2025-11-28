@@ -671,7 +671,7 @@
   background-color: #e5e5e5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1150px) {
   .container {
     flex-direction: column;
     padding: 1rem;
@@ -689,3 +689,4 @@
     padding: 1.5rem;
   }
 }
+

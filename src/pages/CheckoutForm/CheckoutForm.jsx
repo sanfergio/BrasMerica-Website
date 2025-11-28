@@ -3,12 +3,20 @@ import styles from "./CheckoutForm.module.css";
 import ShortHeader from "../../components/ShortHeader/ShortHeader.jsx";
 import Footer from "../../components/Footer/Footer";
 import IframePayment from "../../components/IframePayment/IframePayment.jsx";
-import {VindiToken} from "../../components/KEYS/App.jsx";
+import { VindiToken } from "../../components/KEYS/App.jsx";
+import SupabaseClient from "../../components/KEYS/App.jsx";
 
 const STORAGE_KEY = "cart_v1";
 const CUPONS_VALIDOS = ["GIOVANI", "CUPOMPEDRO", "DESCONTOALL", "NATAL", "LUDTKE", "VICTOR01", "EDUARDA", "EMANUEL10", "PAIXAO", "DUDA10"];
 
 export default function CheckoutForm() {
+
+
+  // Buscar email e nome do localStorage
+  const userEmail = localStorage.getItem("userEmail");
+  const userName = localStorage.getItem("userName");
+
+
   const [cart, setCart] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -72,7 +80,7 @@ export default function CheckoutForm() {
     }
   }, [cart]);
 
-  // Sincroniza com atualizações em outras abas ou componentes
+  // Sincroniza com atualizações em outras abas ou componentes e busca dados do usuário
   useEffect(() => {
     function onStorage(e) {
       if (e.key === STORAGE_KEY) {
@@ -98,14 +106,8 @@ export default function CheckoutForm() {
       }
     }
 
-    // Buscar dados do usuário se email estiver na URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const emailUser = urlParams.get('email');
-
-    if (emailUser && validarEmail(emailUser)) {
-      setFormData(prev => ({ ...prev, email: emailUser }));
-      buscarDadosUsuario(emailUser);
-    }
+    // Buscar dados do usuário logado
+    buscarDadosUsuarioLogado();
 
     window.addEventListener("storage", onStorage);
     window.addEventListener("cartUpdated", onCartUpdated);
@@ -116,35 +118,59 @@ export default function CheckoutForm() {
     };
   }, []);
 
-  // Buscar dados do usuário
-  const buscarDadosUsuario = async (email) => {
+  // Buscar dados do usuário logado do localStorage e Supabase
+  const buscarDadosUsuarioLogado = async () => {
     try {
-      const response = await fetch(`https://newandrews.com.br/NA-COMPONENTS/User-Name.php?email=${encodeURIComponent(email)}`);
-      if (!response.ok) throw new Error("Erro HTTP: " + response.status);
 
-      const data = await response.json();
-      if (data && data.nome) {
-        const updates = {};
 
-        if (data.nome) updates.nome = data.nome;
-        if (data.cpf) updates.cpf = data.cpf;
-        if (data.telefone) updates.telefone = data.telefone;
-        if (data.cep) updates.cep = data.cep;
-        if (data.complemento) updates.numero = data.complemento;
+      if (userEmail) {
+        // Preencher email e nome inicialmente
+        setFormData(prev => ({
+          ...prev,
+          email: userEmail || "",
+          nome: userName || ""
+        }));
 
-        setFormData(prev => ({ ...prev, ...updates }));
+        // Buscar dados completos do usuário no Supabase
+        const { data, error } = await SupabaseClient
+          .from('DBclients')
+          .select('*')
+          .eq('email', userEmail)
+          .single();
 
-        // Disparar validações para campos preenchidos
-        setTimeout(() => {
-          Object.keys(updates).forEach(field => {
-            if (updates[field]) {
-              handleValidation(field, updates[field]);
-            }
-          });
-        }, 100);
+        if (error) {
+          console.error("Erro ao buscar dados do usuário:", error);
+          return;
+        }
+
+        if (data) {
+          const updates = {
+            nome: data.name || userName || "",
+            cpf: data.cpf || "",
+            email: data.email || "",
+            telefone: data.phone_number || "",
+            cep: data.cep || "",
+            endereco: data.address || "",
+            cidade: data.city || "",
+            bairro: data.neighborhood || "",
+            uf: data.state || "",
+            numero: data.complement_number || ""
+          };
+
+          setFormData(prev => ({ ...prev, ...updates }));
+
+          // Disparar validações para campos preenchidos
+          setTimeout(() => {
+            Object.keys(updates).forEach(field => {
+              if (updates[field]) {
+                handleValidation(field, updates[field]);
+              }
+            });
+          }, 100);
+        }
       }
     } catch (error) {
-      console.error("Erro ao consultar o usuário:", error.message);
+      console.error("Erro ao buscar dados do usuário:", error);
     }
   };
 
@@ -304,12 +330,13 @@ export default function CheckoutForm() {
 
       case "cupom":
         if (value === "") {
-          isValid = true;
+          isValid = true; // Cupom vazio é válido (opcional)
           error = "";
         } else if (CUPONS_VALIDOS.includes(value.toUpperCase())) {
           isValid = true;
           error = "Cupom válido.\n10% de desconto aplicado na compra!";
         } else {
+          isValid = false; // Cupom inválido
           error = "Cupom inválido.";
         }
         break;
@@ -321,6 +348,7 @@ export default function CheckoutForm() {
     setFieldValidity(prev => ({ ...prev, [field]: isValid }));
     setFieldErrors(prev => ({ ...prev, [field]: error }));
   };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -444,8 +472,8 @@ export default function CheckoutForm() {
       params.append("neighborhood", formData.bairro);
       params.append("city", formData.cidade);
       params.append("state", formData.uf);
-      params.append("token", VindiToken); 
-      params.append("urlRedirect", 'www.brasmerica.com.br');
+      params.append("token", VindiToken);
+      params.append("urlRedirect", window.location.origin);
 
       cart.forEach((item, index) => {
         const precoUnitario = item.productPrice;
@@ -515,6 +543,15 @@ export default function CheckoutForm() {
   const handleFinalize = (e) => {
     e.preventDefault();
 
+    // Verificar se o cupom é inválido
+    const cupomPreenchido = formData.cupom && formData.cupom.trim() !== "";
+    const cupomInvalido = cupomPreenchido && !fieldValidity.cupom;
+
+    if (cupomInvalido) {
+      alert("Não é possível prosseguir com a compra. O cupom informado é inválido. Remova o cupom ou corrija para continuar.");
+      return;
+    }
+
     const allFieldsValid = Object.keys(fieldValidity).every(key =>
       key === "cupom" ? true : fieldValidity[key]
     );
@@ -557,10 +594,10 @@ export default function CheckoutForm() {
 
             <input
               name="email"
-              value={formData.email}
+              value={userEmail}
               onChange={handleChange}
-              type="email"
-              placeholder="E-mail"
+              type="text"
+              placeholder="email"
               className={fieldValidity.email ? styles.valid : fieldErrors.email ? styles.invalid : ''}
             />
             {fieldErrors.email && <span className={styles.error}>{fieldErrors.email}</span>}
@@ -598,7 +635,6 @@ export default function CheckoutForm() {
               onChange={handleChange}
               type="text"
               placeholder="Endereço"
-              readOnly
               className={fieldValidity.endereco ? styles.valid : fieldErrors.endereco ? styles.invalid : ''}
             />
             {fieldErrors.endereco && <span className={styles.error}>{fieldErrors.endereco}</span>}
@@ -609,7 +645,6 @@ export default function CheckoutForm() {
               onChange={handleChange}
               type="text"
               placeholder="Cidade"
-              readOnly
               className={fieldValidity.cidade ? styles.valid : fieldErrors.cidade ? styles.invalid : ''}
             />
             {fieldErrors.cidade && <span className={styles.error}>{fieldErrors.cidade}</span>}
@@ -620,7 +655,6 @@ export default function CheckoutForm() {
               onChange={handleChange}
               type="text"
               placeholder="Bairro"
-              readOnly
               className={fieldValidity.bairro ? styles.valid : fieldErrors.bairro ? styles.invalid : ''}
             />
             {fieldErrors.bairro && <span className={styles.error}>{fieldErrors.bairro}</span>}
@@ -631,7 +665,6 @@ export default function CheckoutForm() {
               onChange={handleChange}
               type="text"
               placeholder="UF"
-              readOnly
               className={fieldValidity.uf ? styles.valid : fieldErrors.uf ? styles.invalid : ''}
             />
             {fieldErrors.uf && <span className={styles.error}>{fieldErrors.uf}</span>}

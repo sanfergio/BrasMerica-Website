@@ -6,6 +6,14 @@ export default function PersonalDataTab({ userData, setUserData, supabase }) {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [validFields, setValidFields] = useState({});
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: ""
+  });
 
   // Função para validar CPF
   const validarCPF = (cpf) => {
@@ -79,6 +87,18 @@ export default function PersonalDataTab({ userData, setUserData, supabase }) {
             valid = false;
           }
           break;
+        case "newPassword":
+          if (value.length < 6) {
+            error = "Senha deve ter pelo menos 6 caracteres";
+            valid = false;
+          }
+          break;
+        case "confirmPassword":
+          if (value !== passwordData.newPassword) {
+            error = "Senhas não coincidem";
+            valid = false;
+          }
+          break;
         default:
           break;
       }
@@ -131,6 +151,120 @@ export default function PersonalDataTab({ userData, setUserData, supabase }) {
     const { id, value } = e.target;
     setUserData((prev) => ({ ...prev, [id]: value }));
     validateField(id, value);
+  };
+
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setPasswordData(prev => ({ ...prev, [name]: value }));
+    validateField(name, value);
+  };
+
+  // Função para alternar visibilidade da senha
+  const togglePasswordVisibility = (field) => {
+    switch (field) {
+      case 'current':
+        setShowCurrentPassword(!showCurrentPassword);
+        break;
+      case 'new':
+        setShowNewPassword(!showNewPassword);
+        break;
+      case 'confirm':
+        setShowConfirmPassword(!showConfirmPassword);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePasswordUpdate = async () => {
+    const email = localStorage.getItem("userEmail");
+    if (!email) return;
+
+    // Validar campos de senha
+    const passwordFieldsToValidate = ["newPassword", "confirmPassword"];
+    let allValid = true;
+
+    passwordFieldsToValidate.forEach(field => {
+      const isValid = validateField(field, passwordData[field] || "");
+      if (!isValid) allValid = false;
+    });
+
+    if (!allValid) {
+      const errorFields = Object.keys(errors).filter(key => 
+        passwordFieldsToValidate.includes(key) && errors[key]
+      );
+      if (errorFields.length > 0) {
+        let msg = "Corrija os seguintes erros:\n\n";
+        errorFields.forEach(field => {
+          msg += `• ${errors[field]}\n`;
+        });
+        alert(msg);
+      }
+      return;
+    }
+
+    if (!passwordData.currentPassword) {
+      alert("Por favor, digite sua senha atual");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Buscar usuário para verificar senha atual
+      const { data: user, error: userError } = await supabase
+        .from("DBclients")
+        .select("encrypted_key")
+        .eq("email", email)
+        .single();
+
+      if (userError || !user) {
+        alert("Erro ao buscar dados do usuário");
+        setLoading(false);
+        return;
+      }
+
+      // Verificar senha atual (você precisará importar bcryptjs)
+      const bcrypt = await import('bcryptjs');
+      const isCurrentPasswordValid = await bcrypt.compare(
+        passwordData.currentPassword,
+        user.encrypted_key
+      );
+
+      if (!isCurrentPasswordValid) {
+        alert("Senha atual incorreta");
+        setLoading(false);
+        return;
+      }
+
+      // Criptografar nova senha
+      const saltRounds = 12;
+      const hashedNewPassword = await bcrypt.hash(passwordData.newPassword, saltRounds);
+
+      // Atualizar senha no banco
+      const { error } = await supabase
+        .from("DBclients")
+        .update({ encrypted_key: hashedNewPassword })
+        .eq("email", email);
+
+      if (error) {
+        console.error("Erro ao atualizar senha:", error);
+        alert("❌ Erro ao atualizar senha");
+      } else {
+        alert("✔️ Senha atualizada com sucesso!");
+        // Limpar campos de senha
+        setPasswordData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+        });
+      }
+    } catch (err) {
+      console.error("Erro ao atualizar senha:", err);
+      alert("❌ Erro ao atualizar senha");
+    }
+
+    setLoading(false);
   };
 
   const handleSaveChanges = async () => {
@@ -204,10 +338,11 @@ export default function PersonalDataTab({ userData, setUserData, supabase }) {
   };
 
   return (
-    <div className={styles.card}>
-      <h1 className={styles.title}>Dados pessoais</h1>
+    <div >
+      {/* Formulário de Dados Pessoais */}
+      <form className={styles.card} onSubmit={(e) => e.preventDefault()}>
+        <h1 className={styles.title}>Dados Pessoais</h1>
 
-      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         {/* Full Name */}
         <div className={styles.formGroup}>
           <input
@@ -360,6 +495,89 @@ export default function PersonalDataTab({ userData, setUserData, supabase }) {
           {loading ? "Salvando..." : "Salvar alterações"}
         </button>
       </form>
+
+      {/* Formulário de Alteração de Senha - Separado */}
+      <div className={styles.card} style={{marginTop: '2rem'}}>
+        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+          <h3 className={styles.title}>Alterar Senha</h3>
+          
+          {/* Senha Atual */}
+          <div className={styles.formGroup}>
+            <div className={styles.passwordInputContainer}>
+              <input
+                type={showCurrentPassword ? "text" : "password"}
+                name="currentPassword"
+                className={getInputClassName("currentPassword")}
+                placeholder="Senha atual"
+                value={passwordData.currentPassword || ""}
+                onChange={handlePasswordChange}
+              />
+              <button
+                type="button"
+                className={styles.passwordToggle}
+                onClick={() => togglePasswordVisibility('current')}
+              >
+                {showCurrentPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.formRow}>
+            {/* Nova Senha */}
+            <div className={styles.formGroup}>
+              <div className={styles.passwordInputContainer}>
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  name="newPassword"
+                  className={getInputClassName("newPassword")}
+                  placeholder="Nova senha"
+                  value={passwordData.newPassword || ""}
+                  onChange={handlePasswordChange}
+                />
+                <button
+                  type="button"
+                  className={styles.passwordToggle}
+                  onClick={() => togglePasswordVisibility('new')}
+                >
+                  {showNewPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+              {errors.newPassword && <span className={styles.fieldError}>{errors.newPassword}</span>}
+            </div>
+
+            {/* Confirmar Senha */}
+            <div className={styles.formGroup}>
+              <div className={styles.passwordInputContainer}>
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  className={getInputClassName("confirmPassword")}
+                  placeholder="Confirmar senha"
+                  value={passwordData.confirmPassword || ""}
+                  onChange={handlePasswordChange}
+                />
+                <button
+                  type="button"
+                  className={styles.passwordToggle}
+                  onClick={() => togglePasswordVisibility('confirm')}
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </button>
+              </div>
+              {errors.confirmPassword && <span className={styles.fieldError}>{errors.confirmPassword}</span>}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            className={styles.passwordButton}
+            onClick={handlePasswordUpdate}
+            disabled={loading}
+          >
+            {loading ? "Atualizando..." : "Atualizar Senha"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
