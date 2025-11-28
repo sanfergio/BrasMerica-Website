@@ -25,6 +25,7 @@ import BrandsFilter from './pages/BrandsFilter/BrandsFilter.jsx';
 // Componentes relacionados ao carrinho de compras e processo de checkout
 import CartProducts from './pages/CartProducts/CartProducts.jsx'
 import CheckoutForm from './pages/CheckoutForm/CheckoutForm.jsx'
+import ConfirmPayment from './pages/ConfirmPayment.jsx'
 
 // --- PÁGINAS INSTITUCIONAIS (Políticas, Termos, etc.) ---
 import TermosUso from './pages/TermosUso/TermosUso.jsx';
@@ -57,8 +58,6 @@ function App() {
         <Route path="/categorias" element={<ProductsFilter />} />
         <Route path="/quem-somos" element={<QuemSomos />} />
         <Route path="/produtos" element={<ProductPage />} />
-        <Route path="/carrinho" element={<CartProducts />} />
-        <Route path="/checkout" element={<CheckoutForm />} />
         <Route path="/perfil-usuario" element={<PerfilUsuario />} />
         <Route path="/marca/:nomeMarca" element={<BrandsFilter />} />
 
@@ -76,6 +75,9 @@ function App() {
         <Route path="/admin/dataBase/products/add" element={<AddProduct />} />
 
         {/* Forma de pagamento */}
+        <Route path='/compra-confirmada' element={<ConfirmPayment />} />
+        <Route path="/carrinho" element={<CartProducts />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
 
         {/* Rota "Não Encontrado" (Catch-all) */}
         {/* Deve ser sempre a última rota da lista */}
