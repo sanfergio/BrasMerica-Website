@@ -17,14 +17,23 @@ const supabase = SupabaseClient;
 
 export default function UserProfile() {
 
+  function verifyLoginUser() {
+
+    const userEmail = localStorage.getItem("userEmail");
+
+    if (!userEmail) {
+      alert("Você precisa estar logado para acessar o perfil do usuário.");
+      window.location.href = "../../";
+    }
+
+  }
 
   // utils/auth.js ou em um hook personalizado
   function logout() {
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userName");
     window.location.href = "../../";
-  };
-
+  }
 
   const [activeTab, setActiveTab] = useState("personal-data");
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -45,6 +54,52 @@ export default function UserProfile() {
 
   const [useMock, setUseMock] = useState(true);
   const [realOrders, setRealOrders] = useState(null);
+
+  // Mapeamento das hashs para as abas
+  const tabHashMapping = {
+    "personal-data": "dados-pessoais",
+    "my-orders": "meus-pedidos",
+    "change-password": "alterar-senha",
+    "logout": "sair"
+  };
+
+  // Mapeamento reverso (hash para tab id)
+  const hashTabMapping = {
+    "dados-pessoais": "personal-data",
+    "meus-pedidos": "my-orders",
+    "alterar-senha": "change-password",
+    "sair": "logout"
+  };
+
+  // Sincroniza a URL com a aba ativa
+  const updateUrlHash = (tabId) => {
+    const hash = tabHashMapping[tabId] || "dados-pessoais";
+    if (window.location.hash !== `#${hash}`) {
+      window.history.replaceState(null, null, `#${hash}`);
+    }
+  };
+
+  // Atualiza a aba baseada na URL ao carregar a página
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && hashTabMapping[hash]) {
+      setActiveTab(hashTabMapping[hash]);
+    } else {
+      // Define a URL inicial se não houver hash
+      updateUrlHash(activeTab);
+    }
+  }, []);
+
+  // Atualiza a URL sempre que a aba muda
+  useEffect(() => {
+    updateUrlHash(activeTab);
+  }, [activeTab]);
+
+  // Função para mudar de aba que também atualiza a URL
+  const handleSetActiveTab = (tabId) => {
+    setActiveTab(tabId);
+    updateUrlHash(tabId);
+  };
 
   useEffect(() => {
     try {
@@ -147,7 +202,7 @@ export default function UserProfile() {
         <MenuSidebar
           menuItems={menuItems}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={handleSetActiveTab}
         />
 
         <div className={styles.content}>
