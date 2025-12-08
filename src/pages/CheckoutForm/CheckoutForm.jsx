@@ -472,8 +472,6 @@ export default function CheckoutForm() {
       params.append("neighborhood", formData.bairro);
       params.append("city", formData.cidade);
       params.append("state", formData.uf);
-      params.append("token", VindiToken);
-      params.append("urlRedirect", window.location.origin);
 
       cart.forEach((item, index) => {
         const precoUnitario = item.productPrice;
@@ -493,8 +491,8 @@ export default function CheckoutForm() {
       params.append("payment", tipo);
 
       const baseURL = tipo === "PIX"
-        ? "https://www.newandrews.com.br/paymentVindi/pix-payment/?"
-        : "https://www.newandrews.com.br/paymentVindi/card-payment/?";
+        ? "https://newandrews.com.br/paymentVindi/Teste/pix-payment/?"
+        : "https://newandrews.com.br/paymentVindi/Teste/card-payment/?";
 
       return baseURL + params.toString();
     };
