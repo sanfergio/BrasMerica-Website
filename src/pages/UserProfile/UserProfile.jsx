@@ -58,7 +58,7 @@ export default function UserProfile() {
   // Mapeamento das hashs para as abas
   const tabHashMapping = {
     "personal-data": "dados-pessoais",
-    "my-orders": "meus-pedidos",
+    // "my-orders": "meus-pedidos",
     "change-password": "alterar-senha",
     "logout": "sair"
   };
@@ -66,7 +66,7 @@ export default function UserProfile() {
   // Mapeamento reverso (hash para tab id)
   const hashTabMapping = {
     "dados-pessoais": "personal-data",
-    "meus-pedidos": "my-orders",
+    // "meus-pedidos": "my-orders",
     "alterar-senha": "change-password",
     "sair": "logout"
   };
@@ -177,7 +177,7 @@ export default function UserProfile() {
 
   const menuItems = [
     { id: "personal-data", label: "Dados pessoais", icon: User },
-    { id: "my-orders", label: "Meus Pedidos", icon: Package },
+    // { id: "my-orders", label: "Meus Pedidos", icon: Package },
     // { id: "change-password", label: "Alterar Senha", icon: Lock },
     // { id: "refund", label: "Reembolso", icon: RefreshCw },
     { id: "logout", label: "Sair", icon: LogOut },

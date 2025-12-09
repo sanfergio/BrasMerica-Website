@@ -68,7 +68,7 @@ const ConfirmationPage = () => {
   // Função para obter parâmetros da URL
   const obterParametrosDaUrl = () => {
     const urlParams = new URLSearchParams(window.location.search);
-    
+
     const email = urlParams.get('email') || '';
     const total = parseFloat(urlParams.get('valorTotal')) || 0;
     const frete = parseFloat(urlParams.get('valorFrete')) || 0;
@@ -154,10 +154,10 @@ const ConfirmationPage = () => {
 
       {/* Google Tag Manager (noscript) */}
       <noscript>
-        <iframe 
+        <iframe
           src="https://www.googletagmanager.com/ns.html?id=GTM-NBXWDJVT"
-          height="0" 
-          width="0" 
+          height="0"
+          width="0"
           style={{ display: 'none', visibility: 'hidden' }}
           title="Google Tag Manager"
         />
@@ -167,20 +167,20 @@ const ConfirmationPage = () => {
         <div style={styles.content}>
           <div style={styles.loader}>
             <svg style={styles.checkmark} viewBox="0 0 52 52">
-              <circle cx="26" cy="26" r="25" fill="green"/>
-              <path 
-                d="M14 27l10 10 15-15" 
-                fill="none" 
-                stroke="white" 
-                strokeWidth="5" 
-                strokeLinecap="round" 
+              <circle cx="26" cy="26" r="25" fill="green" />
+              <path
+                d="M14 27l10 10 15-15"
+                fill="none"
+                stroke="white"      
+                strokeWidth="5"
+                strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
           </div>
-          <div style={styles.confirmationText}>Compra confirmada!</div>
-          <button 
-            style={styles.returnButton} 
+          <div style={styles.confirmationText}>Transação confirmada! <br /> aguarde a confirmação de entrega e pagamento pelo seu e-mail cadastrado  </div>
+          <button
+            style={styles.returnButton}
             onClick={handleBack}
             onMouseOver={(e) => {
               e.target.style.backgroundColor = 'darkgreen';
