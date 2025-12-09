@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 // Initialize Supabase client
 import SupabaseClient from "../../components/KEYS/App.jsx";
+import EmailChecker from "../../components/EmailChecker/EmailChecker.jsx";
 
 const supabase = SupabaseClient;
 
@@ -42,6 +43,9 @@ export default function Register() {
     password: false,
     confirmPassword: false
   });
+
+  const [showEmailChecker, setShowEmailChecker] = useState(false); 
+  const [pendingFormData, setPendingFormData] = useState(null); 
 
   // === Handle form change ===
   function handleChange(e) {
@@ -239,6 +243,10 @@ export default function Register() {
         return;
       }
 
+      setPendingFormData(form); 
+      setShowEmailChecker(true); 
+      return; 
+
       const { data: lastUser } = await supabase
         .from("DBclients")
         .select("id")
@@ -263,6 +271,72 @@ export default function Register() {
           city: form.city,
           state: form.state,
           complement_number: `${form.number}, ${form.complement}`,
+          encrypted_key: hashedPassword,
+        },
+      ]);
+
+      if (error) {
+        setErrors({ form: "Erro ao cadastrar usuário" });
+        console.error(error);
+      } else {
+        setSuccess("✅ Cadastro realizado com sucesso!");
+        setShowSuccessModal(true);
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2500);
+      }
+    } catch (err) {
+      console.error(err);
+      setErrors({ form: "Erro inesperado" });
+    }
+  }
+
+  async function finalizeRegistration() {
+    if (!pendingFormData) {
+      setErrors({ form: "Dados do formulário não encontrados." });
+      setShowEmailChecker(false);
+      return;
+    }
+
+    const formData = pendingFormData;
+    setShowEmailChecker(false); 
+
+    try {
+      const { data: authUser, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (authError) {
+        setErrors({ form: "Erro ao criar autenticação: " + authError.message });
+        return;
+      }
+
+      // Inserir dados no DBclients 
+      const { data: lastUser } = await supabase
+        .from("DBclients")
+        .select("id")
+        .order("id", { ascending: false })
+        .limit(1)
+        .single();
+
+      const newId = lastUser ? lastUser.id + 1 : 1;
+      const hashedPassword = await bcrypt.hash(formData.password, 10);
+
+      const { data, error } = await supabase.from("DBclients").insert([
+        {
+          id: newId,
+          name: formData.name,
+          email: formData.email,
+          cpf: formData.cpf,
+          phone_number: formData.phone_number,
+          birthday: formData.birth ? formData.birth.toISOString().split("T")[0] : null,
+          cep: formData.cep,
+          neighborhood: formData.neighborhood,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          complement_number: `${formData.number}, ${formData.complement}`,
           encrypted_key: hashedPassword,
         },
       ]);
@@ -448,6 +522,14 @@ export default function Register() {
             </button>
           </div>
         </div>
+      )}
+
+      {showEmailChecker && pendingFormData && (
+        <EmailChecker
+          email={pendingFormData.email}
+          onSuccess={finalizeRegistration} 
+          onCancel={() => setShowEmailChecker(false)}
+        />
       )}
 
       {/* Modal de sucesso */}
