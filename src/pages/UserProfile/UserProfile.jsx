@@ -221,10 +221,6 @@ export default function UserProfile() {
             />
           )}
 
-          {activeTab === "change-password" && (
-            <ChangePasswordTab />
-          )}
-
           {activeTab === "logout" && (
             <LogoutTab
               userData={userData}

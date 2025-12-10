@@ -21,6 +21,7 @@ import NotFound from './pages/NotFound.jsx';
 import ProductPage from './pages/ProductPage/ProductPage.jsx'
 import BrandsFilter from './pages/BrandsFilter/BrandsFilter.jsx';
 import RememberPassword from './components/RememberPassword/RememberPassword.jsx';
+import ChangePassword from './pages/UserProfile/ChangePasswordTab.jsx';
 
 
 // --- PÁGINAS DE CARRINHO E CHECKOUT ---
@@ -63,6 +64,7 @@ function App() {
         <Route path="/perfil-usuario" element={<PerfilUsuario />} />
         <Route path="/marca/:nomeMarca" element={<BrandsFilter />} />
         <Route path="/esqueci-minha-senha" element={<RememberPassword />} />
+        <Route path="/trocar-senha" element={<ChangePassword />} />
 
 
         {/* Rotas de Políticas e Termos */}
