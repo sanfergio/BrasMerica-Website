@@ -284,7 +284,7 @@ export default function RememberPassword() {
                   <button
                     onClick={handleResendCode}
                     disabled={timer > 0 || isLoading}
-                    className={`text-sm underline ${timer > 0 ? 'text-gray-400 cursor-not-allowed' : 'text-blue-600 hover:text-blue-800 cursor-pointer'}`}
+                    className={styles.button}
                   >
                     {timer > 0 ? `Aguarde ${timer}s para reenviar` : "Reenviar código"}
                   </button>
@@ -293,7 +293,7 @@ export default function RememberPassword() {
                 <div className="text-center mt-2">
                   <button
                     onClick={() => { setStep("EMAIL"); setError(""); setOtpCode(""); }}
-                    className="text-sm text-gray-500 hover:text-gray-700 underline"
+                    className={styles.button}
                   >
                     Trocar e-mail
                   </button>
