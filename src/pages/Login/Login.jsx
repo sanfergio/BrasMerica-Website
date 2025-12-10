@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Importando Link e useNavigate
 import styles from "./Login.module.css";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
@@ -11,6 +12,7 @@ import SupabaseClient from "../../components/KEYS/App.jsx";
 const supabase = SupabaseClient;
 
 export default function Login() {
+  const navigate = useNavigate(); // Hook para navegação
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,7 +23,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Define o título da página conforme solicitado
   useEffect(() => {
     try {
       document.title = "Brasmérica | Login";
@@ -30,7 +31,6 @@ export default function Login() {
     }
   }, []);
 
-  // 🔤 Atualiza campos
   function handleChange(e) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -38,19 +38,16 @@ export default function Login() {
     setSuccess("");
   }
 
-  // 👁️ Alternar visibilidade da senha
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // ✅ Validação de e-mail robusta
   function validateEmail(email) {
     const re =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?$/;
     return re.test(email);
   }
 
-  // 🔒 Login principal
   async function handleSubmit(e) {
     e.preventDefault();
     const newErrors = {};
@@ -74,7 +71,6 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // 🔍 Busca o usuário na tabela correta
       const { data: user, error } = await supabase
         .from("DBclients")
         .select("*")
@@ -87,7 +83,6 @@ export default function Login() {
         return;
       }
 
-      // 🔑 Compara a senha com o hash do banco
       const isValid = await bcrypt.compare(
         formData.password,
         user.encrypted_key
@@ -99,14 +94,13 @@ export default function Login() {
         return;
       }
 
-      // ✅ Login bem-sucedido
       setSuccess("Login realizado com sucesso!");
       localStorage.setItem("userEmail", user.email);
       localStorage.setItem("userName", user.name);
 
-      // Redireciona após 1s
+      // Redireciona usando navigate do React Router
       setTimeout(() => {
-        window.location.href = `./`;
+        navigate("/"); // Redireciona para a home
       }, 1000);
     } catch (err) {
       console.error("Erro no login:", err);
@@ -207,25 +201,23 @@ export default function Login() {
               <p className={styles.errorMessage}>{errors.password}</p>
             )}
 
-            {/* Link "Esqueci minha senha" */}
+            {/* Link "Esqueci minha senha" com React Router */}
             <div className={styles.forgotPasswordContainer}>
-              <a 
-                href="/forgot-password" 
+              <Link 
+                to="/esqueci-minha-senha" 
                 className={styles.forgotPasswordLink}
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Entre em contato com o suporte para recuperar sua senha.");
-                }}
               >
                 Esqueci minha senha
-              </a>
+              </Link>
             </div>
 
             {/* Botões */}
             <div className={styles.actionsRow}>
-              <a className={styles.link} href="/register">
+              {/* Link "Não tenho conta" com React Router */}
+              <Link className={styles.link} to="/register">
                 Não tenho uma conta
-              </a>
+              </Link>
+              
               <button 
                 className={styles.signupButton} 
                 type="submit"
