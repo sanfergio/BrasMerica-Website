@@ -20,6 +20,8 @@ import QuemSomos from './pages/QuemSomos/QuemSomos.jsx';
 import NotFound from './pages/NotFound.jsx';
 import ProductPage from './pages/ProductPage/ProductPage.jsx'
 import BrandsFilter from './pages/BrandsFilter/BrandsFilter.jsx';
+import RememberPassword from './components/RememberPassword/RememberPassword.jsx';
+
 
 // --- PÁGINAS DE CARRINHO E CHECKOUT ---
 // Componentes relacionados ao carrinho de compras e processo de checkout
@@ -60,6 +62,7 @@ function App() {
         <Route path="/produtos" element={<ProductPage />} />
         <Route path="/perfil-usuario" element={<PerfilUsuario />} />
         <Route path="/marca/:nomeMarca" element={<BrandsFilter />} />
+        <Route path="/esqueci-minha-senha" element={<RememberPassword />} />
 
 
         {/* Rotas de Políticas e Termos */}
