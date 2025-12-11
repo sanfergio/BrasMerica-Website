@@ -9,7 +9,6 @@ import WhatsAppButton from "../../components/WhatsappButton";
 import SupabaseClient from "../../components/KEYS/App.jsx";
 import PersonalDataTab from "./PersonalDataTab";
 import MyOrdersTab from "./MyOrdersTab";
-import ChangePasswordTab from "./ChangePasswordTab";
 import LogoutTab from "./LogoutTab";
 import MenuSidebar from "./MenuSidebar";
 
